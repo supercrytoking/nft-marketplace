@@ -107,10 +107,8 @@ export default function Create() {
                         <p>Mint an NFT</p>
                         <p>Upload an asset to mint your NFT. Minting your NFT is completely free (+gas).</p>
                         <p>Minting an NFT is a 3-step process. You'll first upload your NFT's metadata to IPFS, then mint the token to your wallet, and finally, optionally approve and list the new NFT for sale.</p>
-                        <p>
-                            Your asset(s) are uploaded to IPFS (The InterPlanetary File System) for life-long safe keeping, and pinned indefinitely, and minted to an immutable ERC721-compliant smart contract on the
-                            Fantom Blockchain.
-                        </p>
+                        <p>Your asset(s) are uploaded to IPFS (The InterPlanetary File System) for life-long safe keeping, and pinned indefinitely.</p>
+                        <p>The NFT is minted to an immutable ERC721-compliant smart contract on the Fantom Blockchain.</p>
                     </div>
                     <div className="w-full space-y-6">
                         <form onSubmit={upload} className="flex flex-col space-y-4">
