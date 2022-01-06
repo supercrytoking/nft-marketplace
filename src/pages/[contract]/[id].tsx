@@ -1,3 +1,4 @@
+import axios from 'axios'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
@@ -7,12 +8,15 @@ import Web3 from 'web3'
 import Input from '../../components/Input'
 import Modal from '../../components/Modal'
 import useExchange from '../../hooks/useExchange'
+import { api } from '../../utils/utils'
 
-export function getServerSideProps(ctx) {
-    return { props: ctx.query }
+export async function getServerSideProps(ctx) {
+    const { contract, id } = ctx.query
+    const { data: staleData } = await api.get(`/data/${contract}/${id}`)
+    return { props: { contract, id, staleData } }
 }
 
-export default function TokenPage({ contract, id }) {
+export default function TokenPage({ contract, id, staleData }) {
     const wallet = useWallet()
     const { createListing: createListingFunction, acceptListing: acceptListingFunction, revokeListing: revokeListingFunction } = useExchange()
     const { data, mutate } = useSWR(`/data/${contract}/${id}`)
@@ -46,6 +50,11 @@ export default function TokenPage({ contract, id }) {
     if (!data) return null
     return (
         <>
+            <Head>
+                <link rel="icon" type="image/png" href={staleData.metadata.image} />
+                <meta property="og:image" content={staleData.metadata.image} />
+                <meta name="twitter:image" content={staleData.metadata.image} />
+            </Head>
             <Modal visible={showModal === 'list'} onClose={() => setShowModal(false)}>
                 <div className="space-y-4">
                     <Input label="Listing Price" value={listingPrice} onChange={(e) => setListingPrice(e.target.value)} type="number" />
