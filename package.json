@@ -1,0 +1,41 @@
+{
+    "name": "template",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "dev": "next",
+        "start": "next start",
+        "build": "next build"
+    },
+    "dependencies": {
+        "axios": "^0.24.0",
+        "classnames": "^2.3.1",
+        "comma-number": "^2.1.0",
+        "framer-motion": "^5.5.5",
+        "nanoid": "^3.1.28",
+        "next": "^12.0.7",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "short-number": "^1.0.7",
+        "swr": "^1.0.1",
+        "use-wallet": "^0.10.0",
+        "web3": "^1.6.1"
+    },
+    "devDependencies": {
+        "@types/node": "^14.14.28",
+        "@types/react": "^17.0.2",
+        "@typescript-eslint/eslint-plugin": "^4.15.0",
+        "@typescript-eslint/parser": "^4.15.0",
+        "autoprefixer": "^10.4.1",
+        "eslint": "^7.20.0",
+        "eslint-config-airbnb": "^18.2.1",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-jsx-a11y": "^6.4.1",
+        "eslint-plugin-react": "^7.22.0",
+        "eslint-plugin-react-hooks": "^4.2.0",
+        "postcss": "^8.4.5",
+        "tailwindcss": "^3.0.11",
+        "typescript": "^4.4.3"
+    }
+}
