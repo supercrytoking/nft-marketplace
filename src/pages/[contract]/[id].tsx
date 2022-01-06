@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import useSWR from 'swr'
 import { useWallet } from 'use-wallet'
 import Web3 from 'web3'
+import History from '../../components/History'
 import Input from '../../components/Input'
 import Modal from '../../components/Modal'
 import useExchange from '../../hooks/useExchange'
@@ -26,7 +27,9 @@ export default function TokenPage({ contract, id, staleData }) {
 
     const image = data ? data.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/') : null
     const iAmOwner = data && data.owner === wallet.account
-    const isListed = data && data.listing.exists
+    const isListed = data && data.listings.length > 0 && data.listings[0].status === 'listed'
+
+    const listing = data ? data.listings[0] : null
 
     const createListing = async () => {
         await createListingFunction(contract, id, Web3.utils.toWei(listingPrice))
@@ -129,7 +132,7 @@ export default function TokenPage({ contract, id, staleData }) {
                         )}
                         {isListed && (
                             <>
-                                <p className="text-xl">{Web3.utils.fromWei(data.listing.price)} FTM</p>
+                                <p className="text-xl">{Web3.utils.fromWei(listing.price)} FTM</p>
                             </>
                         )}
 
@@ -178,6 +181,8 @@ export default function TokenPage({ contract, id, staleData }) {
                         ))}
                     </div>
                 )}
+
+                <History contractAddress={data.contractAddress} tokenId={data.tokenId} />
             </div>
         </>
     )

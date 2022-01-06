@@ -42,61 +42,6 @@ export const exchange = [
     },
     {
         inputs: [],
-        stateMutability: 'nonpayable',
-        type: 'constructor'
-    },
-    {
-        anonymous: false,
-        inputs: [
-            {
-                indexed: false,
-                internalType: 'address',
-                name: 'contractAddress',
-                type: 'address'
-            },
-            {
-                indexed: true,
-                internalType: 'uint256',
-                name: 'tokenId',
-                type: 'uint256'
-            }
-        ],
-        name: 'ListingCancelled',
-        type: 'event'
-    },
-    {
-        anonymous: false,
-        inputs: [
-            {
-                indexed: true,
-                internalType: 'address',
-                name: 'from',
-                type: 'address'
-            },
-            {
-                indexed: true,
-                internalType: 'address',
-                name: 'contractAdress',
-                type: 'address'
-            },
-            {
-                indexed: true,
-                internalType: 'uint256',
-                name: 'tokenId',
-                type: 'uint256'
-            },
-            {
-                indexed: false,
-                internalType: 'uint256',
-                name: 'price',
-                type: 'uint256'
-            }
-        ],
-        name: 'ListingEvent',
-        type: 'event'
-    },
-    {
-        inputs: [],
         name: 'pause',
         outputs: [],
         stateMutability: 'nonpayable',
@@ -121,24 +66,17 @@ export const exchange = [
         type: 'function'
     },
     {
+        inputs: [],
+        stateMutability: 'nonpayable',
+        type: 'constructor'
+    },
+    {
         anonymous: false,
         inputs: [
             {
                 indexed: true,
                 internalType: 'address',
-                name: 'from',
-                type: 'address'
-            },
-            {
-                indexed: false,
-                internalType: 'address',
-                name: 'to',
-                type: 'address'
-            },
-            {
-                indexed: true,
-                internalType: 'address',
-                name: 'contractAdress',
+                name: 'contractAddress',
                 type: 'address'
             },
             {
@@ -152,9 +90,15 @@ export const exchange = [
                 internalType: 'uint256',
                 name: 'price',
                 type: 'uint256'
+            },
+            {
+                indexed: false,
+                internalType: 'string',
+                name: 'eventType',
+                type: 'string'
             }
         ],
-        name: 'SaleEvent',
+        name: 'MarketplaceEvent',
         type: 'event'
     },
     {
