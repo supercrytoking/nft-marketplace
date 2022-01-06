@@ -2,18 +2,29 @@ import useSWR from 'swr'
 import Link from 'next/link'
 import { useState } from 'react'
 
-export default function Explore() {
-    const [feed, setFeed] = useState('/feeds/latest')
+const feeds = [
+    {
+        name: 'latest',
+        query: '/feeds/latest'
+    },
+    {
+        name: 'listed',
+        query: '/feeds/listed'
+    }
+]
 
-    const { data } = useSWR(feed)
+export default function Explore() {
+    const [feed, setFeed] = useState(feeds[0])
+    const { data } = useSWR(feed.query)
+
     return (
         <div className="p-6 max-w-7xl mx-auto space-y-6">
             <div className="flex flex-wrap gap-4">
-                <button onClick={() => setFeed(`/data/${process.env.NEXT_PUBLIC_MINTING_CONTRACT}`)} type="button" className="px-4 py-2 bg-white text-black">
-                    Local
+                <button onClick={() => setFeed(feeds[0])} type="button" className="px-4 py-2 bg-white text-black">
+                    Latest
                 </button>
-                <button onClick={() => setFeed('latest')} type="button" className="px-4 py-2 bg-white text-black">
-                    Recent
+                <button onClick={() => setFeed(feeds[1])} type="button" className="px-4 py-2 bg-white text-black">
+                    Listed
                 </button>
             </div>
 

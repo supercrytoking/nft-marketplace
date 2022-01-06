@@ -1,7 +1,7 @@
+import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { useWallet } from 'use-wallet'
 import Web3 from 'web3'
-import Link from 'next/link'
 import Input from '../components/Input'
 import Modal from '../components/Modal'
 import Textarea from '../components/Textarea'
@@ -92,9 +92,9 @@ export default function Create() {
                                 <Link href="/wallet">
                                     <a>View Wallet</a>
                                 </Link>
-                                <button className="bg-white text-black px-4 py-2" onClick={mint} type="submit">
+                                {/* <Button onClick={mint}>
                                     List for Sale
-                                </button>
+                                </Button> */}
                             </div>
                         </>
                     )}
