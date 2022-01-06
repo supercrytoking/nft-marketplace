@@ -97,7 +97,7 @@ export default function TokenPage({ contract, id }) {
                             </p>
                             <p className="truncate">
                                 Owner:{' '}
-                                <Link href="/">
+                                <Link href={`/wallet/${data.owner}`}>
                                     <a href="" className="underline hover:no-underline">
                                         {iAmOwner ? 'you' : data.owner}
                                     </a>

@@ -32,7 +32,7 @@ export default function Collection({ contractAddress }) {
             <div>
                 <p>{name}</p>
                 <p className="truncate">
-                    <a href={`https://ftmscan.com/address/0xD7ECe7ED77AF50d6C0f27E4755A2B09B5f97d7B7/${contractAddress}`} target="_blank" className="underline hover:no-underline" rel="noreferrer">
+                    <a href={`https://ftmscan.com/address/${contractAddress}`} target="_blank" className="underline hover:no-underline" rel="noreferrer">
                         {contractAddress.slice(0, 6)}
                         ...
                         {contractAddress.slice(-6)}
