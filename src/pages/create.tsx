@@ -102,34 +102,42 @@ export default function Create() {
             </Modal>
 
             <div className="p-6 max-w-7xl mx-auto">
-                <div className="max-w-2xl space-y-6">
-                    <form onSubmit={upload} className="flex flex-col space-y-4">
-                        {!fileURL && (
-                            <>
-                                <button onClick={() => fileRef.current.click()} type="button" className="h-64 rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center justify-center">
-                                    <p>X</p>
-                                </button>
-                            </>
-                        )}
-
-                        {fileURL && (
-                            <>
-                                <button onClick={() => setFile(null)} className="w-full" type="button">
-                                    <img className="rounded bg-zinc-900 border-zinc-800 border overflow-hidden w-full" src={fileURL} alt="" />
-                                </button>
-                            </>
-                        )}
-
-                        <input type="file" onChange={(e) => setFile(e.target.files[0])} className="hidden" ref={fileRef} accept="image/*" />
-                        <Input label="Name" value={name} onChange={(e) => setName(e.target.value)} />
-                        <Textarea label="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
-                        <div className="flex justify-end">
-                            <button type="submit">Upload to IPFS</button>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                        <p>Mint an NFT</p>
+                        <p>Upload an asset to mint your NFT. Minting your NFT is completely free (+gas).</p>
+                        <p>Minting an NFT is a 3-step process. You'll first upload your NFT's metadata to IPFS, then mint the token to your wallet, and finally, optionally approve and list the new NFT for sale.</p>
+                        <p>
+                            Your asset(s) are uploaded to IPFS (The InterPlanetary File System) for life-long safe keeping, and pinned indefinitely, and minted to an immutable ERC721-compliant smart contract on the
+                            Fantom Blockchain.
+                        </p>
+                    </div>
+                    <div className="w-full space-y-6">
+                        <form onSubmit={upload} className="flex flex-col space-y-4">
+                            {!fileURL && (
+                                <>
+                                    <button onClick={() => fileRef.current.click()} type="button" className="h-64 rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center justify-center">
+                                        <p>X</p>
+                                    </button>
+                                </>
+                            )}
+                            {fileURL && (
+                                <>
+                                    <button onClick={() => setFile(null)} className="w-full" type="button">
+                                        <img className="rounded bg-zinc-900 border-zinc-800 border overflow-hidden w-full" src={fileURL} alt="" />
+                                    </button>
+                                </>
+                            )}
+                            <input type="file" onChange={(e) => setFile(e.target.files[0])} className="hidden" ref={fileRef} accept="image/*" />
+                            <Input label="Name" value={name} onChange={(e) => setName(e.target.value)} />
+                            <Textarea label="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
+                            <div className="flex justify-end">
+                                <button type="submit">Upload to IPFS</button>
+                            </div>
+                        </form>
+                        <div>
+                            <p className="bg-zinc-900 p-2 border-zinc-800 border rounded">{JSON.stringify(metadata, null, 4)}</p>
                         </div>
-                    </form>
-
-                    <div>
-                        <p className="bg-zinc-900 p-2 border-zinc-800 border rounded">{JSON.stringify(metadata, null, 4)}</p>
                     </div>
                 </div>
             </div>
