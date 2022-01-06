@@ -5,7 +5,7 @@ import { formatPricing } from '../utils/utils'
 export default function IndexPage() {
     return (
         <div className="p-6 max-w-7xl mx-auto">
-            <div className="bg-white text-black h-96 flex items-center justify-center">
+            <div className="bg-white text-black h-96 flex items-center justify-center p-6">
                 <p className="text-2xl">Welcome to a new kind of marketplace.</p>
             </div>
         </div>

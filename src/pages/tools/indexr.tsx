@@ -10,17 +10,21 @@ export default function Indexr() {
     const { data: process } = useSWR(Web3.utils.isAddress(contractAddress) ? `/indexr/collection/${contractAddress}` : null)
 
     return (
-        <div className="p-6 max-w-xl mx-auto space-y-6">
-            <div className="space-y-4">
-                <p>Enter an ERC721-compliant NFT contract address to track all its tokens.</p>
+        <div className="p-6 max-w-7xl mx-auto">
+            <div className="max-w-2xl space-y-6">
+                {' '}
+                <div className="space-y-4">
+                    <p>Enter an ERC721-compliant NFT contract address to track all its tokens.</p>
 
-                <Input disable={!data || !data.status} value={contractAddress} onChange={(e) => setContractAddress(e.target.value)} />
+                    <Input disable={!data || !data.status} value={contractAddress} onChange={(e) => setContractAddress(e.target.value)} />
+                </div>
+                {(data || process) && (
+                    <p className="bg-zinc-900 p-2 border-zinc-800 border rounded">
+                        {data && <>Status: {JSON.stringify(data, null, 4)}</>} <br />
+                        {process && <>Process: {JSON.stringify(process, null, 4)}</>}
+                    </p>
+                )}
             </div>
-
-            <p className="bg-zinc-900 p-2 border-zinc-800 border rounded">
-                Status: {JSON.stringify(data, null, 4)} <br />
-                {process && <>Process: {JSON.stringify(process, null, 4)}</>}
-            </p>
         </div>
     )
 }
