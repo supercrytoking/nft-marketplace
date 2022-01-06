@@ -38,7 +38,7 @@ export default function Collection({ contractAddress }) {
                         {contractAddress.slice(-6)}
                     </a>
                 </p>
-                <p>{totalSupply} items</p>
+                {totalSupply && <p>{totalSupply} items</p>}
             </div>
             {data && (
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
