@@ -20,9 +20,7 @@ export async function getServerSideProps(ctx) {
 
 export default function TokenPage({ contract, id, staleData }) {
     const wallet = useWallet()
-    const {
-        status, createListing: createListingFunction, acceptListing: acceptListingFunction, revokeListing: revokeListingFunction
-    } = useExchange()
+    const { status, createListing: createListingFunction, acceptListing: acceptListingFunction, revokeListing: revokeListingFunction } = useExchange()
     const { data, mutate } = useSWR(`/data/${contract}/${id}`)
 
     const [showModal, setShowModal] = useState<false | 'list' | 'send'>(false)
@@ -30,7 +28,7 @@ export default function TokenPage({ contract, id, staleData }) {
 
     const image = data ? data.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/') : null
     const iAmOwner = data && data.owner === wallet.account
-    const isListed = data && data.listing.status === 'listed'
+    const isListed = data && data.listing && data.listing.status === 'listed'
 
     const listing = data ? data.listing : null
 
@@ -52,7 +50,7 @@ export default function TokenPage({ contract, id, staleData }) {
     }
 
     useEffect(() => {
-        setListingPrice(data?.listing?.price)
+        setListingPrice(data?.listing?.price && Web3.utils.fromWei(data?.listing?.price))
     }, [data])
 
     if (!data) return null
@@ -63,6 +61,7 @@ export default function TokenPage({ contract, id, staleData }) {
                 <meta property="og:image" content={staleData.metadata.image} />
                 <meta name="twitter:image" content={staleData.metadata.image} />
             </Head>
+
             <Modal visible={showModal === 'list'} onClose={() => setShowModal(false)}>
                 <div className="space-y-4">
                     <Input label="Listing Price" value={listingPrice} onChange={(e) => setListingPrice(e.target.value)} type="number" />
@@ -77,13 +76,13 @@ export default function TokenPage({ contract, id, staleData }) {
 
             <Modal visible={showModal === 'send'} onClose={() => setShowModal(false)}>
                 <div className="space-y-4">
-                    <Input label="Address" value={listingPrice} onChange={(e) => setListingPrice(e.target.value)} type="number" />
-
+                    {/* <Input label="Address" value={listingPrice} onChange={(e) => setListingPrice(e.target.value)} type="number" /> */}
+                    {/*
                     <div className="flex gap-4 justify-end items-center">
                         <button className="bg-white text-black px-4 py-2" onClick={() => {}} type="submit">
                             Send Now
                         </button>
-                    </div>
+                    </div> */}
                 </div>
             </Modal>
 
@@ -106,8 +105,7 @@ export default function TokenPage({ contract, id, staleData }) {
                         </div>
                         <div className="">
                             <p className="truncate">
-                                Collection:
-                                {' '}
+                                Collection:{' '}
                                 <Link href={`/collections/${data.contractAddress}`}>
                                     <a href="" className="underline hover:no-underline">
                                         {data.contractAddress}
@@ -115,19 +113,14 @@ export default function TokenPage({ contract, id, staleData }) {
                                 </Link>
                             </p>
                             <p className="truncate">
-                                Owner:
-                                {' '}
+                                Owner:{' '}
                                 <Link href={`/wallet/${data.owner}`}>
                                     <a href="" className="underline hover:no-underline">
                                         {iAmOwner ? 'you' : data.owner}
                                     </a>
                                 </Link>
                             </p>
-                            <p>
-                                Token ID:
-                                {' '}
-                                {data.tokenId}
-                            </p>
+                            <p>Token ID: {data.tokenId}</p>
                             <p>
                                 <a className="underline hover:no-underline" href={data.tokenURI} target="_blank" rel="noreferrer">
                                     Open metadata
@@ -143,11 +136,7 @@ export default function TokenPage({ contract, id, staleData }) {
                         )}
                         {isListed && (
                             <>
-                                <p className="text-xl">
-                                    {Web3.utils.fromWei(listing.price)}
-                                    {' '}
-                                    FTM
-                                </p>
+                                <p className="text-xl">{Web3.utils.fromWei(listing.price)} FTM</p>
                             </>
                         )}
 
