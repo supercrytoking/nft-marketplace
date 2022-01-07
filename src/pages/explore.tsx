@@ -26,7 +26,7 @@ export default function Explore() {
         <div className="p-6 max-w-7xl mx-auto space-y-6">
             <div className="flex flex-wrap gap-4">
                 {feeds.map(({ slug, name }, index) => (
-                    <Button className={classNames(feed.slug === slug && 'bg-blue-400')} key={slug} onClick={() => setFeed(feeds[index])}>
+                    <Button className={classNames(feed.slug === slug && 'bg-blue-500')} key={slug} onClick={() => setFeed(feeds[index])}>
                         {name}
                     </Button>
                 ))}

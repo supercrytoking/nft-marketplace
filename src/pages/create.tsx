@@ -1,7 +1,9 @@
+import { nanoid } from 'nanoid'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { useWallet } from 'use-wallet'
 import Web3 from 'web3'
+import Button from '../components/Button'
 import Input from '../components/Input'
 import Modal from '../components/Modal'
 import Textarea from '../components/Textarea'
@@ -130,7 +132,7 @@ export default function Create() {
                             <Input label="Name" value={name} onChange={(e) => setName(e.target.value)} />
                             <Textarea label="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
                             <div className="flex justify-end">
-                                <button type="submit">Upload to IPFS</button>
+                                <Button type="submit">Upload to IPFS</Button>
                             </div>
                         </form>
                         <div>
