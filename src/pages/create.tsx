@@ -13,6 +13,7 @@ import { api } from '../utils/utils'
 export default function Create() {
     const wallet = useWallet()
 
+    const [status, setStatus] = useState('idle')
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [date, setDate] = useState(new Date().toString())
@@ -32,14 +33,16 @@ export default function Create() {
 
     const upload = async (e) => {
         try {
+            setStatus('uploading')
             if (e) e.preventDefault()
             const formData = new FormData()
             formData.append('file', file)
             formData.append('metadata', JSON.stringify(metadata))
             const { data } = await api.post('/upload', formData)
             setCid(data.cid)
-            setShowModal(true)
+            setStatus('idle')
         } catch (error) {
+            setStatus('error')
             console.error(error)
         }
     }
@@ -49,6 +52,7 @@ export default function Create() {
     const mint = async (e) => {
         try {
             if (!wallet.account) return wallet.connect()
+            setStatus('minting')
             await contract.methods.mint(wallet.account, cid).estimateGas({ from: wallet.account })
             const doMint = await contract.methods.mint(wallet.account, cid).send({ from: wallet.account })
             const transferEvent = doMint.events.Transfer
@@ -59,7 +63,9 @@ export default function Create() {
                 tokenId = transferEvent.returnValues.tokenId
             }
             setTokenId(tokenId)
+            setStatus('idle')
         } catch (error) {
+            setStatus('error')
             console.error(error)
         }
     }
@@ -79,24 +85,25 @@ export default function Create() {
                     </a>
                     <p>1. Your NFT has been uploaded to IPFS. You can proceed to mint it to the Fantom Blockchain now:</p>
                     <div className="flex justify-end">
-                        <button className="bg-white text-black px-4 py-2" onClick={mint} type="submit">
+                        <Button onClick={mint} loading={status === 'minting'}>
                             {wallet.account ? 'Mint NFT' : 'Connect Wallet'}
-                        </button>
+                        </Button>
                     </div>
 
                     {tokenId && (
                         <>
                             <p>
                                 2. Your token (#
-                                {tokenId}) has been minted and is now in your wallet.
+                                {tokenId}
+                                ) has been minted and is now in your wallet. Next, you can optionally list it for sale.
                             </p>
                             <div className="flex gap-4 justify-end items-center">
                                 <Link href="/wallet">
                                     <a>View Wallet</a>
                                 </Link>
-                                {/* <Button onClick={mint}>
-                                    List for Sale
-                                </Button> */}
+                                <Link href={`/${process.env.NEXT_PUBLIC_MINTING_CONTRACT}/${tokenId}`}>
+                                    <a className="bg-white text-black px-4 py-2">View Token</a>
+                                </Link>
                             </div>
                         </>
                     )}
@@ -132,7 +139,9 @@ export default function Create() {
                             <Input label="Name" value={name} onChange={(e) => setName(e.target.value)} />
                             <Textarea label="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
                             <div className="flex justify-end">
-                                <Button type="submit">Upload to IPFS</Button>
+                                <Button type="submit" onClick={upload} loading={status === 'uploading'}>
+                                    Upload to IPFS
+                                </Button>
                             </div>
                         </form>
                         <div>
