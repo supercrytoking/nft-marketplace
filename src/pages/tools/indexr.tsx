@@ -7,7 +7,7 @@ export default function Indexr() {
     const [contractAddress, setContractAddress] = useState('')
 
     const { data } = useSWR('/indexr')
-    const { data: process } = useSWR(Web3.utils.isAddress(contractAddress) ? `/indexr/collection/${contractAddress}` : null)
+    const { data: process } = useSWR(Web3.utils.isAddress(contractAddress) ? `/indexr/collections/${contractAddress}` : null)
 
     return (
         <div className="p-6 max-w-7xl mx-auto">

@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import useSWR from 'swr'
 import { useWallet } from 'use-wallet'
 import Web3 from 'web3'
+import Button from '../../components/Button'
 import History from '../../components/History'
 import Input from '../../components/Input'
 import Modal from '../../components/Modal'
@@ -19,7 +20,9 @@ export async function getServerSideProps(ctx) {
 
 export default function TokenPage({ contract, id, staleData }) {
     const wallet = useWallet()
-    const { createListing: createListingFunction, acceptListing: acceptListingFunction, revokeListing: revokeListingFunction } = useExchange()
+    const {
+        status, createListing: createListingFunction, acceptListing: acceptListingFunction, revokeListing: revokeListingFunction
+    } = useExchange()
     const { data, mutate } = useSWR(`/data/${contract}/${id}`)
 
     const [showModal, setShowModal] = useState<false | 'list' | 'send'>(false)
@@ -27,16 +30,18 @@ export default function TokenPage({ contract, id, staleData }) {
 
     const image = data ? data.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/') : null
     const iAmOwner = data && data.owner === wallet.account
-    const isListed = data && data.listings.length > 0 && data.listings[0].status === 'listed'
+    const isListed = data && data.listing.status === 'listed'
 
-    const listing = data ? data.listings[0] : null
+    const listing = data ? data.listing : null
 
     const createListing = async () => {
         await createListingFunction(contract, id, Web3.utils.toWei(listingPrice))
         await mutate()
+        setShowModal(false)
     }
 
     const acceptListing = async () => {
+        console.log(listingPrice)
         await acceptListingFunction(contract, id, listingPrice)
         await mutate()
     }
@@ -63,9 +68,9 @@ export default function TokenPage({ contract, id, staleData }) {
                     <Input label="Listing Price" value={listingPrice} onChange={(e) => setListingPrice(e.target.value)} type="number" />
 
                     <div className="flex gap-4 justify-end items-center">
-                        <button className="bg-white text-black px-4 py-2" onClick={() => createListing()} type="submit">
+                        <Button onClick={() => createListing()} loading={status === 'creating'}>
                             List for Sale
-                        </button>
+                        </Button>
                     </div>
                 </div>
             </Modal>
@@ -101,22 +106,28 @@ export default function TokenPage({ contract, id, staleData }) {
                         </div>
                         <div className="">
                             <p className="truncate">
-                                Collection:{' '}
-                                <Link href={`/collection/${data.contractAddress}`}>
+                                Collection:
+                                {' '}
+                                <Link href={`/collections/${data.contractAddress}`}>
                                     <a href="" className="underline hover:no-underline">
                                         {data.contractAddress}
                                     </a>
                                 </Link>
                             </p>
                             <p className="truncate">
-                                Owner:{' '}
+                                Owner:
+                                {' '}
                                 <Link href={`/wallet/${data.owner}`}>
                                     <a href="" className="underline hover:no-underline">
                                         {iAmOwner ? 'you' : data.owner}
                                     </a>
                                 </Link>
                             </p>
-                            <p>Token ID: {data.tokenId}</p>
+                            <p>
+                                Token ID:
+                                {' '}
+                                {data.tokenId}
+                            </p>
                             <p>
                                 <a className="underline hover:no-underline" href={data.tokenURI} target="_blank" rel="noreferrer">
                                     Open metadata
@@ -132,11 +143,15 @@ export default function TokenPage({ contract, id, staleData }) {
                         )}
                         {isListed && (
                             <>
-                                <p className="text-xl">{Web3.utils.fromWei(listing.price)} FTM</p>
+                                <p className="text-xl">
+                                    {Web3.utils.fromWei(listing.price)}
+                                    {' '}
+                                    FTM
+                                </p>
                             </>
                         )}
 
-                        <div className="space-y-2">
+                        <div className="space-y-2 flex flex-col">
                             {!wallet.account && (
                                 <button onClick={() => wallet.connect()} type="button" className="bg-white w-full text-black px-4 py-2">
                                     Connect Wallet
@@ -161,9 +176,9 @@ export default function TokenPage({ contract, id, staleData }) {
                                         {isListed ? 'Modify Listing' : 'List for Sale'}
                                     </button>
                                     {isListed && (
-                                        <button onClick={() => revokeListing()} type="button" className="bg-white w-full text-black px-4 py-2">
+                                        <Button onClick={() => revokeListing()} loading={status === 'revoking'}>
                                             Delist from Sale
-                                        </button>
+                                        </Button>
                                     )}
                                 </>
                             )}

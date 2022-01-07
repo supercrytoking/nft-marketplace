@@ -1,6 +1,3 @@
-import useSWR from 'swr'
-import Link from 'next/link'
-import { formatPricing } from '../utils/utils'
 import CoolStuff from '../components/CoolStuff'
 
 export default function IndexPage() {

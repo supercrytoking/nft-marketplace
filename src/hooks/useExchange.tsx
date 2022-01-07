@@ -23,9 +23,10 @@ export default function useExchange() {
     const createListing = async (contractAddress: string, tokenId: string, price: any) => {
         try {
             if (!wallet.account) return wallet.connect()
-            await doApprovalCheck(contractAddress, tokenId)
             setStatus('creating')
+            await doApprovalCheck(contractAddress, tokenId)
             await contract.methods.createListing(contractAddress, tokenId, price).send({ from: wallet.account })
+            setStatus('idle')
         } catch (error) {
             setStatus('error')
             console.log(error)
@@ -37,6 +38,7 @@ export default function useExchange() {
             if (!wallet.account) return wallet.connect()
             setStatus('revoking')
             await contract.methods.revokeListing(contractAddress, tokenId).send({ from: wallet.account })
+            setStatus('idle')
         } catch (error) {
             setStatus('error')
             console.log(error)
@@ -48,6 +50,7 @@ export default function useExchange() {
             if (!wallet.account) return wallet.connect()
             setStatus('accepting')
             await contract.methods.acceptListing(contractAddress, tokenId).send({ value: price, from: wallet.account })
+            setStatus('idle')
         } catch (error) {
             setStatus('error')
             console.log(error)
