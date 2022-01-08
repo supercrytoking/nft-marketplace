@@ -3,6 +3,7 @@ import commaNumber from 'comma-number'
 import shortNumber from 'short-number'
 import axios from 'axios'
 
+// export const apiUrl = true ? 'https://api.fantom.digital' : 'http://localhost:8888'
 export const apiUrl = process.env.NODE_ENV === 'production' ? 'https://api.fantom.digital' : 'http://localhost:8888'
 
 export const cacheImage = (url: string) => `${apiUrl}/cache/${encodeURIComponent(url)}`

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Web3 from 'web3'
 import { useEffect, useState } from 'react'
 import { erc721 } from '../../data/abis'
+import { cacheImage } from '../../utils/utils'
 
 export function getServerSideProps(ctx) {
     return { props: ctx.query }
@@ -45,7 +46,7 @@ export default function Collection({ contractAddress }) {
                     {data.map((nft) => (
                         <Link href={`/${nft.contractAddress}/${nft.tokenId}`}>
                             <a className="rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center">
-                                <img className="w-full" src={nft.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/')} alt="" />
+                                <img className="w-full" src={cacheImage(nft.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/'))} alt="" />
                             </a>
                         </Link>
                     ))}
