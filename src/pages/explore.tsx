@@ -54,7 +54,16 @@ export default function Explore() {
                         <Link key={`${nft.contractAddress}-${nft.tokenId}`} href={`/${nft.contractAddress}/${nft.tokenId}`}>
                             <a className="rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center">
                                 <LazyLoad once>
-                                    <img className="w-full" src={cacheImage(nft.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/'))} alt="" />
+                                    <img
+                                        className="w-full"
+                                        src={cacheImage(nft.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/'))}
+                                        onError={(e) => {
+                                            setTimeout(() => {
+                                                e.target.src += `?${+new Date()}`
+                                            }, 1000)
+                                        }}
+                                        alt=""
+                                    />
                                 </LazyLoad>
                             </a>
                         </Link>
