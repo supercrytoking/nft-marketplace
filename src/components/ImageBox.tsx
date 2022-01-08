@@ -23,7 +23,6 @@ export default function ImageBox({ nft }) {
         <>
             <Link key={`${nft.contractAddress}-${nft.tokenId}`} href={`/${nft.contractAddress}/${nft.tokenId}`}>
                 <a className="rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center h-full" style={{ minHeight: '24rem' }}>
-                    {isLoaded ? 'y' : 'no'}
                     <LazyLoad>
                         <img ref={ref} className="" src={cacheImage(nft.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/'))} onLoad={() => setIsLoaded(true)} onError={(e) => setIsLoaded(false)} alt="" />
                     </LazyLoad>
