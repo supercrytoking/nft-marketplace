@@ -55,16 +55,19 @@ export default function ImageBox({ nft }) {
     return (
         <>
             <Link key={`${nft.contractAddress}-${nft.tokenId}`} href={`/${nft.contractAddress}/${nft.tokenId}`}>
-                <a ref={boxRef} className={classNames('relative rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center justify-center h-full', !imageBinary && 'square')}>
-                    {!imageBinary && (
-                        <div className="content">
-                            <LazyLoad>
-                                <img className="" src={'/img/loading.gif'} alt="" />
-                            </LazyLoad>
-                        </div>
-                    )}
-                    <img ref={ref} className="" src={`data:image/jpeg;charset=utf-8;base64,${imageBinary}`} alt="" />
-                </a>
+                <div>
+                    {baseURL}
+                    <a ref={boxRef} className={classNames('relative rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center justify-center h-full', !imageBinary && 'square')}>
+                        {!imageBinary && (
+                            <div className="content">
+                                <LazyLoad>
+                                    <img className="" src={'/img/loading.gif'} alt="" />
+                                </LazyLoad>
+                            </div>
+                        )}
+                        <img ref={ref} className="" src={`data:image/jpeg;charset=utf-8;base64,${imageBinary}`} alt="" />
+                    </a>
+                </div>
             </Link>
         </>
     )

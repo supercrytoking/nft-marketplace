@@ -7,6 +7,7 @@ import { useWallet } from 'use-wallet'
 import Web3 from 'web3'
 import Button from '../../components/Button'
 import History from '../../components/History'
+import ImageBox from '../../components/ImageBox'
 import Input from '../../components/Input'
 import Modal from '../../components/Modal'
 import useExchange from '../../hooks/useExchange'
@@ -81,7 +82,8 @@ export default function TokenPage({ contract, id }) {
 
             <div className="p-6 max-w-3xl mx-auto space-y-6">
                 <div className="flex justify-center">
-                    <img className="rounded bg-zinc-900 border-zinc-800 border overflow-hidden" src={cacheImage(image)} alt="" />
+                    <ImageBox nft={data} />
+                    {/* <img className="rounded bg-zinc-900 border-zinc-800 border overflow-hidden" src={cacheImage(image)} alt="" /> */}
                 </div>
 
                 <p className="text-3xl">{data.metadata.name}</p>
