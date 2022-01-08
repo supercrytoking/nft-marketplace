@@ -14,6 +14,7 @@ export default function ImageBox({ nft }) {
 
         const timer = setInterval(() => {
             if (!ref.current) return
+            console.log('Trying to load again...', nft.contractAddress, nft.tokenId)
             ref.current.src = ref.current.src
         }, 2000)
         return () => clearInterval(timer)
