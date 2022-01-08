@@ -8,7 +8,7 @@ import axios from 'axios'
 import classNames from 'classnames'
 
 export default function ImageBox({ nft }) {
-    const imageId = hash(nft.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/'))
+    const imageId = hash(nft.metadata.image)
     const baseURL = `https://enbzwejmbbmiirvimcib.supabase.in/storage/v1/object/public/cache/${imageId}`
 
     const [isLoaded, setIsLoaded] = useState(false)
@@ -40,7 +40,7 @@ export default function ImageBox({ nft }) {
                 setRefreshing(true)
                 if (refreshing) return
                 try {
-                    await api.get(cacheImage(nft.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/')))
+                    await api.get(cacheImage(nft.metadata.image))
                 } catch (error) {}
                 console.log(error)
             }
