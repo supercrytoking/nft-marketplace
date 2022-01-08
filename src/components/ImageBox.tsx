@@ -61,10 +61,14 @@ export default function ImageBox({ nft }) {
                 <a ref={boxRef} className={classNames('relative rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center justify-center h-full', !isLoaded && 'square')}>
                     {!isLoaded && (
                         <div className="content">
-                            <img className="" src={'/img/loading.gif'} alt="" />
+                            <LazyLoad>
+                                <img className="" src={'/img/loading.gif'} alt="" />
+                            </LazyLoad>
                         </div>
                     )}
-                    <img ref={ref} className="" src={`data:image/jpeg;charset=utf-8;base64,${imageBinary}`} onLoad={() => setIsLoaded(true)} onError={(e) => setIsLoaded(false)} alt="" />
+                    <LazyLoad>
+                        <img ref={ref} className="" src={`data:image/jpeg;charset=utf-8;base64,${imageBinary}`} onLoad={() => setIsLoaded(true)} onError={(e) => setIsLoaded(false)} alt="" />
+                    </LazyLoad>
                 </a>
             </Link>
         </>
