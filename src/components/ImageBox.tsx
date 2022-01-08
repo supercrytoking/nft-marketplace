@@ -35,8 +35,9 @@ export default function ImageBox({ nft }) {
         <>
             <Link key={`${nft.contractAddress}-${nft.tokenId}`} href={`/${nft.contractAddress}/${nft.tokenId}`}>
                 <a ref={boxRef} className="rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center h-full" style={{ minHeight: '24rem' }}>
+                    {isLoaded ? 'y' : 'n'}
                     {isVisible ? 'y' : 'n'}
-                    <img ref={ref} className="" src={isVisible ? baseURL : null} onLoad={() => setIsLoaded(true)} onError={(e) => setIsLoaded(false)} alt="" />
+                    <img ref={ref} className="" src={isVisible || isLoaded ? baseURL : null} onLoad={() => setIsLoaded(true)} onError={(e) => setIsLoaded(false)} alt="" />
                 </a>
             </Link>
         </>
