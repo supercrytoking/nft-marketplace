@@ -3,7 +3,9 @@ import Link from 'next/link'
 import { useState } from 'react'
 import classNames from 'classnames'
 import ReactTyped from 'react-typed'
+import LazyLoad from 'react-lazyload'
 import Button from '../components/Button'
+import { cacheImage } from '../utils/utils'
 
 const feeds = [
     {
@@ -30,8 +32,6 @@ export default function Explore() {
                         {name}
                     </Button>
                 ))}
-                {/* <Button className={classNames(feed.name)} onClick={() => setFeed(feeds[0])}>Latest</Button>
-                <Button onClick={() => setFeed(feeds[1])}>Listed</Button> */}
             </div>
 
             {!data && (
@@ -53,7 +53,9 @@ export default function Explore() {
                     {data.map((nft) => (
                         <Link key={`${nft.contractAddress}-${nft.tokenId}`} href={`/${nft.contractAddress}/${nft.tokenId}`}>
                             <a className="rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center">
-                                <img className="w-full" src={nft.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/')} alt="" />
+                                <LazyLoad once>
+                                    <img className="w-full" src={cacheImage(nft.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/'))} alt="" />
+                                </LazyLoad>
                             </a>
                         </Link>
                     ))}

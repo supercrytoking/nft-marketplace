@@ -1,5 +1,6 @@
-import { nanoid } from 'nanoid'
+import classNames from 'classnames'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 import { useWallet } from 'use-wallet'
 import Web3 from 'web3'
@@ -12,15 +13,19 @@ import { api } from '../utils/utils'
 
 export default function Create() {
     const wallet = useWallet()
+    const router = useRouter()
+
+    const [tab, setTab] = useState<'create' | 'import'>('create')
 
     const [status, setStatus] = useState('idle')
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [date, setDate] = useState(new Date().toString())
     const [file, setFile] = useState('')
-
     const [cid, setCid] = useState('')
     const [tokenId, setTokenId] = useState('')
+    const [inputTokenId, setInputTokenId] = useState('')
+    const [inputContractAddress, setInputContractAddress] = useState('')
 
     const fileRef = useRef()
     const fileURL = file ? URL.createObjectURL(file) : ''
@@ -70,6 +75,13 @@ export default function Create() {
         }
     }
 
+    const importToken = (e) => {
+        if (e) e.preventDefault()
+        const url = `/${inputContractAddress}/${inputTokenId}`
+        console.log(url)
+        router.push(url)
+    }
+
     useEffect(() => {
         const timer = setInterval(() => setDate(new Date().toString()), 1000)
         return () => clearInterval(timer)
@@ -94,8 +106,7 @@ export default function Create() {
                         <>
                             <p>
                                 2. Your token (#
-                                {tokenId}
-                                ) has been minted and is now in your wallet. Next, you can optionally list it for sale.
+                                {tokenId}) has been minted and is now in your wallet. Next, you can optionally list it for sale.
                             </p>
                             <div className="flex gap-4 justify-end items-center">
                                 <Link href="/wallet">
@@ -110,45 +121,79 @@ export default function Create() {
                 </div>
             </Modal>
 
-            <div className="p-6 max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                        <p>Mint an NFT</p>
-                        <p>Upload an asset to mint your NFT. Minting your NFT is completely free (+gas).</p>
-                        <p>Minting an NFT is a 3-step process. You'll first upload your NFT's metadata to IPFS, then mint the token to your wallet, and finally, optionally approve and list the new NFT for sale.</p>
-                        <p>Your asset(s) are uploaded to IPFS (The InterPlanetary File System) for life-long safe keeping, and pinned indefinitely.</p>
-                        <p>The NFT is minted to an immutable ERC721-compliant smart contract on the Fantom Blockchain.</p>
-                    </div>
-                    <div className="w-full space-y-6">
-                        <form onSubmit={upload} className="flex flex-col space-y-4">
-                            {!fileURL && (
-                                <>
-                                    <button onClick={() => fileRef.current.click()} type="button" className="h-64 rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center justify-center">
-                                        <p>X</p>
-                                    </button>
-                                </>
-                            )}
-                            {fileURL && (
-                                <>
-                                    <button onClick={() => setFile(null)} className="w-full" type="button">
-                                        <img className="rounded bg-zinc-900 border-zinc-800 border overflow-hidden w-full" src={fileURL} alt="" />
-                                    </button>
-                                </>
-                            )}
-                            <input type="file" onChange={(e) => setFile(e.target.files[0])} className="hidden" ref={fileRef} accept="image/*" />
-                            <Input label="Name" value={name} onChange={(e) => setName(e.target.value)} />
-                            <Textarea label="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
-                            <div className="flex justify-end">
-                                <Button type="submit" onClick={upload} loading={status === 'uploading'}>
-                                    Upload to IPFS
-                                </Button>
-                            </div>
-                        </form>
-                        <div>
-                            <p className="bg-zinc-900 p-2 border-zinc-800 border rounded">{JSON.stringify(metadata, null, 4)}</p>
+            <div className="p-6 max-w-7xl mx-auto space-y-6">
+                <div className="flex flex-wrap gap-4">
+                    <Button className={classNames(false && 'bg-blue-500')} onClick={() => setTab('create')}>
+                        Create
+                    </Button>
+
+                    <Button className={classNames(false && 'bg-blue-500')} onClick={() => setTab('import')}>
+                        Import Existing Token
+                    </Button>
+                </div>
+
+                {tab === 'import' && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                            <p>Import</p>
+
+                            <p>You can import a token that already exists on the Fantom blockchain — created anywhere — here.</p>
+                            <p>Your token must be ERC721-compliant and contain an `image` and `name` in the json metadata.</p>
+                        </div>
+                        <div className="w-full space-y-6">
+                            <form onSubmit={importToken} className="flex flex-col space-y-4">
+                                <Input label="Contract Address" value={inputContractAddress} onChange={(e) => setInputContractAddress(e.target.value)} />
+                                <Input label="Token ID" value={inputTokenId} onChange={(e) => setInputTokenId(e.target.value)} />
+                                <div className="flex justify-end">
+                                    <Button type="submit" onClick={importToken}>
+                                        Import Token
+                                    </Button>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                </div>
+                )}
+
+                {tab === 'create' && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                            <p>Mint an NFT</p>
+                            <p>Upload an asset to mint your NFT. Minting your NFT is completely free (+gas).</p>
+                            <p>Minting an NFT is a 3-step process. You'll first upload your NFT's metadata to IPFS, then mint the token to your wallet, and finally, optionally approve and list the new NFT for sale.</p>
+                            <p>Your asset(s) are uploaded to IPFS (The InterPlanetary File System) for life-long safe keeping, and pinned indefinitely.</p>
+                            <p>The NFT is minted to an immutable ERC721-compliant smart contract on the Fantom Blockchain.</p>
+                        </div>
+                        <div className="w-full space-y-6">
+                            <form onSubmit={upload} className="flex flex-col space-y-4">
+                                {!fileURL && (
+                                    <>
+                                        <button onClick={() => fileRef.current.click()} type="button" className="h-64 rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center justify-center">
+                                            <p>X</p>
+                                        </button>
+                                    </>
+                                )}
+                                {fileURL && (
+                                    <>
+                                        <button onClick={() => setFile(null)} className="w-full" type="button">
+                                            <img className="rounded bg-zinc-900 border-zinc-800 border overflow-hidden w-full" src={fileURL} alt="" />
+                                        </button>
+                                    </>
+                                )}
+                                <input type="file" onChange={(e) => setFile(e.target.files[0])} className="hidden" ref={fileRef} accept="image/*" />
+                                <Input label="Name" value={name} onChange={(e) => setName(e.target.value)} />
+                                <Textarea label="Description" value={description} onChange={(e) => setDescription(e.target.value)} />
+                                <div className="flex justify-end">
+                                    <Button type="submit" onClick={upload} loading={status === 'uploading'}>
+                                        Upload to IPFS
+                                    </Button>
+                                </div>
+                            </form>
+                            <div>
+                                <p className="bg-zinc-900 p-2 border-zinc-800 border rounded">{JSON.stringify(metadata, null, 4)}</p>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </>
     )

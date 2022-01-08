@@ -10,15 +10,14 @@ import History from '../../components/History'
 import Input from '../../components/Input'
 import Modal from '../../components/Modal'
 import useExchange from '../../hooks/useExchange'
-import { api } from '../../utils/utils'
+import { api, cacheImage } from '../../utils/utils'
 
 export async function getServerSideProps(ctx) {
     const { contract, id } = ctx.query
-    const { data: staleData } = await api.get(`/data/${contract}/${id}`)
-    return { props: { contract, id, staleData } }
+    return { props: { contract, id } }
 }
 
-export default function TokenPage({ contract, id, staleData }) {
+export default function TokenPage({ contract, id }) {
     const wallet = useWallet()
     const { status, createListing: createListingFunction, acceptListing: acceptListingFunction, revokeListing: revokeListingFunction } = useExchange()
     const { data, mutate } = useSWR(`/data/${contract}/${id}`)
@@ -56,12 +55,6 @@ export default function TokenPage({ contract, id, staleData }) {
     if (!data) return null
     return (
         <>
-            <Head>
-                <link rel="icon" type="image/png" href={staleData.metadata.image} />
-                <meta property="og:image" content={staleData.metadata.image} />
-                <meta name="twitter:image" content={staleData.metadata.image} />
-            </Head>
-
             <Modal visible={showModal === 'list'} onClose={() => setShowModal(false)}>
                 <div className="space-y-4">
                     <Input label="Listing Price" value={listingPrice} onChange={(e) => setListingPrice(e.target.value)} type="number" />
@@ -88,7 +81,7 @@ export default function TokenPage({ contract, id, staleData }) {
 
             <div className="p-6 max-w-3xl mx-auto space-y-6">
                 <div className="flex justify-center">
-                    <img className="rounded bg-zinc-900 border-zinc-800 border overflow-hidden" src={image} alt="" />
+                    <img className="rounded bg-zinc-900 border-zinc-800 border overflow-hidden" src={cacheImage(image)} alt="" />
                 </div>
 
                 <p className="text-3xl">{data.metadata.name}</p>
