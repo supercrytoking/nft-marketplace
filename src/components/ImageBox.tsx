@@ -21,7 +21,7 @@ export default function ImageBox({ nft }) {
             if (!ref.current) return
             console.log('Trying to load again...', nft.contractAddress, nft.tokenId)
             ref.current.src = ref.current.src
-        }, 1000)
+        }, 5000)
         return () => clearInterval(timer)
     }, [isLoaded, ref])
 
@@ -35,8 +35,9 @@ export default function ImageBox({ nft }) {
     return (
         <>
             <Link key={`${nft.contractAddress}-${nft.tokenId}`} href={`/${nft.contractAddress}/${nft.tokenId}`}>
-                <a ref={boxRef} className="rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center h-full" style={{ minHeight: '24rem' }}>
-                    <img ref={ref} className="" src={baseURL} onLoad={() => setIsLoaded(true)} onError={(e) => setIsLoaded(false)} alt="" />
+                <a ref={boxRef} className="rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center justify-center h-full ">
+                    {!isLoaded && <img src={'/img/loading.gif'} alt="" />}
+                    <img ref={ref} className="h-full" src={baseURL} onLoad={() => setIsLoaded(true)} onError={(e) => setIsLoaded(false)} alt="" />
                 </a>
             </Link>
         </>
