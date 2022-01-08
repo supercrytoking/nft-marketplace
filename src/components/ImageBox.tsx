@@ -9,7 +9,6 @@ import axios from 'axios'
 export default function ImageBox({ nft }) {
     const imageId = hash(nft.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/'))
     const baseURL = `https://enbzwejmbbmiirvimcib.supabase.in/storage/v1/object/public/cache/${imageId}`
-    // const baseURL = cacheImage(nft.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/'))
 
     const [isLoaded, setIsLoaded] = useState(false)
     const [refreshing, setRefreshing] = useState(false)
@@ -32,27 +31,13 @@ export default function ImageBox({ nft }) {
     }
 
     useEffect(() => {
-        if (isLoaded) return
-        if (!ref) return
+        if (!isVisible) return
+        if (imageBinary) return
 
-        const timer = setInterval(() => {
-            if (!ref.current) return
-            console.log('Trying to load again...', nft.contractAddress, nft.tokenId)
-            ref.current.src = ref.current.src
-        }, 1000)
-        return () => clearInterval(timer)
-    }, [isLoaded, ref])
-
-    useEffect(() => {
-        if (!ref.current) return
-        if (isLoaded) return
-        if (!isVisible) ref.current.src = ''
-        if (isVisible) ref.current.src = baseURL
-    }, [ref, isVisible, isLoaded])
-
-    useEffect(() => {
         const onLoad = async () => {
             try {
+                console.log('Getting image again...')
+
                 const { data } = await axios.get(baseURL, {
                     responseType: 'arraybuffer'
                 })
@@ -63,30 +48,30 @@ export default function ImageBox({ nft }) {
                     return
                 }
             } catch (error) {
-                queueImage()
+                setRefreshing(true)
+                if (!refreshing) {
+                    console.log('Queueing...')
+                    try {
+                        await api.get(cacheImage(nft.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/')))
+                    } catch (error) {
+                        queueImage()
+                    }
+                }
                 console.log(error)
             }
         }
+
         onLoad()
-    }, [])
+        const timer = setInterval(onLoad, 1000)
+        return () => clearInterval(timer)
+    }, [isVisible, imageBinary, refreshing])
 
     return (
         <>
             <Link key={`${nft.contractAddress}-${nft.tokenId}`} href={`/${nft.contractAddress}/${nft.tokenId}`}>
-                <a ref={boxRef} className="relative rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center justify-center h-full ">
+                <a ref={boxRef} className="relative rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center justify-center h-full" style={{ minHeight: `24em` }}>
                     {!isLoaded && <img className="absolute" src={'/img/loading.gif'} alt="" />}
-                    <img
-                        ref={ref}
-                        className="h-full relative"
-                        src={`data:image/jpeg;charset=utf-8;base64,${imageBinary}`}
-                        // onLoad={() => setIsLoaded(true)}
-                        // onError={(e) => {
-                        //     setIsLoaded(false)
-                        //     console.log('error')
-                        //     queueImage()
-                        // }}
-                        alt=""
-                    />
+                    <img ref={ref} className="h-full relative" src={`data:image/jpeg;charset=utf-8;base64,${imageBinary}`} onLoad={() => setIsLoaded(true)} onError={(e) => setIsLoaded(false)} alt="" />
                 </a>
             </Link>
         </>
