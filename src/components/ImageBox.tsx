@@ -1,30 +1,34 @@
 import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
 import LazyLoad from 'react-lazyload'
-import TrackVisibility from 'react-on-screen'
 import { cacheImage } from '../utils/utils'
 
 export default function ImageBox({ nft }) {
+    const [isLoaded, setIsLoaded] = useState(false)
+
+    const ref = useRef()
+
+    useEffect(() => {
+        if (isLoaded) return
+        if (!ref) return
+
+        const timer = setInterval(() => {
+            if (!ref.current) return
+            ref.current.src += `?random=${Date.now()}`
+        }, 2000)
+        return () => clearInterval(timer)
+    }, [isLoaded, ref])
+
     return (
-        <LazyLoad once>
-            <TrackVisibility>
-                {({ isVisible }) => (
-                    <Link key={`${nft.contractAddress}-${nft.tokenId}`} href={`/${nft.contractAddress}/${nft.tokenId}`}>
-                        <a className="rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center h-full" style={{ minHeight: '24rem' }}>
-                            {isVisible ? 'y' : 'n'}
-                            <img
-                                className=""
-                                src={cacheImage(nft.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/'))}
-                                onError={(e) => {
-                                    setTimeout(() => {
-                                        if (isVisible) e.target.src += `?${+new Date()}`
-                                    }, 1000)
-                                }}
-                                alt=""
-                            />
-                        </a>
-                    </Link>
-                )}
-            </TrackVisibility>
-        </LazyLoad>
+        <>
+            <Link key={`${nft.contractAddress}-${nft.tokenId}`} href={`/${nft.contractAddress}/${nft.tokenId}`}>
+                <a className="rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center h-full" style={{ minHeight: '24rem' }}>
+                    {isLoaded ? 'y' : 'no'}
+                    <LazyLoad>
+                        <img ref={ref} className="" src={cacheImage(nft.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/'))} onLoad={() => setIsLoaded(true)} onError={(e) => setIsLoaded(false)} alt="" />
+                    </LazyLoad>
+                </a>
+            </Link>
+        </>
     )
 }
