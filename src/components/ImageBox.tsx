@@ -20,8 +20,8 @@ export default function ImageBox({ nft }) {
     const isVisible = useOnScreen(boxRef)
 
     useEffect(() => {
-        if (!isVisible) return
         if (imageBinary) return
+        if (!isVisible) return
 
         const onLoad = async () => {
             try {
@@ -38,19 +38,16 @@ export default function ImageBox({ nft }) {
                 }
             } catch (error) {
                 setRefreshing(true)
-                if (!refreshing) {
-                    console.log('Queueing...')
-                    try {
-                        await api.get(cacheImage(nft.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/')))
-                    } catch (error) {
-                        queueImage()
-                    }
-                }
+                if (refreshing) return
+                try {
+                    await api.get(cacheImage(nft.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/')))
+                } catch (error) {}
                 console.log(error)
             }
         }
 
         onLoad()
+
         const timer = setInterval(onLoad, 1000)
         return () => clearInterval(timer)
     }, [isVisible, imageBinary, refreshing])
@@ -58,17 +55,15 @@ export default function ImageBox({ nft }) {
     return (
         <>
             <Link key={`${nft.contractAddress}-${nft.tokenId}`} href={`/${nft.contractAddress}/${nft.tokenId}`}>
-                <a ref={boxRef} className={classNames('relative rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center justify-center h-full', !isLoaded && 'square')}>
-                    {!isLoaded && (
+                <a ref={boxRef} className={classNames('relative rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center justify-center h-full', !imageBinary && 'square')}>
+                    {!imageBinary && (
                         <div className="content">
                             <LazyLoad>
                                 <img className="" src={'/img/loading.gif'} alt="" />
                             </LazyLoad>
                         </div>
                     )}
-                    <LazyLoad>
-                        <img ref={ref} className="" src={`data:image/jpeg;charset=utf-8;base64,${imageBinary}`} onLoad={() => setIsLoaded(true)} onError={(e) => setIsLoaded(false)} alt="" />
-                    </LazyLoad>
+                    <img ref={ref} className="" src={`data:image/jpeg;charset=utf-8;base64,${imageBinary}`} alt="" />
                 </a>
             </Link>
         </>
