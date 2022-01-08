@@ -25,19 +25,18 @@ export default function ImageBox({ nft }) {
         return () => clearInterval(timer)
     }, [isLoaded, ref])
 
-    // useEffect(() => {
-    //     if (!ref.current) return
-    //     if (!isVisible) ref.current.src = ''
-    //     if (isVisible) ref.current.src = baseURL
-    // }, [ref, isVisible])
+    useEffect(() => {
+        if (!ref.current) return
+        if (isLoaded) return
+        if (!isVisible) ref.current.src = ''
+        if (isVisible) ref.current.src = baseURL
+    }, [ref, isVisible, isLoaded])
 
     return (
         <>
             <Link key={`${nft.contractAddress}-${nft.tokenId}`} href={`/${nft.contractAddress}/${nft.tokenId}`}>
                 <a ref={boxRef} className="rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center h-full" style={{ minHeight: '24rem' }}>
-                    {isLoaded ? 'y' : 'n'}
-                    {isVisible ? 'y' : 'n'}
-                    <img ref={ref} className="" src={isVisible || isLoaded ? baseURL : null} onLoad={() => setIsLoaded(true)} onError={(e) => setIsLoaded(false)} alt="" />
+                    <img ref={ref} className="" src={baseURL} onLoad={() => setIsLoaded(true)} onError={(e) => setIsLoaded(false)} alt="" />
                 </a>
             </Link>
         </>
