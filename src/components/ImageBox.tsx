@@ -14,7 +14,7 @@ export default function ImageBox({ nft }) {
 
         const timer = setInterval(() => {
             if (!ref.current) return
-            ref.current.src += `?random=${Date.now()}`
+            ref.current.src = ref.current.src
         }, 2000)
         return () => clearInterval(timer)
     }, [isLoaded, ref])
