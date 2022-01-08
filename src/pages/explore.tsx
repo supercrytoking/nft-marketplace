@@ -49,7 +49,7 @@ export default function Explore() {
             )}
 
             {data && (
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                     {data.map((nft) => (
                         <Link key={`${nft.contractAddress}-${nft.tokenId}`} href={`/${nft.contractAddress}/${nft.tokenId}`}>
                             <a className="rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center">
