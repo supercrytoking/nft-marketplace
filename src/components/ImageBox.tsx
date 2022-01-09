@@ -27,16 +27,25 @@ export default function ImageBox({ nft }) {
         if (!isVisible) return
         if (cachedImageData) return
 
-        const onLoad = async () => api.get(cacheImage(nft.metadata.image))
+        const onLoad = async () => {
+            try {
+                // api.get(cacheImage(nft.metadata.image))
+            } catch (error) {
+                console.log('error')
+            }
+        }
         onLoad()
     }, [isVisible, cachedImageData])
 
     return (
         <Link key={`${nft.contractAddress}-${nft.tokenId}`} href={`/${nft.contractAddress}/${nft.tokenId}`}>
             <a ref={ref} className={classNames('relative rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex flex-col items-center justify-center h-full', !imageData && 'square')}>
-                <div className=".content">
-                    <img src={`data:image/jpeg;charset=utf-8;base64,${imageData}`} alt="" />
-                </div>
+                {!imageData && (
+                    <div className="content flex flex-col items-center justify-center h-full">
+                        <img className="" src={'/img/loading.gif'} alt="" />
+                    </div>
+                )}
+                {imageData && <img src={`data:image/jpeg;charset=utf-8;base64,${imageData}`} alt="" />}
             </a>
         </Link>
     )

@@ -80,108 +80,109 @@ export default function TokenPage({ contract, id }) {
                 </div>
             </Modal>
 
-            <div className="p-6 max-w-3xl mx-auto space-y-6">
-                <div className="flex justify-center">
-                    <ImageBox nft={data} />
-                    {/* <img className="rounded bg-zinc-900 border-zinc-800 border overflow-hidden" src={cacheImage(image)} alt="" /> */}
-                </div>
-
-                <p className="text-3xl">{data.metadata.name}</p>
+            <div className="p-6 max-w-7xl mx-auto space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-6">
+                    <div>
                         <div>
-                            {data.metadata.description && <p>{data.metadata.description}</p>}
-                            {!data.metadata.description && (
-                                <p className="opacity-50">
-                                    This token has no description. Here's some Lorem: Deserunt ullamco culpa non laboris minim. Eiusmod laboris eu nisi Lorem labore in eiusmod. Dolore sunt enim commodo pariatur ullamco
-                                    enim pariatur sunt velit culpa.
-                                </p>
-                            )}
-                        </div>
-                        <div className="">
-                            <p className="truncate">
-                                Collection:{' '}
-                                <Link href={`/collections/${data.contractAddress}`}>
-                                    <a href="" className="underline hover:no-underline">
-                                        {data.contractAddress}
-                                    </a>
-                                </Link>
-                            </p>
-                            <p className="truncate">
-                                Owner:{' '}
-                                <Link href={`/wallet/${data.owner}`}>
-                                    <a href="" className="underline hover:no-underline">
-                                        {iAmOwner ? 'you' : data.owner}
-                                    </a>
-                                </Link>
-                            </p>
-                            <p>Token ID: {data.tokenId}</p>
-                            <p>
-                                <a className="underline hover:no-underline" href={data.tokenURI} target="_blank" rel="noreferrer">
-                                    Open metadata
-                                </a>
-                            </p>
+                            <ImageBox nft={data} />
                         </div>
                     </div>
-                    <div className="space-y-6">
-                        {!isListed && (
-                            <>
-                                <p className="text-xl opacity-50">Not listed for sale. :(</p>
-                            </>
-                        )}
-                        {isListed && (
-                            <>
-                                <p className="text-xl">{Web3.utils.fromWei(listing.price)} FTM</p>
-                            </>
-                        )}
 
-                        <div className="space-y-2 flex flex-col">
-                            {!wallet.account && (
-                                <button onClick={() => wallet.connect()} type="button" className="bg-white w-full text-black px-4 py-2">
-                                    Connect Wallet
-                                </button>
-                            )}
-                            {wallet.account && (
-                                <>
-                                    {isListed && (
-                                        <button onClick={() => acceptListing()} type="button" className="bg-white w-full text-black px-4 py-2">
-                                            Buy Now
+                    <div className="space-y-6">
+                        <p className="text-3xl">{data.metadata.name}</p>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="space-y-6">
+                                <div>
+                                    {data.metadata.description && <p>{data.metadata.description}</p>}
+                                    {!data.metadata.description && (
+                                        <p className="opacity-50">
+                                            This token has no description. Here's some Lorem: Deserunt ullamco culpa non laboris minim. Eiusmod laboris eu nisi Lorem labore in eiusmod. Dolore sunt enim commodo pariatur
+                                            ullamco enim pariatur sunt velit culpa.
+                                        </p>
+                                    )}
+                                </div>
+                                <div className="">
+                                    <p className="truncate">
+                                        Collection:{' '}
+                                        <Link href={`/collections/${data.contractAddress}`}>
+                                            <a href="" className="underline hover:no-underline">
+                                                {data.contractAddress}
+                                            </a>
+                                        </Link>
+                                    </p>
+                                    <p className="truncate">
+                                        Owner:{' '}
+                                        <Link href={`/wallet/${data.owner}`}>
+                                            <a href="" className="underline hover:no-underline">
+                                                {iAmOwner ? 'you' : data.owner}
+                                            </a>
+                                        </Link>
+                                    </p>
+                                    <p>Token ID: {data.tokenId}</p>
+                                    <p>
+                                        <a className="underline hover:no-underline" href={data.tokenURI} target="_blank" rel="noreferrer">
+                                            Open metadata
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="space-y-6">
+                                {!isListed && (
+                                    <>
+                                        <p className="text-xl opacity-50">Not listed for sale. :(</p>
+                                    </>
+                                )}
+                                {isListed && (
+                                    <>
+                                        <p className="text-xl">{Web3.utils.fromWei(listing.price)} FTM</p>
+                                    </>
+                                )}
+                                <div className="space-y-2 flex flex-col">
+                                    {!wallet.account && (
+                                        <button onClick={() => wallet.connect()} type="button" className="bg-white w-full text-black px-4 py-2">
+                                            Connect Wallet
                                         </button>
                                     )}
-                                </>
-                            )}
-
-                            {iAmOwner && (
-                                <>
-                                    <button onClick={() => setShowModal('send')} type="button" className="bg-white w-full text-black px-4 py-2">
-                                        Send
-                                    </button>
-                                    <button onClick={() => setShowModal('list')} type="button" className="bg-white w-full text-black px-4 py-2">
-                                        {isListed ? 'Modify Listing' : 'List for Sale'}
-                                    </button>
-                                    {isListed && (
-                                        <Button onClick={() => revokeListing()} loading={status === 'revoking'}>
-                                            Delist from Sale
-                                        </Button>
+                                    {wallet.account && (
+                                        <>
+                                            {isListed && (
+                                                <button onClick={() => acceptListing()} type="button" className="bg-white w-full text-black px-4 py-2">
+                                                    Buy Now
+                                                </button>
+                                            )}
+                                        </>
                                     )}
-                                </>
-                            )}
+                                    {iAmOwner && (
+                                        <>
+                                            <button onClick={() => setShowModal('send')} type="button" className="bg-white w-full text-black px-4 py-2">
+                                                Send
+                                            </button>
+                                            <button onClick={() => setShowModal('list')} type="button" className="bg-white w-full text-black px-4 py-2">
+                                                {isListed ? 'Modify Listing' : 'List for Sale'}
+                                            </button>
+                                            {isListed && (
+                                                <Button onClick={() => revokeListing()} loading={status === 'revoking'}>
+                                                    Delist from Sale
+                                                </Button>
+                                            )}
+                                        </>
+                                    )}
+                                </div>
+                            </div>
                         </div>
+                        {data.metadata.attributes && (
+                            <div className="flex gap-2 flex-wrap">
+                                {data.metadata.attributes.map((attribute) => (
+                                    <div className="inline-block bg-white text-black p-2">
+                                        <p className="text-xs">{attribute.trait_type}</p>
+                                        <p>{attribute.value}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                        <History contractAddress={data.contractAddress} tokenId={data.tokenId} />
                     </div>
                 </div>
-
-                {data.metadata.attributes && (
-                    <div className="flex gap-2 flex-wrap">
-                        {data.metadata.attributes.map((attribute) => (
-                            <div className="inline-block bg-white text-black p-2">
-                                <p className="text-xs">{attribute.trait_type}</p>
-                                <p>{attribute.value}</p>
-                            </div>
-                        ))}
-                    </div>
-                )}
-
-                <History contractAddress={data.contractAddress} tokenId={data.tokenId} />
             </div>
         </>
     )
