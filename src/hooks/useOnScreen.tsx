@@ -9,7 +9,7 @@ export default function useOnScreen(ref, rootMargin = '0px') {
         const observer = new IntersectionObserver(
             ([entry]) => {
                 // Update our state when observer callback fires
-                setIntersecting(entry.isIntersecting)
+                if (entry.isIntersecting) setIntersecting(entry.isIntersecting)
             },
             {
                 rootMargin
