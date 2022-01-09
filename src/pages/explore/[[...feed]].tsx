@@ -31,14 +31,18 @@ export default function Explore({ feed: feedFromProps }) {
     const [feed, setFeed] = useState(feedFromQuery)
     const { data } = useSWR(feed.query)
 
-    useEffect(() => router.push(`/explore/${feed.slug}`, `/explore/${feed.slug}`, { shallow: true }), [feed])
+    const navigateToFeed = (feedId) => {
+        const newFeed = feeds[feedId]
+        setFeed(newFeed)
+        router.push(`/explore/${newFeed.slug}`, `/explore/${newFeed.slug}`, { shallow: true })
+    }
 
     return (
         <div className="p-6 max-w-7xl mx-auto space-y-6">
             {/* {JSON.stringify(feedFromProps)} */}
             <div className="flex flex-wrap gap-4">
                 {feeds.map(({ slug, name }, index) => (
-                    <Button className={classNames(feed.slug === slug && 'bg-blue-500')} key={slug} onClick={() => setFeed(feeds[index])}>
+                    <Button className={classNames(feed.slug === slug && 'bg-blue-500')} key={slug} onClick={() => navigateToFeed(index)}>
                         {name}
                     </Button>
                 ))}
