@@ -19,12 +19,8 @@ export default function ImageBox({ nft }) {
     const isVisible = useOnScreen(ref, '1000px')
     const { isScrolling } = useIsScrolling()
 
-    const { data: cachedImageData, error: cacheImageError } = useSWR(!turnedOff && isVisible ? `${imageCacheUrl}/${imageId}` : null, fetcher)
-    const { data: defaultImage } = useSWR(isVisible ? `${imageUrl(nft.metadata.image)}` : null, fetcher, {
-        revalidateIfStale: false,
-        revalidateOnFocus: false,
-        revalidateOnReconnect: false
-    })
+    const { data: defaultImage } = useSWR(isVisible ? `${imageUrl(nft.metadata.image)}` : null, fetcher)
+    const { data: cachedImageData, error: cacheImageError } = useSWR(!defaultImage && isVisible ? `${imageCacheUrl}/${imageId}` : null, fetcher)
 
     const binaryToBase64 = (data) => (data ? Buffer.from(data, 'binary').toString('base64') : null)
     const imageData = binaryToBase64(defaultImage || cachedImageData)
@@ -35,7 +31,7 @@ export default function ImageBox({ nft }) {
 
         const onLoad = async () => {
             try {
-                // api.get(cacheImage(nft.metadata.image))
+                api.get(cacheImage(nft.metadata.image))
             } catch (error) {
                 console.log('error')
             }
