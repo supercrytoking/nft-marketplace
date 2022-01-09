@@ -11,7 +11,7 @@ export default function FeaturedPage() {
                     {/* <p className="tracking-widest uppercase font-extrabold opacity-25">Fantom Digital Presents</p> */}
                     <p className="text-4xl md:text-7xl font-extrabold">Trials and Tribulations of the Spirit</p>
                     <p className="text-xl md:text-3xl font-light">
-                        Currently residing in Minas Gerais, Brazilian Artist MADSON&trade; presents his Genesis collection, Trials and Tribulations of the Spirit. Each piece expresses reprehenderit et adipisicing quis
+                        Currently residing in Nova Ponte, Brazilian Artist MADSON&trade; presents his Genesis collection, Trials and Tribulations of the Spirit. Each piece expresses reprehenderit et adipisicing quis
                         aliquip ut officia eiusmod. Elit do do sit id pariatur laboris do. Ullamco consectetur cupidatat nostrud dolore consequat consectetur ipsum nulla fugiat mollit. Anim officia magna exercitation
                         nulla elit nulla elit sit.
                     </p>
