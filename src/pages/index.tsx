@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import CoolStuff from '../components/CoolStuff'
 import Input from '../components/Input'
 import TokenLookup from '../components/TokenLookup'
@@ -7,7 +8,17 @@ export default function IndexPage() {
         <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
             <div className="bg-zinc-400 text-zinc-900 h-96 flex items-center justify-center p-6 relative">
                 <CoolStuff />
-                <p className="text-2xl z-10">Welcome to a new kind of marketplace.</p>
+
+                <div>
+                    <Link href="/create" passHref>
+                        <a className="group bg-zinc-900 inline-block border border-zinc-400">
+                            <p className="translate translate-x-2 -translate-y-2 group-hover:translate-x-0 group-hover:-translate-y-0 bg-white text-zinc-900 px-6 py-3 text-xl inline-block border border-zinc-900 text-xs md:text-base">
+                                Create an NFT
+                            </p>
+                        </a>
+                    </Link>
+                </div>
+                {/* <p className="text-2xl z-10">Welcome to a new kind of marketplace.</p> */}
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-6">
