@@ -29,7 +29,7 @@ export default function IndexPage() {
             </div>
 
             <div className="flex flex-col md:flex-row gap-12">
-                <div className="w-full bg-zinc-400 text-zinc-900 bg-cover bg-center p-6" style={{ backgroundImage: 'url("/img/madson-sample.png")' }}>
+                <div className="w-full h-60 md:h-auto bg-zinc-400 text-zinc-900 bg-cover bg-center p-6" style={{ backgroundImage: 'url("/img/madson-sample.png")' }}>
                     <div className="bg-zinc-900 inline-block border border-zinc-400">
                         <p className="translate translate-x-1 -translate-y-1 bg-zinc-400 text-zinc-900 px-4 py-1 inline-block border border-zinc-900">Featured Collection</p>
                     </div>
