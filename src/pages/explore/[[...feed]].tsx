@@ -8,7 +8,7 @@ import ImageBox from '../../components/ImageBox'
 
 const feeds = [
     {
-        slug: '',
+        slug: '/',
         name: 'Latest',
         query: '/feeds/latest'
     },
