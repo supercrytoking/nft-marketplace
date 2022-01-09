@@ -1,13 +1,14 @@
 import classNames from 'classnames'
-import { useState } from 'react'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import ReactTyped from 'react-typed'
 import useSWR from 'swr'
-import Button from '../components/Button'
-import ImageBox from '../components/ImageBox'
+import Button from '../../components/Button'
+import ImageBox from '../../components/ImageBox'
 
 const feeds = [
     {
-        slug: 'latest',
+        slug: '',
         name: 'Latest',
         query: '/feeds/latest'
     },
@@ -18,12 +19,23 @@ const feeds = [
     }
 ]
 
-export default function Explore() {
-    const [feed, setFeed] = useState(feeds[0])
+export async function getServerSideProps(ctx: any) {
+    return { props: ctx.query }
+}
+
+export default function Explore({ feed: feedFromProps }) {
+    const router = useRouter()
+
+    const feedFromQuery = feedFromProps ? feeds.find((search) => search.slug === feedFromProps[0]) : feeds[0]
+
+    const [feed, setFeed] = useState(feedFromQuery)
     const { data } = useSWR(feed.query)
+
+    useEffect(() => router.push(`/explore/${feed.slug}`, `/explore/${feed.slug}`, { shallow: true }), [feed])
 
     return (
         <div className="p-6 max-w-7xl mx-auto space-y-6">
+            {/* {JSON.stringify(feedFromProps)} */}
             <div className="flex flex-wrap gap-4">
                 {feeds.map(({ slug, name }, index) => (
                     <Button className={classNames(feed.slug === slug && 'bg-blue-500')} key={slug} onClick={() => setFeed(feeds[index])}>
