@@ -19,7 +19,7 @@ export default function Wallet({ params }) {
     return (
         <div className="p-6 max-w-7xl mx-auto space-y-6">
             {!wallet.account && (
-                <button onClick={() => wallet.connect()} type="button" className="px-4 py-2 bg-white text-black">
+                <button onClick={() => wallet.connect()} type="button" className="px-4 py-2 bg-zinc-400 text-zinc-900">
                     Connect Wallet
                 </button>
             )}
@@ -33,10 +33,10 @@ export default function Wallet({ params }) {
             )}
 
             {wallet.account && (
-                <div className="bg-white text-black p-6 flex items-center flex-wrap gap-6">
+                <div className="bg-zinc-400 text-zinc-900 p-6 flex items-center flex-wrap gap-6">
                     <p className="flex-1">Don't see all your NFTs? No problem.</p>
                     <Link href="/tools/indexr" passHref>
-                        <a className="bg-black text-white px-4 py-2">Use the Indexer</a>
+                        <a className="bg-zinc-900 text-zinc-400 px-4 py-2">Use the Indexer</a>
                     </Link>
                 </div>
             )}

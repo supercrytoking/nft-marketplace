@@ -27,10 +27,10 @@ export default function CreatePage() {
     return (
         <div className="p-6 max-w-7xl mx-auto space-y-6">
             <div className="space-x-4">
-                <button onClick={() => setTab('import')} type="button" className="bg-white px-4 py-2 text-black">
+                <button onClick={() => setTab('import')} type="button" className="bg-zinc-400 px-4 py-2 text-zinc-900">
                     Import NFT
                 </button>
-                <button disabled onClick={() => setTab('create')} type="button" className="bg-white px-4 py-2 text-black opacity-50 cursor-not-allowed">
+                <button disabled onClick={() => setTab('create')} type="button" className="bg-zinc-400 px-4 py-2 text-zinc-900 opacity-50 cursor-not-allowed">
                     Create NFT
                 </button>
             </div>
@@ -39,15 +39,15 @@ export default function CreatePage() {
                     <div className="space-y-4">
                         <div className="space-y-1">
                             <p>Name</p>
-                            <input type="text" name="name" className="bg-white bg-opacity-25 p-2" />
+                            <input type="text" name="name" className="bg-zinc-400 bg-opacity-25 p-2" />
                         </div>
                         <div className="space-y-1">
                             <p>Description</p>
-                            <input type="text" name="name" className="bg-white bg-opacity-25 p-2" />
+                            <input type="text" name="name" className="bg-zinc-400 bg-opacity-25 p-2" />
                         </div>
                         <div className="space-y-1">
                             <p>Price</p>
-                            <input type="text" name="name" className="bg-white bg-opacity-25 p-2" />
+                            <input type="text" name="name" className="bg-zinc-400 bg-opacity-25 p-2" />
                         </div>
                         <div className="space-y-1">
                             <p>Image</p>
@@ -61,24 +61,24 @@ export default function CreatePage() {
                     <form onSubmit={onImport} className="space-y-4">
                         <div className="space-y-1">
                             <p>Contract Address</p>
-                            <input value={contractAddress} onChange={(e) => setContractAddress(e.target.value)} type="text" name="name" className="bg-white bg-opacity-25 p-2" />
+                            <input value={contractAddress} onChange={(e) => setContractAddress(e.target.value)} type="text" name="name" className="bg-zinc-400 bg-opacity-25 p-2" />
                         </div>
                         <div className="space-y-1">
                             <p>Token</p>
-                            <input value={token} onChange={(e) => setToken(e.target.value)} type="text" name="name" className="bg-white bg-opacity-25 p-2" />
+                            <input value={token} onChange={(e) => setToken(e.target.value)} type="text" name="name" className="bg-zinc-400 bg-opacity-25 p-2" />
                         </div>
                         <div className="space-y-1">
                             <p>Price</p>
-                            <input value={price} onChange={(e) => setPrice(e.target.value)} type="text" name="name" className="bg-white bg-opacity-25 p-2" />
+                            <input value={price} onChange={(e) => setPrice(e.target.value)} type="text" name="name" className="bg-zinc-400 bg-opacity-25 p-2" />
                         </div>
                         <div>
-                            <button className="bg-white text-black px-4 py-2" type="submit">
+                            <button className="bg-zinc-400 text-zinc-900 px-4 py-2" type="submit">
                                 List NFT
                             </button>
                         </div>
                     </form>
 
-                    {errorMessage && <div className="bg-red-400 text-black p-2">{errorMessage}</div>}
+                    {errorMessage && <div className="bg-red-400 text-zinc-900 p-2">{errorMessage}</div>}
                     {nft && (
                         <div>
                             <img className="w-32" src={nft.metadata.image} alt="" />

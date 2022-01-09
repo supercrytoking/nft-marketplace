@@ -25,7 +25,7 @@ const HistoryItem = ({ event }) => {
     const value = transaction ? Number(web3.utils.fromWei(transaction.value.toString())).toFixed(2) : null
 
     return (
-        <div className="bg-white text-black p-2">
+        <div className="bg-zinc-400 text-zinc-900 p-2">
             <div className="flex items-center justify-center space-x-4">
                 <p className="truncate">{event.returnValues.from}</p>
                 <p>&rarr;</p>
@@ -73,7 +73,7 @@ export default function History({ contractAddress, tokenId }) {
     return (
         <div className="space-y-2">
             {(!events || events.length <= 0) && (
-                <div className="bg-white text-black p-4  text-center">
+                <div className="bg-zinc-400 text-zinc-900 p-4  text-center">
                     <p>
                         <ReactTyped strings={['Loading history...']} loop />
                     </p>

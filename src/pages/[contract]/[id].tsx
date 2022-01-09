@@ -73,7 +73,7 @@ export default function TokenPage({ contract, id }) {
                     {/* <Input label="Address" value={listingPrice} onChange={(e) => setListingPrice(e.target.value)} type="number" /> */}
                     {/*
                     <div className="flex gap-4 justify-end items-center">
-                        <button className="bg-white text-black px-4 py-2" onClick={() => {}} type="submit">
+                        <button className="bg-zinc-400 text-zinc-900 px-4 py-2" onClick={() => {}} type="submit">
                             Send Now
                         </button>
                     </div> */}
@@ -141,14 +141,14 @@ export default function TokenPage({ contract, id }) {
                                 )}
                                 <div className="space-y-2 flex flex-col">
                                     {!wallet.account && (
-                                        <button onClick={() => wallet.connect()} type="button" className="bg-white w-full text-black px-4 py-2">
+                                        <button onClick={() => wallet.connect()} type="button" className="bg-zinc-400 w-full text-zinc-900 px-4 py-2">
                                             Connect Wallet
                                         </button>
                                     )}
                                     {wallet.account && (
                                         <>
                                             {isListed && (
-                                                <button onClick={() => acceptListing()} type="button" className="bg-white w-full text-black px-4 py-2">
+                                                <button onClick={() => acceptListing()} type="button" className="bg-zinc-400 w-full text-zinc-900 px-4 py-2">
                                                     Buy Now
                                                 </button>
                                             )}
@@ -156,10 +156,10 @@ export default function TokenPage({ contract, id }) {
                                     )}
                                     {iAmOwner && (
                                         <>
-                                            <button onClick={() => setShowModal('send')} type="button" className="bg-white w-full text-black px-4 py-2">
+                                            <button onClick={() => setShowModal('send')} type="button" className="bg-zinc-400 w-full text-zinc-900 px-4 py-2">
                                                 Send
                                             </button>
-                                            <button onClick={() => setShowModal('list')} type="button" className="bg-white w-full text-black px-4 py-2">
+                                            <button onClick={() => setShowModal('list')} type="button" className="bg-zinc-400 w-full text-zinc-900 px-4 py-2">
                                                 {isListed ? 'Modify Listing' : 'List for Sale'}
                                             </button>
                                             {isListed && (
@@ -175,7 +175,7 @@ export default function TokenPage({ contract, id }) {
                         {data.metadata.attributes && (
                             <div className="flex gap-2 flex-wrap">
                                 {data.metadata.attributes.map((attribute) => (
-                                    <div className="inline-block bg-white text-black p-2">
+                                    <div className="inline-block bg-zinc-400 text-zinc-900 p-2">
                                         <p className="text-xs">{attribute.trait_type}</p>
                                         <p>{attribute.value}</p>
                                     </div>

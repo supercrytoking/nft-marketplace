@@ -16,9 +16,9 @@ export default function FeaturedPage() {
                         nulla elit nulla elit sit.
                     </p>
                     <div className="flex flex-wrap gap-4 text-xs md:text-base">
-                        <p className="bg-white text-black px-4 py-2 rounded font-mono inline-block whitespace-nowrap">Limited Release</p>
-                        <p className="bg-white text-black px-4 py-2 rounded font-mono inline-block whitespace-nowrap">25 Pieces</p>
-                        <p className="bg-white text-black px-4 py-2 rounded font-mono inline-block whitespace-nowrap">Genesis Collection</p>
+                        <p className="bg-zinc-400 text-zinc-900 px-4 py-2 rounded font-mono inline-block whitespace-nowrap">Limited Release</p>
+                        <p className="bg-zinc-400 text-zinc-900 px-4 py-2 rounded font-mono inline-block whitespace-nowrap">25 Pieces</p>
+                        <p className="bg-zinc-400 text-zinc-900 px-4 py-2 rounded font-mono inline-block whitespace-nowrap">Genesis Collection</p>
                     </div>
                 </div>
 

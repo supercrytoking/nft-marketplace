@@ -113,7 +113,7 @@ export default function Create() {
                                     <a>View Wallet</a>
                                 </Link>
                                 <Link href={`/${process.env.NEXT_PUBLIC_MINTING_CONTRACT}/${tokenId}`}>
-                                    <a className="bg-white text-black px-4 py-2">View Token</a>
+                                    <a className="bg-zinc-400 text-zinc-900 px-4 py-2">View Token</a>
                                 </Link>
                             </div>
                         </>

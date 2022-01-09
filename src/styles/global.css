@@ -6,8 +6,8 @@ html,
 body,
 #__next {
     height: 100%;
-    /* @apply font-mono text-neutral-600 bg-neutral-900; */
-    @apply font-mono text-white bg-black;
+    /* @apply font-mono text-zinc-400 bg-zinc-900; */
+    @apply font-mono text-zinc-400 bg-zinc-900;
 }
 
 .square {
