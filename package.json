@@ -23,6 +23,7 @@
         "react-on-screen": "^2.1.1",
         "react-p5": "^1.3.24",
         "react-typed": "^1.2.0",
+        "react-use-is-scrolling": "^0.0.2",
         "short-number": "^1.0.7",
         "swr": "^1.1.2",
         "use-wallet": "^0.10.0",

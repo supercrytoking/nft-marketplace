@@ -8078,6 +8078,13 @@ react-typed@^1.2.0:
     prop-types "^15.6.0"
     typed.js "^2.0.6"
 
+react-use-is-scrolling@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/react-use-is-scrolling/-/react-use-is-scrolling-0.0.2.tgz#723dcb65d77486cc052d1045b639fa2f6232834c"
+  integrity sha512-tnrSZRTMUcNAbUG2Q8jTWUrp3Q8ka5X9cLeqXZa2Xh95NvMGxxfHnUHXd1JFmYUPm4O4Ig4cWbdlme+bhcjLWA==
+  dependencies:
+    lodash.throttle "^4.1.1"
+
 react-use-measure@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/react-use-measure/-/react-use-measure-2.1.1.tgz#5824537f4ee01c9469c45d5f7a8446177c6cc4ba"
