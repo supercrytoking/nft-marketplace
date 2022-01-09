@@ -28,7 +28,7 @@ export default function Collection({ contractAddress }) {
     }, [])
 
     return (
-        <div className="p-6 max-w-7xl mx-auto space-y-6">
+        <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
             <div>
                 <p>{name}</p>
                 <p className="truncate">

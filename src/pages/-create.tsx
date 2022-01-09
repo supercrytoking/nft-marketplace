@@ -25,7 +25,7 @@ export default function CreatePage() {
     }
 
     return (
-        <div className="p-6 max-w-7xl mx-auto space-y-6">
+        <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
             <div className="space-x-4">
                 <button onClick={() => setTab('import')} type="button" className="bg-zinc-400 px-4 py-2 text-zinc-900">
                     Import NFT

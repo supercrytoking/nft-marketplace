@@ -80,7 +80,7 @@ export default function TokenPage({ contract, id }) {
                 </div>
             </Modal>
 
-            <div className="p-6 max-w-7xl mx-auto space-y-6">
+            <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <div>

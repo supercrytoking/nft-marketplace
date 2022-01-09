@@ -38,7 +38,7 @@ export default function Explore({ feed: feedFromProps }) {
     }
 
     return (
-        <div className="p-6 max-w-7xl mx-auto space-y-6">
+        <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
             {/* {JSON.stringify(feedFromProps)} */}
             <div className="flex flex-wrap gap-4">
                 {feeds.map(({ slug, name }, index) => (

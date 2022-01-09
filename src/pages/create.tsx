@@ -122,7 +122,7 @@ export default function Create() {
                 </div>
             </Modal>
 
-            <div className="p-6 max-w-7xl mx-auto space-y-6">
+            <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
                 <div className="flex flex-wrap gap-4">
                     <Button className={classNames(false && 'bg-blue-500')} onClick={() => setTab('create')}>
                         Create
