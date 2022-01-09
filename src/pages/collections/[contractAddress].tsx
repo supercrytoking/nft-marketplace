@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import useSWR from 'swr'
 import Web3 from 'web3'
+import Button from '../../components/Button'
 import ImageBox from '../../components/ImageBox'
 import Input from '../../components/Input'
 import { erc721 } from '../../data/abis'
@@ -18,8 +19,8 @@ export default function Collection({ contractAddress }) {
     const web3 = new Web3(`${process.env.NEXT_PUBLIC_RPC}`)
     const contract = new web3.eth.Contract(erc721 as any, contractAddress)
 
+    const [showFilters, setShowFilters] = useState(false)
     const [tokenLookup, setTokenLookup] = useState('')
-
     const [name, setName] = useState('')
     const [totalSupply, setTotalSupply] = useState('')
 
@@ -58,10 +59,13 @@ export default function Collection({ contractAddress }) {
                     {totalSupply && <p>{totalSupply} items</p>}
                 </div>
                 <div className="w-full md:w-auto">
-                    <form onSubmit={searchToken}>
-                        <Input value={tokenLookup} onChange={(e) => setTokenLookup(e.target.value)} label="Token ID" />
-                        <button type="submit" className="hidden" />
-                    </form>
+                    {!showFilters && <Button onClick={() => setShowFilters(true)}>Filter</Button>}
+                    {showFilters && (
+                        <form onSubmit={searchToken}>
+                            <Input value={tokenLookup} onChange={(e) => setTokenLookup(e.target.value)} label="Token ID" />
+                            <button type="submit" className="hidden" />
+                        </form>
+                    )}
                 </div>
             </div>
             {data && (

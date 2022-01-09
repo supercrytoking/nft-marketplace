@@ -1,5 +1,3 @@
-import axios from 'axios'
-import Head from 'next/head'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import ReactTyped from 'react-typed'
@@ -12,7 +10,7 @@ import ImageBox from '../../components/ImageBox'
 import Input from '../../components/Input'
 import Modal from '../../components/Modal'
 import useExchange from '../../hooks/useExchange'
-import { api, cacheImage, imageUrl } from '../../utils/utils'
+import { imageUrl } from '../../utils/utils'
 
 export async function getServerSideProps(ctx) {
     const { contract, id } = ctx.query
