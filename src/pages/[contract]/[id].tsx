@@ -131,32 +131,6 @@ export default function TokenPage({ contract, id }) {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-6">
-                                <div className="">
-                                    <p className="truncate">
-                                        Collection:{' '}
-                                        <Link href={`/collections/${data.contractAddress}`}>
-                                            <a href="" className="underline hover:no-underline">
-                                                {data.contractAddress}
-                                            </a>
-                                        </Link>
-                                    </p>
-                                    <p className="truncate">
-                                        Owner:{' '}
-                                        <Link href={`/wallet/${data.owner}`}>
-                                            <a href="" className="underline hover:no-underline">
-                                                {iAmOwner ? 'you' : data.owner}
-                                            </a>
-                                        </Link>
-                                    </p>
-                                    <p>Token ID: {data.tokenId}</p>
-                                    <p>
-                                        <a className="underline hover:no-underline" href={imageUrl(data.metadata.image)} target="_blank" rel="noreferrer">
-                                            Open original asset
-                                        </a>
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="space-y-6">
                                 {!isListed && (
                                     <>
                                         <p className="text-xl opacity-50">Not listed for sale. :(</p>
@@ -197,6 +171,32 @@ export default function TokenPage({ contract, id }) {
                                             )}
                                         </>
                                     )}
+                                </div>
+                            </div>
+                            <div className="space-y-6">
+                                <div className="">
+                                    <p className="truncate">
+                                        Collection:{' '}
+                                        <Link href={`/collections/${data.contractAddress}`}>
+                                            <a href="" className="underline hover:no-underline">
+                                                {data.contractAddress}
+                                            </a>
+                                        </Link>
+                                    </p>
+                                    <p className="truncate">
+                                        Owner:{' '}
+                                        <Link href={`/wallet/${data.owner}`}>
+                                            <a href="" className="underline hover:no-underline">
+                                                {iAmOwner ? 'you' : data.owner}
+                                            </a>
+                                        </Link>
+                                    </p>
+                                    <p>Token ID: {data.tokenId}</p>
+                                    <p>
+                                        <a className="underline hover:no-underline" href={imageUrl(data.metadata.image)} target="_blank" rel="noreferrer">
+                                            Open original asset
+                                        </a>
+                                    </p>
                                 </div>
                             </div>
                         </div>

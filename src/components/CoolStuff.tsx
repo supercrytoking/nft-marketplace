@@ -46,7 +46,7 @@ const CoolStuff: React.FC<ComponentProps> = (props: ComponentProps) => {
         p5.box(100)
         p5.pop()
 
-        angle += 0.017
+        angle += 0.008
     }
 
     const windowResized = (p5: p5Types, canvasParentRef: Element) => {
