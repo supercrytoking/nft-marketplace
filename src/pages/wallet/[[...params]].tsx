@@ -3,6 +3,7 @@ import { useWallet } from 'use-wallet'
 
 import Link from 'next/link'
 import Web3 from 'web3'
+import ImageBox from '../../components/ImageBox'
 
 export function getServerSideProps(ctx) {
     return { props: ctx.query }
@@ -26,11 +27,7 @@ export default function Wallet({ params }) {
             {data && (
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                     {data.map((nft) => (
-                        <Link href={`/${nft.contractAddress}/${nft.tokenId}`}>
-                            <a className="rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center">
-                                <img className="w-full" src={nft.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/')} alt="" />
-                            </a>
-                        </Link>
+                        <ImageBox nft={nft} />
                     ))}
                 </div>
             )}
