@@ -11,7 +11,7 @@ import ImageBox from '../../components/ImageBox'
 import Input from '../../components/Input'
 import Modal from '../../components/Modal'
 import useExchange from '../../hooks/useExchange'
-import { api, cacheImage } from '../../utils/utils'
+import { api, cacheImage, imageUrl } from '../../utils/utils'
 
 export async function getServerSideProps(ctx) {
     const { contract, id } = ctx.query
@@ -90,17 +90,19 @@ export default function TokenPage({ contract, id }) {
 
                     <div className="space-y-6">
                         <p className="text-3xl">{data.metadata.name}</p>
+
+                        <div>
+                            {data.metadata.description && <p>{data.metadata.description}</p>}
+                            {!data.metadata.description && (
+                                <p className="opacity-50">
+                                    This token has no description. Here's some Lorem: Deserunt ullamco culpa non laboris minim. Eiusmod laboris eu nisi Lorem labore in eiusmod. Dolore sunt enim commodo pariatur ullamco
+                                    enim pariatur sunt velit culpa.
+                                </p>
+                            )}
+                        </div>
+
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-6">
-                                <div>
-                                    {data.metadata.description && <p>{data.metadata.description}</p>}
-                                    {!data.metadata.description && (
-                                        <p className="opacity-50">
-                                            This token has no description. Here's some Lorem: Deserunt ullamco culpa non laboris minim. Eiusmod laboris eu nisi Lorem labore in eiusmod. Dolore sunt enim commodo pariatur
-                                            ullamco enim pariatur sunt velit culpa.
-                                        </p>
-                                    )}
-                                </div>
                                 <div className="">
                                     <p className="truncate">
                                         Collection:{' '}
@@ -120,8 +122,8 @@ export default function TokenPage({ contract, id }) {
                                     </p>
                                     <p>Token ID: {data.tokenId}</p>
                                     <p>
-                                        <a className="underline hover:no-underline" href={data.tokenURI} target="_blank" rel="noreferrer">
-                                            Open metadata
+                                        <a className="underline hover:no-underline" href={imageUrl(data.metadata.image)} target="_blank" rel="noreferrer">
+                                            Open original asset
                                         </a>
                                     </p>
                                 </div>
