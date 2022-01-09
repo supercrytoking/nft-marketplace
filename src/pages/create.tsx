@@ -8,6 +8,7 @@ import Button from '../components/Button'
 import Input from '../components/Input'
 import Modal from '../components/Modal'
 import Textarea from '../components/Textarea'
+import TokenLookup from '../components/TokenLookup'
 import { erc721 } from '../data/abis'
 import { api } from '../utils/utils'
 
@@ -132,7 +133,7 @@ export default function Create() {
                     </Button>
                 </div>
 
-                {tab === 'import' && (
+                {/* {tab === 'import' && (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
                             <p>Import</p>
@@ -152,23 +153,31 @@ export default function Create() {
                             </form>
                         </div>
                     </div>
-                )}
+                )} */}
 
-                {tab === 'create' && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                            <p>Mint an NFT</p>
-                            <p>Upload an asset to mint your NFT. Minting your NFT is completely free (+gas).</p>
-                            <p>Minting an NFT is a 3-step process. You'll first upload your NFT's metadata to IPFS, then mint the token to your wallet, and finally, optionally approve and list the new NFT for sale.</p>
-                            <p>Your asset(s) are uploaded to IPFS (The InterPlanetary File System) for life-long safe keeping, and pinned indefinitely.</p>
-                            <p>The NFT is minted to an immutable ERC721-compliant smart contract on the Fantom Blockchain.</p>
+                {true && (
+                    // {tab === 'create' && (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 spce">
+                        <div className="space-y-6">
+                            {tab === 'import' && <TokenLookup />}
+                            <div className="space-y-2">
+                                <p>Mint an NFT</p>
+                                <p>Upload an asset to mint your NFT. Minting your NFT is completely free (+gas).</p>
+                                <p>
+                                    Minting an NFT is a 3-step process. You'll first upload your NFT's metadata to IPFS, then mint the token to your wallet, and finally, optionally approve and list the new NFT for sale.
+                                </p>
+                                <p>Your asset(s) are uploaded to IPFS (The InterPlanetary File System) for life-long safe keeping, and pinned indefinitely.</p>
+                                <p>The NFT is minted to an immutable ERC721-compliant smart contract on the Fantom Blockchain.</p>
+                            </div>
                         </div>
                         <div className="w-full space-y-6">
                             <form onSubmit={upload} className="flex flex-col space-y-4">
                                 {!fileURL && (
                                     <>
                                         <button onClick={() => fileRef.current.click()} type="button" className="h-64 rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center justify-center">
-                                            <p>X</p>
+                                            <p>
+                                                <i className="fas fa-upload" />
+                                            </p>
                                         </button>
                                     </>
                                 )}

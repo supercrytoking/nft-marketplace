@@ -21,7 +21,7 @@ export default function TokenLookup() {
     }
 
     return (
-        <div className="md:max-w-md w-full border border-zinc-400 p-6 space-y-4">
+        <div className="w-full rounded bg-zinc-900 border-zinc-800 border p-6 space-y-4">
             <div className="space-y-1">
                 <p>Token Lookup</p>
                 <p>Find any ERC721 on the Fantom Blockchain.</p>

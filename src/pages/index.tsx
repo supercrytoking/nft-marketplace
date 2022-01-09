@@ -46,7 +46,9 @@ export default function IndexPage() {
                         <p className="translate translate-x-1 -translate-y-1 bg-zinc-400 text-zinc-900 px-4 py-1 inline-block border border-zinc-900 text-xs md:text-base">Featured Collection</p>
                     </div>
                 </div>
-                <TokenLookup />
+                <div className="md:max-w-md">
+                    <TokenLookup />
+                </div>
             </div>
 
             <div className="flex items-center">
