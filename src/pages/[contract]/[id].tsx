@@ -2,6 +2,7 @@ import axios from 'axios'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import ReactTyped from 'react-typed'
 import useSWR from 'swr'
 import { useWallet } from 'use-wallet'
 import Web3 from 'web3'
@@ -21,7 +22,7 @@ export async function getServerSideProps(ctx) {
 export default function TokenPage({ contract, id }) {
     const wallet = useWallet()
     const { status, createListing: createListingFunction, acceptListing: acceptListingFunction, revokeListing: revokeListingFunction } = useExchange()
-    const { data, mutate } = useSWR(`/data/${contract}/${id}`)
+    const { data, error, mutate } = useSWR(`/data/${contract}/${id}`)
 
     const [showModal, setShowModal] = useState<false | 'list' | 'send'>(false)
     const [listingPrice, setListingPrice] = useState('')
@@ -53,7 +54,26 @@ export default function TokenPage({ contract, id }) {
         setListingPrice(data?.listing?.price && Web3.utils.fromWei(data?.listing?.price))
     }, [data])
 
-    if (!data) return null
+    if (!data) {
+        return (
+            <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
+                {!data && !error && (
+                    <p className="opacity-50">
+                        <ReactTyped strings={['Loading...']} loop />
+                    </p>
+                )}
+                {!data && error && (
+                    <p className="opacity-50">
+                        Error. Not found. If you believe this is an error,{' '}
+                        <a className="underline hover:not-underline" href="https://discord.gg/TUgJg338kS" target="_blank" rel="noreferrer">
+                            report it to the team
+                        </a>
+                        .
+                    </p>
+                )}
+            </div>
+        )
+    }
     return (
         <>
             <Modal visible={showModal === 'list'} onClose={() => setShowModal(false)}>
@@ -81,6 +101,14 @@ export default function TokenPage({ contract, id }) {
             </Modal>
 
             <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
+                {!data && (
+                    <div>
+                        <p className="opacity-50">
+                            <ReactTyped strings={['Loading...']} loop />
+                        </p>
+                    </div>
+                )}
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <div>

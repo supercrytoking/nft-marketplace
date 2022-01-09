@@ -33,13 +33,14 @@ const HistoryItem = ({ event }) => {
                 {/* {value && <p>{value} FTM</p>} */}
             </div>
             <div className="flex items-center space-x-4 text-xs opacity-50">
-                <p className="">
+                <p className="space-x-4">
                     <a className="underline hover:no-underline" href={`https://ftmscan.com/tx/${event.transactionHash}`} target="_blank" rel="noreferrer">
                         {event.transactionHash.slice(0, 6)}
                         ...
                         {event.transactionHash.slice(-6)}
                     </a>
-                    <span> @ {time}</span>
+                    <span>{time}</span>
+                    <span>{value} FTM</span>
                 </p>
             </div>
         </div>

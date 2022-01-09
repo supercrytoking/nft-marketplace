@@ -15,6 +15,7 @@
         "dayjs": "^1.10.7",
         "framer-motion": "^5.5.5",
         "hash-string": "^1.0.0",
+        "module": "^1.2.5",
         "nanoid": "^3.1.30",
         "next": "^12.0.7",
         "react": "^17.0.2",
@@ -25,6 +26,8 @@
         "react-typed": "^1.2.0",
         "react-use-is-scrolling": "^0.0.2",
         "short-number": "^1.0.7",
+        "solc": "^0.8.11",
+        "solc-js": "^1.0.1",
         "swr": "^1.1.2",
         "use-wallet": "^0.10.0",
         "web3": "^1.6.1"

@@ -1,12 +1,11 @@
-import '../styles/global.css'
 import type { AppProps } from 'next/app'
-import { SWRConfig } from 'swr'
-import axios from 'axios'
-import { UseWalletProvider } from 'use-wallet'
 import Head from 'next/head'
+import { SWRConfig } from 'swr'
+import { UseWalletProvider } from 'use-wallet'
 import Header from '../components/Header'
-import { api } from '../utils/utils'
 import Meta from '../components/Meta'
+import '../styles/global.css'
+import { api } from '../utils/utils'
 
 const fetcher = (url) => api.get(url).then((res) => res.data)
 
