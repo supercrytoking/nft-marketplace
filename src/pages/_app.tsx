@@ -6,12 +6,14 @@ import { UseWalletProvider } from 'use-wallet'
 import Head from 'next/head'
 import Header from '../components/Header'
 import { api } from '../utils/utils'
+import Meta from '../components/Meta'
 
 const fetcher = (url) => api.get(url).then((res) => res.data)
 
 export default function App({ Component, pageProps }: AppProps) {
     return (
         <>
+            <Meta />
             <Head>
                 <link
                     rel="stylesheet"
@@ -21,7 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
                     referrerPolicy="no-referrer"
                 />
             </Head>
-            <UseWalletProvider chainId={250}>
+            <UseWalletProvider>
                 <SWRConfig value={{ fetcher }}>
                     <Header />
                     <Component {...pageProps} />

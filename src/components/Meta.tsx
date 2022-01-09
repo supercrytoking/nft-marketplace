@@ -1,9 +1,9 @@
 import Head from 'next/head'
 
 const Meta = () => {
-    const title = 'Fugly Fantom Frogs'
-    const description = '3,333 disgusting frogs that are part of a cult. They are the Fugly Fantom Frogs... and this is their story.'
-    const url = 'https://fuglyfrogs.com'
+    const title = 'FANTOM DIGITAL'
+    const description = 'Create & Discover'
+    const url = 'https://fantom.digital'
 
     return (
         <Head>
@@ -18,9 +18,9 @@ const Meta = () => {
             <meta name="twitter:title" content={title} />
             <meta name="twitter:description" content={description} />
             <meta name="twitter:site" content={url} />
-            <link rel="icon" type="image/png" href={`${url}/img/previews/5.png`} />
-            <meta property="og:image" content={`${url}/img/loop-2.gif`} />
-            <meta name="twitter:image" content={`${url}/img/loop-2.gif`} />
+            {/* <link rel="icon" type="image/png" href={`${url}/img/previews/5.png`} />
+            <meta property="og:image" content={`${url}/img/loading.gif`} />
+            <meta name="twitter:image" content={`${url}/img/loading.gif`} /> */}
         </Head>
     )
 }
