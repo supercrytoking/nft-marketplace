@@ -157,7 +157,7 @@ export default function Create() {
 
                 {true && (
                     // {tab === 'create' && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 spce">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                         <div className="space-y-6">
                             {tab === 'import' && <TokenLookup />}
                             <div className="space-y-2">
