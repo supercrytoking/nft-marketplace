@@ -35,7 +35,7 @@ export default function Explore({ feed: feedFromProps }) {
     const feedFromQuery = feedFromProps ? feeds.find((search) => search.slug === feedFromProps[0]) : feeds[0]
 
     const [feed, setFeed] = useState(feedFromQuery)
-    const { data } = useSWR(feed.query)
+    const { data, error } = useSWR(feed.query)
 
     const navigateToFeed = (feedId) => {
         const newFeed = feeds[feedId]
@@ -68,6 +68,12 @@ export default function Explore({ feed: feedFromProps }) {
                     <p className="opacity-50">
                         <ReactTyped strings={['Loading...']} loop />
                     </p>
+                </div>
+            )}
+
+            {error && (
+                <div>
+                    <p className="opacity-50">An error has occurred. Please check back in a few minutes.</p>
                 </div>
             )}
 
