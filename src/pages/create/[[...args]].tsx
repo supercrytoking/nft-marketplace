@@ -18,6 +18,8 @@ export async function getServerSideProps(ctx) {
 export default function Index({ args }) {
     const router = useRouter()
 
+    console.log(args)
+
     const tabFromQuery = args ? args[0] : null
     const contractAddressFromQuery = args ? args[1] : null
 
