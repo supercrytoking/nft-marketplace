@@ -1,11 +1,15 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import Router from 'next/router'
+import { useWallet } from 'use-wallet'
 import Button from '../Button'
 import Portal from '../Portal'
 import links from './links'
+import ConnectWallet from './ConnectWallet'
 
 export default function MobileHeader() {
+    const wallet = useWallet()
+
     const [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
@@ -40,13 +44,15 @@ export default function MobileHeader() {
             )}
 
             <div className="block md:hidden p-6">
-                <div className="flex justify-end">
+                <div className="flex">
                     <Button onClick={() => setIsOpen((_) => !_)}>
                         <span className="mr-2">
                             <i className="fas fa-bars" />
                         </span>
                         <span>Menu</span>
                     </Button>
+                    <div className="flex-1" />
+                    <ConnectWallet />
                 </div>
             </div>
         </>

@@ -6,7 +6,7 @@ import TokenLookup from '../components/TokenLookup'
 export default function IndexPage() {
     return (
         <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
-            <div className="bg-zinc-400 text-zinc-900 h-96 flex items-center justify-center p-6 relative">
+            <div className="bg-zinc-400 text-zinc-900 h-96 flex items-center justify-center p-6 relative overflow-hidden">
                 <CoolStuff />
 
                 <div>
