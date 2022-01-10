@@ -14,11 +14,13 @@ export default function Wallet({ params }) {
 
     const address = params ? params[0] : wallet.account
     const isAddress = Web3.utils.isAddress(address)
+    const isSearching = params && params[0]
+
     const { data } = useSWR(isAddress ? `/data/wallet/${address}` : null)
 
     return (
         <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
-            {!wallet.account && (
+            {!isSearching && !wallet.account && (
                 <button onClick={() => wallet.connect()} type="button" className="px-4 py-2 bg-zinc-400 text-zinc-900">
                     Connect Wallet
                 </button>
