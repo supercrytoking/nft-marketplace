@@ -88,6 +88,7 @@ export default function Collection({ contractAddress }) {
                     )}
                 </div>
             </div>
+
             {data && (
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                     {data.map((nft) => (
