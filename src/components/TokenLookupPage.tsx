@@ -1,4 +1,3 @@
-import CopyableCode from './CopyableCode'
 import TokenLookup from './TokenLookup'
 
 export default function TokenLookupPage() {

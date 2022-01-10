@@ -63,7 +63,7 @@ export default function Explore({ feed: feedFromProps }) {
                 </div>
             </div>
 
-            {!data && (
+            {!error && !data && (
                 <div>
                     <p className="opacity-50">
                         <ReactTyped strings={['Loading...']} loop />
