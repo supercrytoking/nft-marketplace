@@ -18,6 +18,18 @@ const links = [
         slug: 'wallet',
         href: '/wallet',
         title: 'My Collection'
+    },
+    {
+        slug: 'discord',
+        href: 'https://discord.gg/TUgJg338kS',
+        target: '_blank',
+        title: <i className="fab fa-discord" />
+    },
+    {
+        slug: 'twitter',
+        href: 'https://twitter.com/fantomdigital',
+        target: '_blank',
+        title: <i className="fab fa-twitter" />
     }
 ]
 

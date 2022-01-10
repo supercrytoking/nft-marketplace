@@ -11,7 +11,7 @@ export default function DesktopHeader() {
         <div className="hidden md:flex px-6 pt-12 max-w-7xl mx-auto  items-center space-x-4">
             {links.map((link) => (
                 <Link href={link.href} passHref>
-                    <a>{link.title}</a>
+                    <a target={link.target}>{link.title}</a>
                 </Link>
             ))}
             <div className="flex-1" />

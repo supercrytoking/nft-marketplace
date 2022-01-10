@@ -3,7 +3,7 @@ import Head from 'next/head'
 const Meta = () => {
     const title = 'FANTOM DIGITAL'
     const description = 'Create & Discover'
-    const url = 'https://fantom.digital'
+    const url = 'https://beta.fantom.digital'
 
     return (
         <Head>
