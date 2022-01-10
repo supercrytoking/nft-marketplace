@@ -6,6 +6,12 @@ import Header from '../components/Header'
 import Meta from '../components/Meta'
 import '../styles/global.css'
 import { api } from '../utils/utils'
+import dayjs from 'dayjs'
+import Footer from '../components/Footer'
+
+const relativeTime = require('dayjs/plugin/relativeTime')
+
+dayjs.extend(relativeTime)
 
 const fetcher = (url) => api.get(url).then((res) => res.data)
 
@@ -26,6 +32,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 <SWRConfig value={{ fetcher }}>
                     <Header />
                     <Component {...pageProps} />
+                    <Footer />
                 </SWRConfig>
             </UseWalletProvider>
         </>

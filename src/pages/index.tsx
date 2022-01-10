@@ -50,11 +50,6 @@ export default function IndexPage() {
                     <TokenLookup />
                 </div>
             </div>
-
-            <div className="flex items-center">
-                <p className="flex-1">Fantom Digital &copy; {new Date().getFullYear()}</p>
-                <p>❤️</p>
-            </div>
         </div>
     )
 }

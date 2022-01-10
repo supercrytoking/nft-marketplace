@@ -117,15 +117,11 @@ export default function TokenPage({ contract, id }) {
                     <div className="space-y-6">
                         <p className="text-3xl">{data.metadata.name}</p>
 
-                        <div>
-                            {data.metadata.description && <p>{data.metadata.description}</p>}
-                            {!data.metadata.description && (
-                                <p className="opacity-50">
-                                    This token has no description. Here's some Lorem: Deserunt ullamco culpa non laboris minim. Eiusmod laboris eu nisi Lorem labore in eiusmod. Dolore sunt enim commodo pariatur ullamco
-                                    enim pariatur sunt velit culpa.
-                                </p>
-                            )}
-                        </div>
+                        {data.metadata.description && (
+                            <div>
+                                <p>{data.metadata.description}</p>
+                            </div>
+                        )}
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="space-y-6">

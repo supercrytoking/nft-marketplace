@@ -21,7 +21,9 @@ const HistoryItem = ({ event }) => {
         onLoad()
     }, [])
 
-    const time = block ? dayjs.unix(block.timestamp).format('M/D/YYYY h:mm A') : null
+    // .fromNow()
+
+    const time = block ? (dayjs.unix(block.timestamp).diff(dayjs(new Date()), 'days') > 1 ? dayjs.unix(block.timestamp).format('M/D/YYYY h:mm A') : dayjs.unix(block.timestamp).fromNow()) : null
     const value = transaction ? Number(web3.utils.fromWei(transaction.value.toString())).toFixed(2) : null
 
     return (

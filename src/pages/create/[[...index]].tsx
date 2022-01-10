@@ -32,9 +32,7 @@ export default function Index({ args }) {
         <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
             <div className="flex flex-wrap gap-4">
                 {tabs.map(({ slug, title }) => (
-                    <Button className={classNames(false && 'bg-blue-500')} onClick={() => setTab(findTab(slug))}>
-                        {title}
-                    </Button>
+                    <Button onClick={() => setTab(findTab(slug))}>{title}</Button>
                 ))}
             </div>
 

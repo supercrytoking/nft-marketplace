@@ -13,12 +13,12 @@ const links = [
         slug: 'create',
         href: '/create',
         title: 'Create'
+    },
+    {
+        slug: 'wallet',
+        href: '/wallet',
+        title: 'My Collection'
     }
-    // {
-    //     slug: 'wallet',
-    //     href: '/wallet',
-    //     title: 'Wallet'
-    // }
 ]
 
 export default links
