@@ -4,6 +4,7 @@ import Button from '../../components/Button'
 import CreateCollection from '../../components/CreateCollection'
 import CreateNft from '../../components/CreateNft'
 import TokenLookup from '../../components/TokenLookup'
+import TokenLookupPage from '../../components/TokenLookupPage'
 
 const tabs = [
     { slug: 'create', href: '/create', title: 'Create' },
@@ -36,7 +37,7 @@ export default function Index({ args }) {
             </div>
 
             {tab.slug === 'create' && <CreateNft />}
-            {tab.slug === 'import' && <TokenLookup />}
+            {tab.slug === 'import' && <TokenLookupPage />}
             {tab.slug === 'collection' && <CreateCollection />}
             {tab.slug === 'collection' && contractAddressFromQuery && <CreateNft contractAddress={contractAddressFromQuery} />}
 
