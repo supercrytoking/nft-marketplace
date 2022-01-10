@@ -17,6 +17,11 @@ const feeds = [
         slug: 'listed',
         name: 'Listed',
         query: '/feeds/listed'
+    },
+    {
+        slug: 'sold',
+        name: 'Sold',
+        query: '/feeds/sold'
     }
 ]
 
