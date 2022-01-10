@@ -3,6 +3,7 @@ import { useWallet } from 'use-wallet'
 
 import Link from 'next/link'
 import Web3 from 'web3'
+import ReactTyped from 'react-typed'
 import ImageBox from '../../components/ImageBox'
 import Button from '../../components/Button'
 
@@ -17,7 +18,7 @@ export default function Wallet({ params }) {
     const isAddress = Web3.utils.isAddress(address)
     const isSearching = params && params[0]
 
-    const { data } = useSWR(isAddress ? `/data/wallet/${address}` : null)
+    const { data, error } = useSWR(isAddress ? `/data/wallet/${address}` : null)
 
     return (
         <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
@@ -25,6 +26,20 @@ export default function Wallet({ params }) {
                 <button onClick={() => wallet.connect()} type="button" className="px-4 py-2 bg-zinc-400 text-zinc-900">
                     Connect Wallet
                 </button>
+            )}
+
+            {!error && !data && (
+                <div>
+                    <p className="opacity-50">
+                        <ReactTyped strings={['Loading...']} loop />
+                    </p>
+                </div>
+            )}
+
+            {error && (
+                <div>
+                    <p className="opacity-50">An error has occurred. Please check back in a few minutes.</p>
+                </div>
             )}
 
             {data && (
