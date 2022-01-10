@@ -4,15 +4,20 @@ import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 import { useWallet } from 'use-wallet'
 import Web3 from 'web3'
-import Button from '../components/Button'
-import Input from '../components/Input'
-import Modal from '../components/Modal'
-import Textarea from '../components/Textarea'
-import TokenLookup from '../components/TokenLookup'
-import { erc721 } from '../data/abis'
-import { api } from '../utils/utils'
+import Button from '../../components/Button'
+import CopyableCode from '../../components/CopyableCode'
+import Input from '../../components/Input'
+import Modal from '../../components/Modal'
+import Textarea from '../../components/Textarea'
+import TokenLookup from '../../components/TokenLookup'
+import { erc721 } from '../../data/abis'
+import { api } from '../../utils/utils'
 
-export default function Create() {
+export async function getServerSideProps(ctx) {
+    return { props: ctx.query }
+}
+
+export default function Create({ contractAddress }) {
     const wallet = useWallet()
     const router = useRouter()
 
@@ -27,6 +32,9 @@ export default function Create() {
     const [tokenId, setTokenId] = useState('')
     const [inputTokenId, setInputTokenId] = useState('')
     const [inputContractAddress, setInputContractAddress] = useState('')
+
+    const isCustomContract = contractAddress && Web3.utils.isAddress(contractAddress[0])
+    const contractToPublishTo = isCustomContract ? contractAddress[0] : (process.env.NEXT_PUBLIC_MINTING_CONTRACT as string)
 
     const fileRef = useRef()
     const fileURL = file ? URL.createObjectURL(file) : ''
@@ -54,13 +62,13 @@ export default function Create() {
     }
 
     const web3 = new Web3(wallet.account ? wallet.ethereum : 'https://rpc.ftm.tools')
-    const contract = new web3.eth.Contract(erc721 as any, process.env.NEXT_PUBLIC_MINTING_CONTRACT as string)
+    const contract = new web3.eth.Contract(erc721 as any, contractToPublishTo)
     const mint = async (e) => {
         try {
             if (!wallet.account) return wallet.connect()
             setStatus('minting')
-            await contract.methods.mint(wallet.account, cid).estimateGas({ from: wallet.account })
-            const doMint = await contract.methods.mint(wallet.account, cid).send({ from: wallet.account })
+            await contract.methods.mint(cid).estimateGas({ from: wallet.account })
+            const doMint = await contract.methods.mint(cid).send({ from: wallet.account })
             const transferEvent = doMint.events.Transfer
             let tokenId
             if (Array.isArray(transferEvent)) {
@@ -169,6 +177,11 @@ export default function Create() {
                                 <p>Your asset(s) are uploaded to IPFS (The InterPlanetary File System) for life-long safe keeping, and pinned indefinitely.</p>
                                 <p>The NFT is minted to an immutable ERC721-compliant smart contract on the Fantom Blockchain.</p>
                             </div>
+                            <div>
+                                <CopyableCode multiLine label="Non-fungible Token Metadata">
+                                    {JSON.stringify(metadata)}
+                                </CopyableCode>
+                            </div>
                         </div>
                         <div className="w-full space-y-6">
                             <form onSubmit={upload} className="flex flex-col space-y-4">
@@ -197,9 +210,6 @@ export default function Create() {
                                     </Button>
                                 </div>
                             </form>
-                            <div>
-                                <p className="bg-zinc-900 p-2 border-zinc-800 border rounded">{JSON.stringify(metadata, null, 4)}</p>
-                            </div>
                         </div>
                     </div>
                 )}

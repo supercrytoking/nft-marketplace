@@ -6,8 +6,8 @@ export default class MyDocument extends Document {
             <Html>
                 <Head />
                 <body>
-                    <Main />
                     <div id="myportal" />
+                    <Main />
                     <NextScript />
                 </body>
             </Html>
