@@ -11,7 +11,7 @@ export default function CopyableCode({ label, multiLine, children }) {
 
     return (
         <CopyToClipboard text={children}>
-            <div className="block" type="button" onClick={() => setRecentlyClicked(true)}>
+            <div className="block" onClick={() => setRecentlyClicked(true)}>
                 {label && (
                     <p className="mb-1 text-xs">
                         {label} <span className="opacity-50">click to copy</span>
