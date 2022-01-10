@@ -27,7 +27,7 @@ const links = [
     },
     {
         slug: 'twitter',
-        href: 'https://twitter.com/fantomdigital',
+        href: 'https://twitter.com/DigitalFantom',
         target: '_blank',
         title: <i className="fab fa-twitter" />
     }
