@@ -22,9 +22,9 @@ export default function Footer() {
     }, [])
 
     return (
-        <div className="hidden md:flex px-6 pb-12 max-w-7xl mx-auto  items-center space-x-4">
+        <div className="px-6 pb-12 max-w-7xl mx-auto  items-center space-x-4">
             <div className="flex w-full items-center">
-                <p className="flex-1">Fantom Digital &copy; {new Date().getFullYear()}</p>
+                <p className="text-xs md:text-base flex-1">Fantom Digital &copy; {new Date().getFullYear()}</p>
                 <p>
                     <span className="text-xs">{blockNumber}</span> ❤️
                 </p>

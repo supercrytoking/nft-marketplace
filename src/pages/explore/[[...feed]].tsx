@@ -41,8 +41,8 @@ export default function Explore({ feed: feedFromProps }) {
     return (
         <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
             {/* {JSON.stringify(feedFromProps)} */}
-            <div className="flex items-center">
-                <div className="flex-1 flex flex-wrap gap-4">
+            <div className="flex gap-4 items-center overflow-auto whitespace-nowrap no-scrollbar">
+                <div className="flex-1 flex gap-4">
                     {feeds.map(({ slug, name }, index) => (
                         <Button className={classNames(feed.slug === slug && 'bg-blue-500')} key={slug} onClick={() => navigateToFeed(index)}>
                             {name}

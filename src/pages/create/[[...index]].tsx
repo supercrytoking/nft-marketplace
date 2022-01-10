@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Button from '../../components/Button'
@@ -30,7 +29,7 @@ export default function Index({ args }) {
 
     return (
         <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
-            <div className="flex flex-wrap gap-4">
+            <div className="flex gap-4 overflow-auto whitespace-nowrap no-scrollbar">
                 {tabs.map(({ slug, title }) => (
                     <Button onClick={() => setTab(findTab(slug))}>{title}</Button>
                 ))}
@@ -44,5 +43,4 @@ export default function Index({ args }) {
             {contractAddressFromQuery}
         </div>
     )
-    // return div
 }
