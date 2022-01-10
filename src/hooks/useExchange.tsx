@@ -49,6 +49,7 @@ export default function useExchange() {
         try {
             if (!wallet.account) return wallet.connect()
             setStatus('accepting')
+            // await contract.methods.acceptListing(contractAddress, tokenId).estimateGas({ value: price, from: wallet.account })
             await contract.methods.acceptListing(contractAddress, tokenId).send({ value: price, from: wallet.account })
             setStatus('idle')
         } catch (error) {

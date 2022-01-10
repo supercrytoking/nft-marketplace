@@ -20,8 +20,8 @@ export default function Collection({ contractAddress }) {
 
     const { data } = useSWR(`/data/${contractAddress}`)
 
-    // const web3 = new Web3(`${process.env.NEXT_PUBLIC_RPC}`)
-    const web3 = new Web3(`${process.env.NEXT_PUBLIC_TESNET_RPC}`)
+    const web3 = new Web3(`${process.env.NEXT_PUBLIC_RPC}`)
+    // const web3 = new Web3(`${process.env.NEXT_PUBLIC_TESNET_RPC}`)
     const contract = new web3.eth.Contract(erc721 as any, contractAddress)
 
     const [showFilters, setShowFilters] = useState(false)

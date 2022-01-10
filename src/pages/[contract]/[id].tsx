@@ -38,8 +38,7 @@ export default function TokenPage({ contract, id }) {
     }
 
     const acceptListing = async () => {
-        console.log(listingPrice)
-        await acceptListingFunction(contract, id, listingPrice)
+        await acceptListingFunction(contract, id, Web3.utils.toWei(listingPrice))
         await mutate()
     }
 
