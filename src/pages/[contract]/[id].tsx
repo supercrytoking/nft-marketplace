@@ -9,6 +9,7 @@ import History from '../../components/History'
 import ImageBox from '../../components/ImageBox'
 import Input from '../../components/Input'
 import Modal from '../../components/Modal'
+import SendModal from '../../components/SendModal'
 import useExchange from '../../hooks/useExchange'
 import { imageUrl } from '../../utils/utils'
 
@@ -85,17 +86,7 @@ export default function TokenPage({ contract, id }) {
                 </div>
             </Modal>
 
-            <Modal visible={showModal === 'send'} onClose={() => setShowModal(false)}>
-                <div className="space-y-4">
-                    {/* <Input label="Address" value={listingPrice} onChange={(e) => setListingPrice(e.target.value)} type="number" /> */}
-                    {/*
-                    <div className="flex gap-4 justify-end items-center">
-                        <button className="bg-zinc-400 text-zinc-900 px-4 py-2" onClick={() => {}} type="submit">
-                            Send Now
-                        </button>
-                    </div> */}
-                </div>
-            </Modal>
+            <SendModal nft={{ contract, id }} visible={showModal === 'send'} onClose={() => setShowModal(false)} />
 
             <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
                 {!data && (
