@@ -176,11 +176,11 @@ export default function TokenPage({ contract, id }) {
                                         </Link>
                                     </p>
                                     <p>Token ID: {data.tokenId}</p>
-                                    <p>
-                                        <a className="underline hover:no-underline" href={imageUrl(data.metadata.image)} target="_blank" rel="noreferrer">
-                                            Open original asset
+                                    {data?.tokenUri && <p>
+                                        <a className="underline hover:no-underline" href={data.tokenUri} target="_blank" rel="noreferrer">
+                                            Open metadata
                                         </a>
-                                    </p>
+                                    </p>}
                                 </div>
                             </div>
                         </div>
