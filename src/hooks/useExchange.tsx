@@ -10,13 +10,15 @@ export default function useExchange() {
 
     const [status, setStatus] = useState<'idle' | 'creating' | 'revoking' | 'accepting' | 'error'>('idle')
 
+    const gasPrice = async () => await web3.eth.getGasPrice()
+
     const doApprovalCheck = async (contractAddress: string, tokenId: string) => {
         const erc721Contract = new web3.eth.Contract(erc721 as any, contractAddress)
         const getApproved = await erc721Contract.methods.getApproved(tokenId).call()
         const isApproved = Web3.utils.toChecksumAddress(getApproved) === Web3.utils.toChecksumAddress(process.env.NEXT_PUBLIC_EXCHANGE_CONTRACT)
 
         if (!isApproved) {
-            await erc721Contract.methods.approve(process.env.NEXT_PUBLIC_EXCHANGE_CONTRACT, tokenId).send({ from: wallet.account })
+            await erc721Contract.methods.approve(process.env.NEXT_PUBLIC_EXCHANGE_CONTRACT, tokenId).send({ from: wallet.account, gasPrice: await gasPrice() })
         }
     }
 
@@ -25,7 +27,7 @@ export default function useExchange() {
             if (!wallet.account) return wallet.connect()
             setStatus('creating')
             await doApprovalCheck(contractAddress, tokenId)
-            await contract.methods.createListing(contractAddress, tokenId, price).send({ from: wallet.account })
+            await contract.methods.createListing(contractAddress, tokenId, price).send({ from: wallet.account, gasPrice: await gasPrice() })
             setStatus('idle')
         } catch (error) {
             setStatus('error')
@@ -37,7 +39,7 @@ export default function useExchange() {
         try {
             if (!wallet.account) return wallet.connect()
             setStatus('revoking')
-            await contract.methods.revokeListing(contractAddress, tokenId).send({ from: wallet.account })
+            await contract.methods.revokeListing(contractAddress, tokenId).send({ from: wallet.account, gasPrice: await gasPrice() })
             setStatus('idle')
         } catch (error) {
             setStatus('error')
@@ -50,7 +52,7 @@ export default function useExchange() {
             if (!wallet.account) return wallet.connect()
             setStatus('accepting')
             // await contract.methods.acceptListing(contractAddress, tokenId).estimateGas({ value: price, from: wallet.account })
-            await contract.methods.acceptListing(contractAddress, tokenId).send({ value: price, from: wallet.account })
+            await contract.methods.acceptListing(contractAddress, tokenId).send({ value: price, from: wallet.account, gasPrice: await gasPrice() })
             setStatus('idle')
         } catch (error) {
             setStatus('error')

@@ -16,12 +16,12 @@ const feeds = [
     {
         slug: 'listed',
         name: 'Listed',
-        query: '/feeds/listings'
+        query: '/feeds/listed'
     },
     {
         slug: 'sold',
         name: 'Sold',
-        query: '/feeds/sales'
+        query: '/feeds/accepted'
     }
 ]
 
@@ -86,7 +86,7 @@ export default function Explore({ feed: feedFromProps }) {
             {data && (
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                     {data.map((nft) => (
-                        <ImageBox nft={nft} key={nft.id} />
+                        <>{nft && <ImageBox nft={nft} key={nft._id} />}</>
                     ))}
                 </div>
             )}

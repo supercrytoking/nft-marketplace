@@ -2,11 +2,13 @@ import useSWR from 'swr'
 import { useWallet } from 'use-wallet'
 
 import Link from 'next/link'
+import lodash from 'lodash'
 import { useEffect } from 'react'
 import ReactTyped from 'react-typed'
 import Web3 from 'web3'
 import Button from '../../components/Button'
 import ImageBox from '../../components/ImageBox'
+import NFTGroup from '../../components/NFTGroup'
 
 export function getServerSideProps(ctx) {
     return { props: ctx.query }
@@ -22,7 +24,13 @@ export default function Wallet({ params }) {
     const { data: unsortedData, error } = useSWR(isAddress ? `/data/wallet/${address}` : null)
     const data = unsortedData?.sort((a, b) => (new Date(b.updated_at || b.created_at) - new Date(a.updated_at || a.created_at)))
 
-    useEffect(() => console.log(data), [data])
+    const grouped = data?.reduce(function (r, a) {
+        r[a.contractAddress] = r[a.contractAddress] || [];
+        r[a.contractAddress].push(a);
+        return r;
+    }, Object.create(null))
+
+    useEffect(() => console.log(grouped), [grouped])
 
     return (
         <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
@@ -73,22 +81,14 @@ export default function Wallet({ params }) {
                 </div>
             )}
 
-            {data && (
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-                    {data.map((nft) => (
-                        <ImageBox nft={nft} />
-                    ))}
+            {grouped && (
+                <div className='space-y-12'>
+                    {Object.keys(grouped)?.map(groupKey => {
+                        const group = grouped[groupKey]
+                        return <NFTGroup items={group} />
+                    })}
                 </div>
             )}
-
-            {/* {wallet.account && (
-                <div className="bg-zinc-400 text-zinc-900 p-6 flex items-center flex-wrap gap-6">
-                    <p className="flex-1">Don't see all your NFTs? No problem.</p>
-                    <Link href="/tools/indexr" passHref>
-                        <a className="bg-zinc-900 text-zinc-400 px-4 py-2">Use the Indexer</a>
-                    </Link>
-                </div>
-            )} */}
         </div>
     )
 }
