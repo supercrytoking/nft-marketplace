@@ -3,8 +3,8 @@ import commaNumber from 'comma-number'
 import shortNumber from 'short-number'
 import axios from 'axios'
 
-// export const apiUrl = true ? 'https://api.fantom.digital' : 'http://localhost:8888'
-export const apiUrl = process.env.NODE_ENV === 'production' ? 'https://api.fantom.digital' : 'http://localhost:8888'
+export const apiUrl = 'https://api.fantom.digital'
+// export const apiUrl = process.env.NODE_ENV === 'production' ? 'https://api.fantom.digital' : 'http://localhost:8888'
 
 export const imageCacheUrl = 'https://enbzwejmbbmiirvimcib.supabase.in/storage/v1/object/public/cache'
 export const ipfsGateway = 'https://ftmdead.mypinata.cloud/ipfs/'
@@ -13,7 +13,7 @@ export const imageUrl = (string) => {
     string = string.replace('https://ipfs.io/ipfs/', ipfsGateway)
     string = string.replace('https://ipfs.io/ipfs/', ipfsGateway)
     string = string.replace('https://gateway.pinata.cloud/ipfs/', ipfsGateway)
-    https: return string
+    return string
 }
 
 export const cacheImage = (url: string) => `${apiUrl}/cache/${encodeURIComponent(url)}`

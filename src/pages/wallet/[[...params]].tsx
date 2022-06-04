@@ -4,6 +4,7 @@ import { useWallet } from 'use-wallet'
 import Link from 'next/link'
 import Web3 from 'web3'
 import ReactTyped from 'react-typed'
+import { useEffect } from 'react'
 import ImageBox from '../../components/ImageBox'
 import Button from '../../components/Button'
 
@@ -20,6 +21,8 @@ export default function Wallet({ params }) {
 
     const { data, error } = useSWR(isAddress ? `/data/wallet/${address}` : null)
 
+    useEffect(() => console.log(data), [data])
+
     return (
         <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
             {!isSearching && !wallet.account && (
@@ -28,7 +31,7 @@ export default function Wallet({ params }) {
                 </button>
             )}
 
-            {!error && !data && (
+            {address && !error && !data && (
                 <div>
                     <p className="opacity-50">
                         <ReactTyped strings={['Loading...']} loop />

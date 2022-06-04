@@ -68,7 +68,13 @@ export default function Collection({ contractAddress }) {
                                 {contractAddress.slice(-6)}
                             </a>
                         </p>
-                        {totalSupply && <p>{totalSupply} items</p>}
+                        {totalSupply && (
+                            <p>
+                                {totalSupply}
+                                {' '}
+                                items
+                            </p>
+                        )}
                     </div>
                     {isMyCollection && (
                         <Link href={`/create/${contractAddress}`} passHref>
