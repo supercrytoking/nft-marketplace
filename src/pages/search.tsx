@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import ReactTyped from 'react-typed'
 import useSWR from 'swr'
-import ImageBox from '../components/ImageBox copy'
+import ImageBox from '../components/ImageBox'
 import Input from '../components/Input'
 
 export default function Search() {

@@ -10,8 +10,13 @@ import ImageBox from '../../components/ImageBox'
 const feeds = [
     {
         slug: '/',
-        name: 'Latest',
-        query: '/feeds/latest'
+        name: 'New',
+        query: '/feeds/new'
+    },
+    {
+        slug: '/moving',
+        name: 'Moving',
+        query: '/feeds/moving'
     },
     {
         slug: 'listed',
