@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import ImageBox from "./ImageBox copy 2"
+import ImageBox from "./ImageBox"
 
 export default function NFTGroup({ items }) {
 
