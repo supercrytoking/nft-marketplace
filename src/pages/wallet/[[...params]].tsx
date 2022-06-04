@@ -2,11 +2,11 @@ import useSWR from 'swr'
 import { useWallet } from 'use-wallet'
 
 import Link from 'next/link'
-import Web3 from 'web3'
-import ReactTyped from 'react-typed'
 import { useEffect } from 'react'
-import ImageBox from '../../components/ImageBox'
+import ReactTyped from 'react-typed'
+import Web3 from 'web3'
 import Button from '../../components/Button'
+import ImageBox from '../../components/ImageBox'
 
 export function getServerSideProps(ctx) {
     return { props: ctx.query }
@@ -19,7 +19,8 @@ export default function Wallet({ params }) {
     const isAddress = Web3.utils.isAddress(address)
     const isSearching = params && params[0]
 
-    const { data, error } = useSWR(isAddress ? `/data/wallet/${address}` : null)
+    const { data: unsortedData, error } = useSWR(isAddress ? `/data/wallet/${address}` : null)
+    const data = unsortedData?.sort((a, b) => (new Date(b.updated_at || b.created_at) - new Date(a.updated_at || a.created_at)))
 
     useEffect(() => console.log(data), [data])
 
