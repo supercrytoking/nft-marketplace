@@ -29,7 +29,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 />
             </Head>
             <UseWalletProvider>
-                <SWRConfig value={{ fetcher }}>
+                <SWRConfig value={{ refreshInterval: 3000, fetcher }}>
                     <Header />
                     <Component {...pageProps} />
                     <Footer />
