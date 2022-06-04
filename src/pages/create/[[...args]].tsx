@@ -9,7 +9,7 @@ import TokenLookupPage from '../../components/TokenLookupPage'
 const tabs = [
     { slug: 'create', href: '/create', title: 'Create' },
     { slug: 'import', href: '/create/import', title: 'Import' },
-    { slug: 'collection', href: '/create/collection', title: 'Create Collection' }
+    { slug: 'collection', href: '/create/collection', title: 'Create Collection', disabled: true }
 ]
 
 export async function getServerSideProps(ctx) {
@@ -31,8 +31,8 @@ export default function Index({ args }) {
     return (
         <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
             <div className="flex gap-4 overflow-auto whitespace-nowrap no-scrollbar">
-                {tabs.map(({ slug, title }) => (
-                    <Button onClick={() => setTab(findTab(slug))}>{title}</Button>
+                {tabs.map(({ slug, title, disabled }) => (
+                    <Button disabled={disabled} onClick={() => setTab(findTab(slug))}>{title}</Button>
                 ))}
             </div>
 
