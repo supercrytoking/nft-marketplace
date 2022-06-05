@@ -13,6 +13,32 @@ body,
 }
 
 
+@layer utilities {
+    @variants responsive {
+        .masonry {
+            column-gap: 1.5em;
+            column-count: 1;
+        }
+
+        .masonry-sm {
+            column-gap: 1.5em;
+            column-count: 2;
+        }
+
+        .masonry-md {
+            column-gap: 1.5em;
+            column-count: 3;
+        }
+
+        .break-inside {
+            break-inside: avoid;
+        }
+
+    }
+}
+
+
+
 @font-face {
     font-family: 'Eurostile Extended';
     src: url('/fonts/EurostileExtended-Black.woff2') format('woff2'), url('/fonts/EurostileExtended-Black.woff') format('woff');

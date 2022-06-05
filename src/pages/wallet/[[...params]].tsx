@@ -81,6 +81,14 @@ export default function Wallet({ params }) {
                 </div>
             )}
 
+            {/* {unsortedData && <>
+                <div className='grid grid-cols-12'>
+                    {unsortedData.slice(0, 22).map((nft => <div>
+                        <div className='square bg-cover bg-center' style={{ backgroundImage: `url("${nft.metadata.image}")` }} />
+                    </div>))}
+                </div>
+            </>} */}
+
             {grouped && (
                 <div className='space-y-12'>
                     {Object.keys(grouped)?.map(groupKey => {

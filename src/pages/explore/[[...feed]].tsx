@@ -7,6 +7,7 @@ import useSWR from 'swr'
 import Button from '../../components/Button'
 import ImageBox from '../../components/ImageBox'
 import LazyLoad from 'react-lazyload';
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
 
 const feeds = [
     {
@@ -98,14 +99,22 @@ export default function Explore({ feed: feedFromProps }) {
             )}
 
             {data && (
-                <div className={classNames("grid gap-6", largeGrid ? 'grid-cols-1 md:grid-cols-3 ' : 'grid-cols-2 md:grid-cols-6')}>
-                    {data.map((nft) => (
-                        <>{nft &&
-                            <ImageBox nft={nft} key={nft._id} />
-                        }</>
-                    ))}
-                </div>
-            )}
-        </div>
+                // <div className={classNames("grid gap-6", largeGrid ? 'grid-cols-1 md:grid-cols-3 ' : 'grid-cols-2 md:grid-cols-6')}>
+                <ResponsiveMasonry
+                    columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+                >
+                    <Masonry
+                        gutter="1em"
+                    >
+                        {data.map((nft) => (
+                            <>{nft &&
+                                <ImageBox nft={nft} key={nft._id} />
+                            }</>
+                        ))}
+                    </Masonry></ResponsiveMasonry>
+                // </div>
+            )
+            }
+        </div >
     )
 }
