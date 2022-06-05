@@ -20,6 +20,11 @@ const links = [
         title: 'My Collection'
     },
     {
+        slug: 'stats',
+        href: '/stats',
+        title: 'Stats'
+    },
+    {
         slug: 'discord',
         href: 'https://discord.gg/TUgJg338kS',
         target: '_blank',

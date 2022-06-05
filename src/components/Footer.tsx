@@ -27,11 +27,6 @@ export default function Footer() {
             <div className="flex w-full items-center gap-6">
                 <p className="text-xs md:text-base ">Fantom Digital &copy; {new Date().getFullYear()}</p>
 
-                <p>
-                    <Link href="/stats">
-                        <a className='underline hover:no-underline'>Stats</a>
-                    </Link>
-                </p>
 
                 <div className="flex-1" />
 

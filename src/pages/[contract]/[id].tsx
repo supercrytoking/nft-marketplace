@@ -26,7 +26,7 @@ export default function TokenPage({ contract, id }) {
     const [showModal, setShowModal] = useState<false | 'list' | 'send'>(false)
     const [listingPrice, setListingPrice] = useState('')
 
-    const image = data ? data.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/') : null
+    const image = data ? data?.metadata?.image?.replace('ipfs://', 'https://ipfs.io/ipfs/') : null
     const iAmOwner = data && data.owner === wallet.account
     const isListed = data && data.listing && data.listing.status === 'listed'
 
