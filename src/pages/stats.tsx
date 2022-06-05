@@ -61,6 +61,43 @@ export default function IndexPage() {
             </>}
 
             {data && <>
+
+
+                <div className="space-y-4 ">
+                    <p>Recently Indexed Tokens</p>
+                    <div className="overflow-scroll whitespace-nowrap">
+                        <table className="w-full table-auto text-left">
+                            <thead className="bg-white bg-opacity-10 uppercase">
+                                <tr>
+                                    <th className="p-2">Token</th>
+                                    <th>Collection</th>
+                                    <th>Contract</th>
+                                    <th>Token ID</th>
+                                    <th>Time</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {data.recentTokens.map((token, index) =>
+                                    <tr className={classNames(index % 2 != 0 && 'bg-white bg-opacity-5')}>
+                                        <td className="p-1 py-2">
+                                            <a className="underline hover:no-underline" href={`/${token.contractAddress}/${token.tokenId}`}>{token.metadata.name}</a>
+                                        </td>
+                                        <td>
+                                            <a className="underline hover:no-underline" href={`/collections/${token.contractAddress}`}> {token?.contract?.name || 'Unknown Collection'}</a>
+                                        </td>
+                                        <td>
+                                            <a className="underline hover:no-underline" href={`/collections/${token.contractAddress}`}>{token.contractAddress.slice(0, 12)}...</a>
+                                        </td>
+                                        <td>{token.tokenId}</td>
+                                        <td>{dayjs(token.updatedAt).format('DD/MM hh:mm:ss:SSS')}</td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
                 <div className="space-y-4 ">
                     <p>Recent Marketplace Events</p>
                     <div className="overflow-scroll whitespace-nowrap">
@@ -101,40 +138,6 @@ export default function IndexPage() {
                     </div>
                 </div>
 
-
-                <div className="space-y-4 ">
-                    <p>Recently Indexed Tokens</p>
-                    <div className="overflow-scroll whitespace-nowrap">
-                        <table className="w-full table-auto text-left">
-                            <thead className="bg-white bg-opacity-10 uppercase">
-                                <tr>
-                                    <th className="p-2">Token</th>
-                                    <th>Collection</th>
-                                    <th>Contract</th>
-                                    <th>Token ID</th>
-                                    <th>Time</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {data.recentTokens.map((token, index) =>
-                                    <tr className={classNames(index % 2 != 0 && 'bg-white bg-opacity-5')}>
-                                        <td className="p-1 py-2">
-                                            <a className="underline hover:no-underline" href={`/${token.contractAddress}/${token.tokenId}`}>{token.metadata.name}</a>
-                                        </td>
-                                        <td>
-                                            <a className="underline hover:no-underline" href={`/collections/${token.contractAddress}`}> {token?.contract?.name || 'Unknown Collection'}</a>
-                                        </td>
-                                        <td>
-                                            <a className="underline hover:no-underline" href={`/collections/${token.contractAddress}`}>{token.contractAddress.slice(0, 12)}...</a>
-                                        </td>
-                                        <td>{token.tokenId}</td>
-                                        <td>{dayjs(token.updatedAt).format('DD/MM hh:mm:ss:SSS')}</td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </>}
         </div >
     )

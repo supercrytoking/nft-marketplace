@@ -40,6 +40,8 @@ export default function Explore({ feed: feedFromProps }) {
 
     const feedFromQuery = feedFromProps ? feeds.find((search) => search.slug === feedFromProps[0]) : feeds[0]
 
+    const [largeGrid, setLargeGrid] = useState(true)
+
     const [feed, setFeed] = useState(feedFromQuery)
     const { data, error } = useSWR(feed.query)
 
@@ -69,6 +71,12 @@ export default function Explore({ feed: feedFromProps }) {
                 </div>
             </div>
 
+            <div className='flex justify-end'>
+                <button onClick={() => setLargeGrid(_ => !_)}>
+                    <i className={classNames('fas', largeGrid ? 'fa-table-cells' : 'fa-table-cells-large')} />
+                </button>
+            </div>
+
             {!error && !data && (
                 <div>
                     <p className="opacity-50">
@@ -90,7 +98,7 @@ export default function Explore({ feed: feedFromProps }) {
             )}
 
             {data && (
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                <div className={classNames("grid gap-6", largeGrid ? ' grid-cols-2 md:grid-cols-3 ' : ' grid-cols-2 md:grid-cols-6')}>
                     {data.map((nft) => (
                         <>{nft &&
                             <ImageBox nft={nft} key={nft._id} />
