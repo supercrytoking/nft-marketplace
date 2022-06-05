@@ -5,6 +5,7 @@ import axios from 'axios'
 
 // export const apiUrl = 'https://api.fantom.digital'
 export const apiUrl = process.env.NODE_ENV === 'production' ? 'https://api.fantom.digital' : 'http://localhost:8888'
+export const api = axios.create({ baseURL: apiUrl })
 
 export const imageCacheUrl = 'https://enbzwejmbbmiirvimcib.supabase.in/storage/v1/object/public/cache'
 export const ipfsGateway = 'https://ftmdead.mypinata.cloud/ipfs/'
@@ -16,8 +17,11 @@ export const imageUrl = (string = "") => {
     return string
 }
 
+export const indexCollection = (contractAddress: string) => {
+    return api.post(`/indexr/collection/${contractAddress}`)
+}
+
 export const cacheImage = (url: string) => `${apiUrl}/cache/${encodeURIComponent(url)}`
 // export const cacheImage = (url: string) => url
 export const formatPricing = (price) => `${Number(price) > 10000 ? shortNumber(Number(Web3.utils.fromWei(price))) : commaNumber(Number(Web3.utils.fromWei(price)))} FTM`
 
-export const api = axios.create({ baseURL: apiUrl })

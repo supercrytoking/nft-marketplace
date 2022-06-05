@@ -8,6 +8,7 @@ import Button from '../../components/Button'
 import ImageBox from '../../components/ImageBox'
 import Input from '../../components/Input'
 import { erc721 } from '../../data/abis'
+import { indexCollection } from '../../utils/utils'
 
 export function getServerSideProps(ctx) {
     return { props: ctx.query }
@@ -93,6 +94,10 @@ export default function Collection({ contractAddress }) {
                         </form>
                     )}
                 </div>
+            </div>
+
+            <div>
+                <button onClick={() => indexCollection(contractAddress)} className='underline hover:no-underline'>Index Collection</button>
             </div>
 
             {data && (
