@@ -14,7 +14,7 @@ const feeds = [
         query: '/feeds/new'
     },
     {
-        slug: '/moving',
+        slug: 'moving',
         name: 'Moving',
         query: '/feeds/moving'
     },
