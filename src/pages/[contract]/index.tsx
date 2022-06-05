@@ -9,22 +9,21 @@ import Button from '../../components/Button'
 import ImageBox from '../../components/ImageBox'
 import Input from '../../components/Input'
 import { erc721 } from '../../data/abis'
-import { indexCollection } from '../../utils/utils'
 
 export function getServerSideProps(ctx) {
     return { props: ctx.query }
 }
 
-export default function Collection({ contractAddress }) {
+export default function Collection({ contract }) {
     const wallet = useWallet()
 
     const router = useRouter()
 
-    const { data, error } = useSWR(`/data/${contractAddress}`)
+    const { data, error } = useSWR(`/data/${contract}`)
 
     const web3 = new Web3(`${process.env.NEXT_PUBLIC_RPC}`)
     // const web3 = new Web3(`${process.env.NEXT_PUBLIC_TESNET_RPC}`)
-    const contract = new web3.eth.Contract(erc721 as any, contractAddress)
+    const contractInstance = new web3.eth.Contract(erc721 as any, contract)
 
     const [showFilters, setShowFilters] = useState(false)
     const [tokenLookup, setTokenLookup] = useState('')
@@ -43,7 +42,7 @@ export default function Collection({ contractAddress }) {
         try {
             e.preventDefault()
             if (!tokenLookup) return
-            router.push(`/${contractAddress}/${tokenLookup}`)
+            router.push(`/${contract}/${tokenLookup}`)
         } catch (error) {
             console.log(error)
         }
@@ -51,11 +50,11 @@ export default function Collection({ contractAddress }) {
 
     useEffect(() => {
         const onLoad = async () => {
-            const nameFromWeb3 = await contract.methods.name().call()
+            const nameFromWeb3 = await contractInstance.methods.name().call()
             setName(nameFromWeb3)
-            const totalSupplyFromWeb3 = await contract.methods.totalSupply().call()
+            const totalSupplyFromWeb3 = await contractInstance.methods.totalSupply().call()
             setTotalSupply(totalSupplyFromWeb3)
-            const ownerFromWeb3 = await contract.methods.owner().call()
+            const ownerFromWeb3 = await contractInstance.methods.owner().call()
             setOwner(ownerFromWeb3)
         }
         onLoad()
@@ -89,10 +88,10 @@ export default function Collection({ contractAddress }) {
                     <div className="space-y-1">
                         <p>{name}</p>
                         <p className="truncate">
-                            <a href={`https://ftmscan.com/address/${contractAddress}`} target="_blank" className="underline hover:no-underline" rel="noreferrer">
-                                {contractAddress.slice(0, 6)}
+                            <a href={`https://ftmscan.com/address/${contract}`} target="_blank" className="underline hover:no-underline" rel="noreferrer">
+                                {contract.slice(0, 6)}
                                 ...
-                                {contractAddress.slice(-6)}
+                                {contract.slice(-6)}
                             </a>
                         </p>
                         {totalSupply && (
@@ -104,7 +103,7 @@ export default function Collection({ contractAddress }) {
                         )}
                     </div>
                     {isMyCollection && (
-                        <Link href={`/create/${contractAddress}`} passHref>
+                        <Link href={`/create/${contract}`} passHref>
                             <a className="block">
                                 <Button>Publish to Collection</Button>
                             </a>
@@ -123,7 +122,7 @@ export default function Collection({ contractAddress }) {
             </div>
 
             {/* <div>
-                <button onClick={() => indexCollection(contractAddress)} className='underline hover:no-underline'>Index Collection</button>
+                <button onClick={() => indexCollection(contract)} className='underline hover:no-underline'>Index Collection</button>
             </div> */}
 
 

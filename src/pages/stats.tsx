@@ -47,7 +47,7 @@ export default function IndexPage() {
                                     {indexrData.currentlyIndexing.map((collection, index) =>
                                         <tr className={classNames(index % 2 != 0 && 'bg-white bg-opacity-5')}>
                                             <td className="px-1 py-2">
-                                                <a className="underline hover:no-underline truncate" href={`/collections/${collection.address}`}>{collection.address}</a>
+                                                <a className="underline hover:no-underline truncate" href={`/${collection.address}`}>{collection.address}</a>
                                             </td>
                                             <td>
                                                 {dayjs(collection.timestamp).fromNow()}
@@ -86,10 +86,10 @@ export default function IndexPage() {
                                             <a className="underline hover:no-underline" href={`/${token.contractAddress}/${token.tokenId}`}>{token.metadata.name}</a>
                                         </td>
                                         <td>
-                                            <a className="underline hover:no-underline" href={`/collections/${token.contractAddress}`}> {token?.contract?.name || 'Unknown Collection'}</a>
+                                            <a className="underline hover:no-underline" href={`/${token.contractAddress}`}> {token?.contract?.name || 'Unknown Collection'}</a>
                                         </td>
                                         <td>
-                                            <a className="underline hover:no-underline" href={`/collections/${token.contractAddress}`}>{token.contractAddress.slice(0, 12)}...</a>
+                                            <a className="underline hover:no-underline" href={`/${token.contractAddress}`}>{token.contractAddress.slice(0, 12)}...</a>
                                         </td>
                                         <td>{token.tokenId}</td>
                                         <td>{dayjs(token.updatedAt).format('DD/MM hh:mm:ss:SSS')}</td>
@@ -127,10 +127,10 @@ export default function IndexPage() {
                                             <a className="underline hover:no-underline" href={`https://ftmscan.com/tx/${event.tx}`}> {event.tx.slice(0, 12)}</a>
                                         </td>
                                         {/* <td>
-                                            <a className="underline hover:no-underline" href={`/collections/${token.contractAddress}`}> {token?.contract?.name || 'Unknown Collection'}</a>
+                                            <a className="underline hover:no-underline" href={`/${token.contractAddress}`}> {token?.contract?.name || 'Unknown Collection'}</a>
                                         </td>
                                         <td>
-                                            <a className="underline hover:no-underline" href={`/collections/${token.contractAddress}`}>{token.contractAddress.slice(0, 12)}...</a>
+                                            <a className="underline hover:no-underline" href={`/${token.contractAddress}`}>{token.contractAddress.slice(0, 12)}...</a>
                                         </td>
                                         <td>{token.tokenId}</td>
                                         <td>{dayjs(token.updatedAt).format('DD/MM hh:mm:ss:SSS')}</td> */}

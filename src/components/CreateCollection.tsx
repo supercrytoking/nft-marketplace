@@ -78,7 +78,7 @@ export default function CreateCollection() {
                         <CopyableCode label="Contract Address">{contractAddress}</CopyableCode>
                         <p>
                             You can now publish your items to your collection on the{' '}
-                            <a href={`/collections/${contractAddress}`} target="_blank" rel="noreferrer" className="underline hover:no-underline">
+                            <a href={`/${contractAddress}`} target="_blank" rel="noreferrer" className="underline hover:no-underline">
                                 collection page
                             </a>
                             .

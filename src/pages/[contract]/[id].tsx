@@ -161,7 +161,7 @@ export default function TokenPage({ contract, id }) {
                                 <div className="">
                                     <p className="truncate">
                                         Collection:{' '}
-                                        <Link href={`/collections/${data.contractAddress}`}>
+                                        <Link href={`/${data.contractAddress}`}>
                                             <a href="" className="underline hover:no-underline">
                                                 {data.contractAddress}
                                             </a>
