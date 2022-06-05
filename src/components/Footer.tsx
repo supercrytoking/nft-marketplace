@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import Web3 from 'web3'
 
@@ -23,12 +24,21 @@ export default function Footer() {
 
     return (
         <div className="px-6 pb-12 max-w-7xl mx-auto  items-center space-x-4">
-            <div className="flex w-full items-center">
-                <p className="text-xs md:text-base flex-1">Fantom Digital &copy; {new Date().getFullYear()}</p>
+            <div className="flex w-full items-center gap-6">
+                <p className="text-xs md:text-base ">Fantom Digital &copy; {new Date().getFullYear()}</p>
+
+                <p>
+                    <Link href="/stats">
+                        <a className='underline hover:no-underline'>Stats</a>
+                    </Link>
+                </p>
+
+                <div className="flex-1" />
+
                 <p>
                     <span className="text-xs">{blockNumber}</span> ❤️
                 </p>
             </div>
-        </div>
+        </div >
     )
 }

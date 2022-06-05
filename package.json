@@ -12,7 +12,7 @@
         "axios": "^0.24.0",
         "classnames": "^2.3.1",
         "comma-number": "^2.1.0",
-        "dayjs": "^1.10.7",
+        "dayjs": "^1.11.2",
         "ethers": "^5.6.8",
         "framer-motion": "^5.5.5",
         "hash-string": "^1.0.0",
