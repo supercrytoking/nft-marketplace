@@ -8,7 +8,7 @@ export const apiUrl = process.env.NODE_ENV === 'production' ? 'https://api.fanto
 
 export const imageCacheUrl = 'https://enbzwejmbbmiirvimcib.supabase.in/storage/v1/object/public/cache'
 export const ipfsGateway = 'https://ftmdead.mypinata.cloud/ipfs/'
-export const imageUrl = (string) => {
+export const imageUrl = (string = "") => {
     string = string.replace('ipfs://', ipfsGateway)
     string = string.replace('https://ipfs.io/ipfs/', ipfsGateway)
     string = string.replace('https://ipfs.io/ipfs/', ipfsGateway)
