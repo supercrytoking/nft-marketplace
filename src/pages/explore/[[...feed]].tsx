@@ -98,7 +98,7 @@ export default function Explore({ feed: feedFromProps }) {
             )}
 
             {data && (
-                <div className={classNames("grid gap-6", largeGrid ? ' grid-cols-2 md:grid-cols-3 ' : ' grid-cols-2 md:grid-cols-6')}>
+                <div className={classNames("grid gap-6", largeGrid ? 'grid-cols-1 md:grid-cols-3 ' : 'grid-cols-2 md:grid-cols-6')}>
                     {data.map((nft) => (
                         <>{nft &&
                             <ImageBox nft={nft} key={nft._id} />

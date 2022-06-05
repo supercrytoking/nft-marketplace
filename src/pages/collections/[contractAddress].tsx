@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import ReactTyped from 'react-typed'
 import useSWR from 'swr'
 import { useWallet } from 'use-wallet'
 import Web3 from 'web3'
@@ -19,7 +20,7 @@ export default function Collection({ contractAddress }) {
 
     const router = useRouter()
 
-    const { data } = useSWR(`/data/${contractAddress}`)
+    const { data, error } = useSWR(`/data/${contractAddress}`)
 
     const web3 = new Web3(`${process.env.NEXT_PUBLIC_RPC}`)
     // const web3 = new Web3(`${process.env.NEXT_PUBLIC_TESNET_RPC}`)
@@ -31,6 +32,10 @@ export default function Collection({ contractAddress }) {
     const [name, setName] = useState('')
     const [totalSupply, setTotalSupply] = useState('')
     const [owner, setOwner] = useState('')
+
+    const listed = data && data.filter(token => token?.listing?.status === 'listed')
+
+    useEffect(() => console.log(listed), [listed])
 
     const isMyCollection = wallet.account && owner ? Web3.utils.toChecksumAddress(wallet.account) === Web3.utils.toChecksumAddress(owner) : null
 
@@ -55,6 +60,27 @@ export default function Collection({ contractAddress }) {
         }
         onLoad()
     }, [])
+
+    if (!data) {
+        return (
+            <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
+                {!data && !error && (
+                    <p className="opacity-50">
+                        <ReactTyped strings={['Loading...']} loop />
+                    </p>
+                )}
+                {!data && error && (
+                    <p className="opacity-50">
+                        Error. Not found. If you believe this is an error,{' '}
+                        <a className="underline hover:not-underline" href="https://discord.gg/TUgJg338kS" target="_blank" rel="noreferrer">
+                            report it to the team
+                        </a>
+                        .
+                    </p>
+                )}
+            </div>
+        )
+    }
 
     return (
         <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
@@ -96,9 +122,22 @@ export default function Collection({ contractAddress }) {
                 </div>
             </div>
 
-            <div>
+            {/* <div>
                 <button onClick={() => indexCollection(contractAddress)} className='underline hover:no-underline'>Index Collection</button>
-            </div>
+            </div> */}
+
+
+
+            {listed && listed.length > 0 &&
+                <div className='space-y-4'>
+                    <p>Listed</p>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                        {listed.map((nft) => (
+                            <ImageBox nft={nft} />
+                        ))}
+                    </div>
+                </div>
+            }
 
             {data && (
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-6">

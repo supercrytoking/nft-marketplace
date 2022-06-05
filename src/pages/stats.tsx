@@ -2,6 +2,7 @@ import classNames from "classnames"
 import useSWR from "swr"
 import commaNumber from 'comma-number'
 import dayjs from "dayjs"
+import CollectionIndexer from "../components/CollectionIndexer"
 
 export default function IndexPage() {
 
@@ -27,34 +28,36 @@ export default function IndexPage() {
 
             {indexrData && <>
                 <div className="space-y-4">
-                    <p>Collecton Indexer</p>
 
-                    <div className="overflow-scroll whitespace-nowrap">
-                        <table className="w-full table-auto text-left">
-                            <thead className="bg-white bg-opacity-10 uppercase">
-                                <tr>
-                                    <th className="p-2">Contract</th>
-                                    <th >Started</th>
-                                    {/* <th>Token ID</th> */}
-                                    {/* <th>Time</th> */}
-                                </tr>
-                            </thead>
-
-                            {indexrData.currentlyIndexing.length < 1 && <div className="p-2 opacity-50">
-                                <p>The collection indexer is currently not indexing any collections.</p></div>}
-                            <tbody>
-                                {indexrData.currentlyIndexing.map((collection, index) =>
-                                    <tr className={classNames(index % 2 != 0 && 'bg-white bg-opacity-5')}>
-                                        <td className="px-1 py-2">
-                                            <a className="underline hover:no-underline truncate" href={`/collections/${collection.address}`}>{collection.address}</a>
-                                        </td>
-                                        <td>
-                                            {dayjs(collection.timestamp).fromNow()}
-                                        </td>
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                        <div className="overflow-scroll whitespace-nowrap md:col-span-2 space-y-4">
+                            <p>Active Indexer Workers</p>
+                            <table className="w-full table-auto text-left">
+                                <thead className="bg-white bg-opacity-10 uppercase">
+                                    <tr>
+                                        <th className="p-2">Contract</th>
+                                        <th >Started</th>
+                                        {/* <th>Token ID</th> */}
+                                        {/* <th>Time</th> */}
                                     </tr>
-                                )}
-                            </tbody>
-                        </table>
+                                </thead>
+                                {indexrData.currentlyIndexing.length < 1 && <div className="p-2 opacity-50">
+                                    <p>The collection indexer is currently not indexing any collections.</p></div>}
+                                <tbody>
+                                    {indexrData.currentlyIndexing.map((collection, index) =>
+                                        <tr className={classNames(index % 2 != 0 && 'bg-white bg-opacity-5')}>
+                                            <td className="px-1 py-2">
+                                                <a className="underline hover:no-underline truncate" href={`/collections/${collection.address}`}>{collection.address}</a>
+                                            </td>
+                                            <td>
+                                                {dayjs(collection.timestamp).fromNow()}
+                                            </td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
+                        <CollectionIndexer />
                     </div>
                 </div>
 

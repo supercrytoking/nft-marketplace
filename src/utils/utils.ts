@@ -2,6 +2,7 @@ import Web3 from 'web3'
 import commaNumber from 'comma-number'
 import shortNumber from 'short-number'
 import axios from 'axios'
+import { mutate } from 'swr'
 
 // export const apiUrl = 'https://api.fantom.digital'
 export const apiUrl = process.env.NODE_ENV === 'production' ? 'https://api.fantom.digital' : 'http://localhost:8888'
@@ -17,8 +18,10 @@ export const imageUrl = (string = "") => {
     return string
 }
 
-export const indexCollection = (contractAddress: string) => {
-    return api.post(`/indexr/collection/${contractAddress}`)
+export const indexCollection = async (contractAddress: string) => {
+    const run = await api.post(`/indexr/collection/${contractAddress}`)
+    await mutate('/stats')
+    return run
 }
 
 export const cacheImage = (url: string) => `${apiUrl}/cache/${encodeURIComponent(url)}`
