@@ -6,6 +6,7 @@ import ReactTyped from 'react-typed'
 import useSWR from 'swr'
 import Button from '../../components/Button'
 import ImageBox from '../../components/ImageBox'
+import LazyLoad from 'react-lazyload';
 
 const feeds = [
     {
@@ -91,7 +92,9 @@ export default function Explore({ feed: feedFromProps }) {
             {data && (
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                     {data.map((nft) => (
-                        <>{nft && <ImageBox nft={nft} key={nft._id} />}</>
+                        <>{nft &&
+                            <ImageBox nft={nft} key={nft._id} />
+                        }</>
                     ))}
                 </div>
             )}

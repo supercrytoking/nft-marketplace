@@ -12,7 +12,6 @@ export default function Indexr() {
     return (
         <div className="p-6 max-w-7xl mx-auto">
             <div className="max-w-2xl space-y-6">
-                {' '}
                 <div className="space-y-4">
                     <p>Enter an ERC721-compliant NFT contract address to track all its tokens.</p>
 
