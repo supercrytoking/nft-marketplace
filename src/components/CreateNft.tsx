@@ -65,8 +65,8 @@ export default function CreateNft({ contractAddress }) {
         try {
             if (!wallet.account) return wallet.connect()
             setStatus('minting')
-            await contract.methods.mint(cid).estimateGas({ from: wallet.account })
-            const doMint = await contract.methods.mint(cid).send({ from: wallet.account })
+            const gasPrice = await web3.eth.getGasPrice()
+            const doMint = await contract.methods.mint(cid).send({ from: wallet.account, gasPrice })
             const transferEvent = doMint.events.Transfer
             let tokenId
             if (Array.isArray(transferEvent)) {
