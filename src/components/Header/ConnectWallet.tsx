@@ -3,11 +3,12 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useWallet } from 'use-wallet'
 import Web3 from 'web3'
+import Button from '../Button'
 
 export default function ConnectWallet() {
     const wallet = useWallet()
 
-    const [balance, setBalance] = useState()
+    const [balance, setBalance] = useState('')
     const formattedBalance = balance ? commaNumber(Number(Web3.utils.fromWei(balance)).toFixed(2)) : null
 
     const web3 = new Web3(wallet.account ? wallet.ethereum : process.env.NEXT_PUBLIC_RPC)
@@ -32,21 +33,16 @@ export default function ConnectWallet() {
         <div className="text-right">
             <div className="flex space-x-2">
                 {!wallet.account && (
-                    <button type="button" onClick={() => wallet.connect()}>
+                    <Button onClick={() => wallet.connect()}>
                         {wallet.account ? shortAddress : 'Connect Wallet'}
-                    </button>
+                    </Button>
                 )}
                 {wallet.account && (
                     <Link href="/wallet">
-                        <a>{wallet.account ? shortAddress : 'Connect Wallet'}</a>
+                        <Button>{wallet.account ? shortAddress : 'Connect Wallet'}</Button>
                     </Link>
                 )}
-
-                {/* <a href={} target="_blank">
-                    <i className="fas fa-qrcode" />
-                </a> */}
             </div>
-            <p className="text-xs">{formattedBalance | 0.0} FTM</p>
         </div>
     )
 }

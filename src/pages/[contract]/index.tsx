@@ -28,13 +28,13 @@ export default function Collection({ contract }) {
     const [showFilters, setShowFilters] = useState(false)
     const [tokenLookup, setTokenLookup] = useState('')
 
-    const [name, setName] = useState('')
     const [totalSupply, setTotalSupply] = useState('')
-    const [owner, setOwner] = useState('')
 
     const listed = data && data.filter(token => token?.listing?.status === 'listed')
 
-    useEffect(() => console.log(listed), [listed])
+    const { data: collection } = useSWR(`/data/${contract}/details`)
+
+    useEffect(() => console.log(collection), [collection])
 
     const isMyCollection = wallet.account && owner ? Web3.utils.toChecksumAddress(wallet.account) === Web3.utils.toChecksumAddress(owner) : null
 
@@ -50,12 +50,12 @@ export default function Collection({ contract }) {
 
     useEffect(() => {
         const onLoad = async () => {
-            const nameFromWeb3 = await contractInstance.methods.name().call()
-            setName(nameFromWeb3)
+            // const nameFromWeb3 = await contractInstance.methods.name().call()
+            // setName(nameFromWeb3)
             const totalSupplyFromWeb3 = await contractInstance.methods.totalSupply().call()
             setTotalSupply(totalSupplyFromWeb3)
-            const ownerFromWeb3 = await contractInstance.methods.owner().call()
-            setOwner(ownerFromWeb3)
+            // const ownerFromWeb3 = await contractInstance.methods.owner().call()
+            // setOwner(ownerFromWeb3)
         }
         onLoad()
     }, [])
@@ -84,23 +84,22 @@ export default function Collection({ contract }) {
     return (
         <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
             <div className="flex flex-wrap gap-6">
-                <div className="space-y-4 flex-1">
+                {collection && <div className="space-y-4 flex-1">
+                    <p className='text-3xl uppercase font-extended'>{collection.name}</p>
+
                     <div className="space-y-1">
-                        <p>{name}</p>
-                        <p className="truncate">
+                        <p>
+                            <span>{collection.count} Tokens Indexed</span>
+                            <span className='opacity-50'> {collection.totalSupply} Total Supply</span>
+                        </p>
+                        <p></p>
+                        <p>
                             <a href={`https://ftmscan.com/address/${contract}`} target="_blank" className="underline hover:no-underline" rel="noreferrer">
-                                {contract.slice(0, 6)}
+                                {contract.slice(0, 12)}
                                 ...
-                                {contract.slice(-6)}
+                                {contract.slice(-12)}
                             </a>
                         </p>
-                        {totalSupply && (
-                            <p>
-                                {totalSupply}
-                                {' '}
-                                items
-                            </p>
-                        )}
                     </div>
                     {isMyCollection && (
                         <Link href={`/create/${contract}`} passHref>
@@ -109,8 +108,8 @@ export default function Collection({ contract }) {
                             </a>
                         </Link>
                     )}
-                </div>
-                <div className="w-full md:w-auto">
+                </div>}
+                {/* <div className="w-full md:w-auto">
                     {!showFilters && <Button onClick={() => setShowFilters(true)}>Filter</Button>}
                     {showFilters && (
                         <form onSubmit={searchToken}>
@@ -118,7 +117,7 @@ export default function Collection({ contract }) {
                             <button type="submit" className="hidden" />
                         </form>
                     )}
-                </div>
+                </div> */}
             </div>
 
             {/* <div>
