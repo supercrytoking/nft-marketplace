@@ -25,8 +25,9 @@ export default function Wallet({ params }) {
     const data = unsortedData?.sort((a, b) => (new Date(b.updated_at || b.created_at) - new Date(a.updated_at || a.created_at)))
 
     const grouped = data?.reduce(function (r, a) {
-        r[a.contractAddress] = r[a.contractAddress] || [];
-        r[a.contractAddress].push(a);
+        const contractAddress = Web3.utils.toChecksumAddress(a.contractAddress)
+        r[contractAddress] = r[contractAddress] || [];
+        r[contractAddress].push(a);
         return r;
     }, Object.create(null))
 
