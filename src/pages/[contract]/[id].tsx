@@ -8,6 +8,8 @@ import Button from '../../components/Button'
 import History from '../../components/History'
 import ImageBox from '../../components/ImageBox'
 import Input from '../../components/Input'
+import NFTKeyWidget from '../../components/ListingWidgets/NFTKeyWidget'
+import PaintswapWidget from '../../components/ListingWidgets/PaintswapWidget'
 import Modal from '../../components/Modal'
 import SendModal from '../../components/SendModal'
 import useExchange from '../../hooks/useExchange'
@@ -22,6 +24,7 @@ export default function TokenPage({ contract, id }) {
     const wallet = useWallet()
     const { status, createListing: createListingFunction, acceptListing: acceptListingFunction, revokeListing: revokeListingFunction } = useExchange()
     const { data, error, mutate } = useSWR(`/data/${contract}/${id}`)
+    const { data: attributes } = useSWR(`/rarity/${contract}`)
 
     const [showModal, setShowModal] = useState<false | 'list' | 'send'>(false)
     const [listingPrice, setListingPrice] = useState('')
@@ -51,6 +54,8 @@ export default function TokenPage({ contract, id }) {
     useEffect(() => {
         setListingPrice(data?.listing?.price && Web3.utils.fromWei(data?.listing?.price))
     }, [data])
+
+    useEffect(() => console.log(attributes), [attributes])
 
     if (!data) {
         return (
@@ -184,16 +189,31 @@ export default function TokenPage({ contract, id }) {
                                 </div>
                             </div>
                         </div>
+
+                        <NFTKeyWidget contractAddress={data.contractAddress} tokenId={data.tokenId} />
+                        <PaintswapWidget contractAddress={data.contractAddress} tokenId={data.tokenId} />
+
+
                         {data.metadata.attributes && (
                             <div className="flex gap-2 flex-wrap">
-                                {data.metadata.attributes.map((attribute) => (
-                                    <div className="inline-block bg-zinc-400 text-zinc-900 p-2">
-                                        <p className="text-xs">{attribute.trait_type}</p>
-                                        <p>{attribute.value}</p>
-                                    </div>
-                                ))}
+                                {data.metadata.attributes.map((attribute) => {
+                                    const attributeData = attributes && attributes.find(search => search._id === attribute.value)
+                                    return (
+                                        <div className="inline-block bg-zinc-400 text-zinc-900 p-2">
+                                            <p className="text-xs">
+                                                <span>{attribute.trait_type}</span>
+                                                {attributeData && <span>
+                                                    {' '}({Number(attributeData.rate).toFixed(2)}%)
+                                                </span>}
+                                            </p>
+                                            <p>{attribute.value}</p>
+                                            <p></p>
+                                        </div>
+                                    )
+                                })}
                             </div>
                         )}
+
                         <History contractAddress={data.contractAddress} tokenId={data.tokenId} />
                     </div>
                 </div>
