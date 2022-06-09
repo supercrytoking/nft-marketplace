@@ -15,14 +15,14 @@ const links = [
         title: 'Create'
     },
     {
-        slug: 'wallet',
-        href: '/wallet',
-        title: 'My Collection'
-    },
-    {
         slug: 'stats',
         href: '/stats',
         title: 'Stats'
+    },
+    {
+        slug: 'search',
+        href: '/search',
+        title: 'Search'
     },
     {
         slug: 'discord',
