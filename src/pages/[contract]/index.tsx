@@ -25,10 +25,7 @@ export default function Collection({ contract }) {
     // const web3 = new Web3(`${process.env.NEXT_PUBLIC_TESNET_RPC}`)
     const contractInstance = new web3.eth.Contract(erc721 as any, contract)
 
-    const [showFilters, setShowFilters] = useState(false)
     const [tokenLookup, setTokenLookup] = useState('')
-
-    const [totalSupply, setTotalSupply] = useState('')
 
     const listed = data && data.filter(token => token?.listing?.status === 'listed')
 
@@ -47,18 +44,6 @@ export default function Collection({ contract }) {
             console.log(error)
         }
     }
-
-    useEffect(() => {
-        const onLoad = async () => {
-            // const nameFromWeb3 = await contractInstance.methods.name().call()
-            // setName(nameFromWeb3)
-            const totalSupplyFromWeb3 = await contractInstance.methods.totalSupply().call()
-            setTotalSupply(totalSupplyFromWeb3)
-            // const ownerFromWeb3 = await contractInstance.methods.owner().call()
-            // setOwner(ownerFromWeb3)
-        }
-        onLoad()
-    }, [])
 
     if (!data) {
         return (
