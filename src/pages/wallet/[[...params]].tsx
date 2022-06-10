@@ -66,6 +66,7 @@ export default function Wallet({ params }) {
 
             {data && (
                 <>
+
                     <div className="flex flex-wrap gap-6">
                         <div className="space-y-4 flex-1">
                             <div className="space-y-1">
@@ -126,6 +127,12 @@ export default function Wallet({ params }) {
             {!showCollections && <>
                 {data && <TokenMasonry tokens={data} />}
             </>}
+
+            {data &&
+                <div className='border-2 border-yellow-400 bg-yellow-400 text-yellow-400 bg-opacity-10 p-6 space-y-2'>
+                    <p className='font-extended uppercase text-xl'>Don't see all yours tokens?</p>
+                    <p className='text-lg'><b>Don't worry, that's normal</b> —  they're still in your wallet. A small number of tokens minted before June 2021 (or during outages) have not been indexed by the Fantom Digital API yet. To index your token, <a href="" target="_blank" className='underline hover:no-underline'>simply import your token</a> or use the  <a href="" target="_blank" className='underline hover:no-underline'>indexr</a>.</p>
+                </div>}
         </div>
     )
 }
