@@ -1,13 +1,12 @@
 import classNames from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
 import ReactTyped from 'react-typed'
 import useSWR from 'swr'
 import Button from '../../components/Button'
 import ImageBox from '../../components/ImageBox'
-import LazyLoad from 'react-lazyload';
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
 
 const feeds = [
     {
@@ -58,7 +57,7 @@ export default function Explore({ feed: feedFromProps }) {
     }
 
     return (
-        <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
+        <div className="p-6 py-12 max-w-7xl mx-auto space-y-12 w-full">
             {/* {JSON.stringify(feedFromProps)} */}
             <div className="flex gap-4 items-center overflow-auto whitespace-nowrap no-scrollbar">
                 <div className="flex-1 flex gap-4">
@@ -77,7 +76,7 @@ export default function Explore({ feed: feedFromProps }) {
                 </div>
             </div>
 
-            <div className='flex'>
+            <div className='flex gap-6 items-start'>
                 <div className='flex-1'>
                     <p className='opacity-75'>{feed.description}</p>
                 </div>

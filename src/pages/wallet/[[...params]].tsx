@@ -34,7 +34,7 @@ export default function Wallet({ params }) {
     useEffect(() => console.log(grouped), [grouped])
 
     return (
-        <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
+        <div className="p-6 py-12 max-w-7xl mx-auto space-y-12 w-full">
             {!isSearching && !wallet.account && (
                 <button onClick={() => wallet.connect()} type="button" className="px-4 py-2 bg-zinc-400 text-zinc-900">
                     Connect Wallet

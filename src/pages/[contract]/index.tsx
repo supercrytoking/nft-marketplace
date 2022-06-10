@@ -47,7 +47,7 @@ export default function Collection({ contract }) {
 
     if (!data) {
         return (
-            <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
+            <div className="p-6 py-12 max-w-7xl mx-auto space-y-12 w-full">
                 {!data && !error && (
                     <p className="opacity-50">
                         <ReactTyped strings={['Loading...']} loop />
@@ -67,7 +67,7 @@ export default function Collection({ contract }) {
     }
 
     return (
-        <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
+        <div className="p-6 py-12 max-w-7xl mx-auto space-y-12 w-full">
             <div className="flex flex-wrap gap-6">
                 {collection && <div className="space-y-4 flex-1">
                     <p className='text-3xl uppercase font-extended'>{collection.name}</p>

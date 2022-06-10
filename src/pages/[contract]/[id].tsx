@@ -58,7 +58,7 @@ export default function TokenPage({ contract, id }) {
 
     if (!data) {
         return (
-            <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
+            <div className="p-6 py-12 max-w-7xl mx-auto space-y-12 w-full">
                 {!data && !error && (
                     <p className="opacity-50">
                         <ReactTyped strings={['Loading...']} loop />
@@ -92,7 +92,7 @@ export default function TokenPage({ contract, id }) {
 
             <SendModal nft={{ contract, id }} visible={showModal === 'send'} onClose={() => setShowModal(false)} />
 
-            <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
+            <div className="p-6 py-12 max-w-7xl mx-auto space-y-12 w-full">
                 {!data && (
                     <div>
                         <p className="opacity-50">

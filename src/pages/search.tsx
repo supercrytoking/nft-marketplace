@@ -13,7 +13,7 @@ export default function Search() {
     const { data, isValidating } = useSWR(searchQuery && `/data/search?q=${searchQuery}`)
 
     return (
-        <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
+        <div className="p-6 py-12 max-w-7xl mx-auto space-y-12 w-full">
 
             <div className="space-y-6">
                 <div className='bg-white bg-opacity-10 relative'>

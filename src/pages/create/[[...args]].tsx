@@ -29,7 +29,7 @@ export default function Index({ args }) {
     useEffect(() => router.push(tab.href, tab.href, { shallow: true }), [tab])
 
     return (
-        <div className="p-6 py-12 max-w-7xl mx-auto space-y-12">
+        <div className="p-6 py-12 max-w-7xl mx-auto space-y-12 w-full">
             <div className="flex gap-4 overflow-auto whitespace-nowrap no-scrollbar">
                 {tabs.map(({ slug, title, disabled }) => (
                     <Button disabled={disabled} onClick={() => setTab(findTab(slug))}>{title}</Button>
