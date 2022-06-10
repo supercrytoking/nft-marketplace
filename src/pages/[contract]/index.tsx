@@ -33,7 +33,8 @@ export default function Collection({ contract }) {
 
     useEffect(() => console.log(collection), [collection])
 
-    const isMyCollection = wallet.account && owner ? Web3.utils.toChecksumAddress(wallet.account) === Web3.utils.toChecksumAddress(owner) : null
+    const isMyCollection = false
+    // const isMyCollection = wallet.account && collectionowner ? Web3.utils.toChecksumAddress(wallet.account) === Web3.utils.toChecksumAddress(owner) : null
 
     const searchToken = (e) => {
         try {

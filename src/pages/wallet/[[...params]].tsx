@@ -3,12 +3,14 @@ import { useWallet } from 'use-wallet'
 
 import Link from 'next/link'
 import lodash from 'lodash'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import ReactTyped from 'react-typed'
 import Web3 from 'web3'
 import Button from '../../components/Button'
 import ImageBox from '../../components/ImageBox'
 import NFTGroup from '../../components/NFTGroup'
+import classNames from 'classnames'
+import TokenMasonry from '../../components/TokenMasonry'
 
 export function getServerSideProps(ctx) {
     return { props: ctx.query }
@@ -21,15 +23,22 @@ export default function Wallet({ params }) {
     const isAddress = Web3.utils.isAddress(address)
     const isSearching = params && params[0]
 
+    const [showCollections, setShowCollections] = useState(true)
+
     const { data: unsortedData, error } = useSWR(isAddress ? `/data/wallet/${address}` : null)
     const data = unsortedData?.sort((a, b) => (new Date(b.updated_at || b.created_at) - new Date(a.updated_at || a.created_at)))
 
-    const grouped = data?.reduce(function (r, a) {
+    const _grouped = data?.reduce(function (r, a) {
         const contractAddress = Web3.utils.toChecksumAddress(a.contractAddress)
         r[contractAddress] = r[contractAddress] || [];
         r[contractAddress].push(a);
         return r;
     }, Object.create(null))
+
+    const grouped = _grouped && Object.keys(_grouped).map((key) => _grouped[key]).sort((a, b) => {
+        console.log(a[0].contract.name, b[0].contract.name)
+        return a[0].contract.name.localeCompare(b[0].contract.name)
+    })
 
     useEffect(() => console.log(grouped), [grouped])
 
@@ -56,48 +65,67 @@ export default function Wallet({ params }) {
             )}
 
             {data && (
-                <div className="flex flex-wrap gap-6">
-                    <div className="space-y-4 flex-1">
-                        <div className="space-y-1">
-                            <p>
-                                <a href={`https://ftmscan.com/address/${address}`} target="_blank" className="underline hover:no-underline" rel="noreferrer">
-                                    {address.slice(0, 6)}
-                                    ...
-                                    {address.slice(-6)}
-                                </a>
-                            </p>
-                            <p>{data.length} items</p>
+                <>
+                    <div className="flex flex-wrap gap-6">
+                        <div className="space-y-4 flex-1">
+                            <div className="space-y-1">
+                                <p>
+                                    <a href={`https://ftmscan.com/address/${address}`} target="_blank" className="underline hover:no-underline" rel="noreferrer">
+                                        {address.slice(0, 6)}
+                                        ...
+                                        {address.slice(-6)}
+                                    </a>
+                                </p>
+                                <p>{data.length} items</p>
+                            </div>
+                            {/* <div /> */}
                         </div>
-                        {/* <div /> */}
+                        {!isSearching && (
+                            <div className="w-full md:w-auto">
+                                <Link href="/create/import" passHref>
+                                    <a className="block">
+                                        <Button>Import</Button>
+                                    </a>
+                                </Link>
+                            </div>
+                        )}
                     </div>
-                    {!isSearching && (
-                        <div className="w-full md:w-auto">
-                            <Link href="/create/import" passHref>
-                                <a className="block">
-                                    <Button>Import</Button>
-                                </a>
-                            </Link>
+
+                    <div>
+                        <div className="flex-1 flex gap-4">
+                            <Button className={classNames(showCollections && 'bg-blue-500')} onClick={() => setShowCollections(true)}>
+                                Collections
+                            </Button>
+
+                            <Button className={classNames(!showCollections && 'bg-blue-500')} onClick={() => setShowCollections(false)}>
+                                NFTs
+                            </Button>
                         </div>
-                    )}
-                </div>
+                    </div>
+                </>
             )}
 
-            {/* {unsortedData && <>
+            {/* {data && <>
                 <div className='grid grid-cols-12'>
-                    {unsortedData.slice(0, 22).map((nft => <div>
+                    {data.slice(0, 22).map((nft => <div>
                         <div className='square bg-cover bg-center' style={{ backgroundImage: `url("${nft.metadata.image}")` }} />
                     </div>))}
                 </div>
             </>} */}
 
-            {grouped && (
-                <div className='space-y-12'>
-                    {Object.keys(grouped)?.map(groupKey => {
-                        const group = grouped[groupKey]
-                        return <NFTGroup items={group} />
-                    })}
-                </div>
-            )}
+
+            {showCollections && <>
+                {grouped && (
+                    <div className='space-y-6'>
+                        {grouped.map(group => {
+                            return <NFTGroup items={group} />
+                        })}
+                    </div>
+                )}
+            </>}
+            {!showCollections && <>
+                {data && <TokenMasonry tokens={data} />}
+            </>}
         </div>
     )
 }
