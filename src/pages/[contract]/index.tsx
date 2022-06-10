@@ -75,7 +75,7 @@ export default function Collection({ contract }) {
                     <div className="space-y-1">
                         <p>
                             <span>{collection.count} Tokens Indexed</span>
-                            <span className='opacity-50'> {collection.totalSupply} Total Supply</span>
+                            <span className='opacity-50'> {collection.totalSupply || 'Unknown'} Total Supply</span>
                         </p>
                         <p></p>
                         <p>
