@@ -13,9 +13,10 @@ export default function NFTGroup({ items }) {
     const contract = firstItem.contract
 
     return <div className={classNames("space-y-6")}>
-        <button className="group flex w-full text-left gap-4 p-4 hover:bg-zinc-800 rounded items-center hover" onClick={() => setOpen(_ => !_)}>
+        <button className={classNames("group flex w-full text-left gap-4 p-4 hover:bg-zinc-800 rounded items-center hover", open && 'bg-zinc-800')} onClick={() => setOpen(_ => !_)}>
             <div className="flex flex-1 items-center gap-4">
-                <img className="w-12 border border-white border-opacity-10 bg-black bg-opacity-25 rounded" src={imageUrl(firstItem.metadata.image)} />
+                <div style={{ backgroundImage: `url("${imageUrl(firstItem.metadata.image)}")` }} className="w-12 h-12 border-white border-opacity-10 bg-black bg-opacity-25 rounded bg-center bg-cover" />
+                {/* <img className="w-12 border " src={} /> */}
                 <div>
                     <p>{contract.name || 'Unknown Collection'} </p>
                     <p>{items.length} items</p>
