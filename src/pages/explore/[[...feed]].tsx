@@ -13,22 +13,27 @@ const feeds = [
     {
         slug: '/',
         name: 'New',
-        query: '/feeds/new'
+        query: '/feeds/new',
+        description: 'View newly minted (or indexed) tokens on the blockchain.'
     },
     {
         slug: 'moving',
         name: 'Moving',
-        query: '/feeds/moving'
+        query: '/feeds/moving',
+        description: 'Tokens that are moving across the blockchain, including manual transfers and marketplace events.'
     },
     {
         slug: 'listed',
         name: 'Listed',
-        query: '/feeds/listed'
+        query: '/feeds/listed',
+        description: 'Tokens that are listed on Fantom Digital.'
     },
     {
         slug: 'sold',
         name: 'Sold',
-        query: '/feeds/accepted'
+        query: '/feeds/accepted',
+        description: 'Tokens that are listed purchased and sold on Fantom Digital.'
+
     }
 ]
 
@@ -72,7 +77,10 @@ export default function Explore({ feed: feedFromProps }) {
                 </div>
             </div>
 
-            <div className='flex justify-end'>
+            <div className='flex'>
+                <div className='flex-1'>
+                    <p className='opacity-75'>{feed.description}</p>
+                </div>
                 <button onClick={() => setLargeGrid(_ => !_)}>
                     <i className={classNames('fas', largeGrid ? 'fa-table-cells' : 'fa-table-cells-large')} />
                 </button>
@@ -100,7 +108,7 @@ export default function Explore({ feed: feedFromProps }) {
 
             {data && (
                 <ResponsiveMasonry
-                    columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+                    columnsCountBreakPoints={{ 350: largeGrid ? 1 : 2, 750: largeGrid ? 2 : 4, 900: largeGrid ? 3 : 5 }}
                 >
                     <Masonry
                         gutter="1em"

@@ -1,12 +1,10 @@
 import classNames from 'classnames'
+import Link from 'next/link'
 import { useState } from 'react'
-import ReactTyped from 'react-typed'
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
 import useSWR from 'swr'
 import { useDebounce } from 'use-debounce'
 import ImageBox from '../components/ImageBox'
-import Input from '../components/Input'
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
-import Link from 'next/link'
 
 export default function Search() {
     const [_searchQuery, setSearchQuery] = useState('')

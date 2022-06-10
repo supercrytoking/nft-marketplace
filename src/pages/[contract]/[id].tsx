@@ -13,7 +13,6 @@ import PaintswapWidget from '../../components/ListingWidgets/PaintswapWidget'
 import Modal from '../../components/Modal'
 import SendModal from '../../components/SendModal'
 import useExchange from '../../hooks/useExchange'
-import { imageUrl } from '../../utils/utils'
 
 export async function getServerSideProps(ctx) {
     const { contract, id } = ctx.query
