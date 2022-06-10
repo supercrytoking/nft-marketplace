@@ -1,15 +1,13 @@
 import useSWR from 'swr'
 import { useWallet } from 'use-wallet'
 
+import classNames from 'classnames'
 import Link from 'next/link'
-import lodash from 'lodash'
 import { useEffect, useState } from 'react'
 import ReactTyped from 'react-typed'
 import Web3 from 'web3'
 import Button from '../../components/Button'
-import ImageBox from '../../components/ImageBox'
 import NFTGroup from '../../components/NFTGroup'
-import classNames from 'classnames'
 import TokenMasonry from '../../components/TokenMasonry'
 
 export function getServerSideProps(ctx) {

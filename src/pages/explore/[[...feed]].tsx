@@ -11,7 +11,7 @@ import ImageBox from '../../components/ImageBox'
 const feeds = [
     {
         slug: '/',
-        name: 'New',
+        name: 'Newly Minted',
         query: '/feeds/new',
         description: 'View newly minted (or indexed) tokens on the blockchain.'
     },
