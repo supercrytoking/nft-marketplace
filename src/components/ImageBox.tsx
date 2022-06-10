@@ -29,7 +29,7 @@ export default function ImageBox({ nft }) {
                             <a onClick={e => e.stopPropagation()} className='underline hover:no-underline opacity-75 hover:opacity-100' target={"_blank"} href={nft.tokenUri}>View Metadata</a>
                         </p>}
 
-                        {!error && <img onLoad={() => setLoaded(true)} onError={() => setError(true)} className='max-h-full min-w-full object-contain' src={imageUrl(nft.metadata.image)} alt={nft?.metdata?.name} />}
+                        <img onLoad={() => setLoaded(true)} onError={() => setError(true)} className={classNames('max-h-full min-w-full object-contain', error && 'hidden')} src={imageUrl(nft.metadata.image)} />
                     </a>
                 </Link>
             </>

@@ -196,7 +196,7 @@ export default function TokenPage({ contract, id }) {
                         {data.metadata.attributes && (
                             <div className="flex gap-2 flex-wrap">
                                 {data.metadata.attributes.map((attribute) => {
-                                    const attributeData = attributes && attributes.find(search => search._id === attribute.value)
+                                    const attributeData = attributes && attributes.find(search => search.value === attribute.value)
                                     return (
                                         <div className="inline-block bg-zinc-400 text-zinc-900 p-2">
                                             <p className="text-xs">
