@@ -23,6 +23,10 @@ export default function IndexPage() {
                         <p className="text-xl">{commaNumber(data.contractCount)}</p>
                         <p>Total Contracts</p>
                     </div>
+                    <div className="bg-zinc-400 text-zinc-900 p-4">
+                        <p className="text-xl">{commaNumber(data.ownerCount)}</p>
+                        <p>Unique Owners</p>
+                    </div>
                 </div>
             </>}
 

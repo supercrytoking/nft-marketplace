@@ -8,6 +8,7 @@ import Web3 from 'web3'
 import Button from '../../components/Button'
 import ImageBox from '../../components/ImageBox'
 import Input from '../../components/Input'
+import TokenMasonry from '../../components/TokenMasonry'
 import { erc721 } from '../../data/abis'
 
 export function getServerSideProps(ctx) {
@@ -95,41 +96,16 @@ export default function Collection({ contract }) {
                         </Link>
                     )}
                 </div>}
-                {/* <div className="w-full md:w-auto">
-                    {!showFilters && <Button onClick={() => setShowFilters(true)}>Filter</Button>}
-                    {showFilters && (
-                        <form onSubmit={searchToken}>
-                            <Input value={tokenLookup} onChange={(e) => setTokenLookup(e.target.value)} label="Token ID" />
-                            <button type="submit" className="hidden" />
-                        </form>
-                    )}
-                </div> */}
             </div>
-
-            {/* <div>
-                <button onClick={() => indexCollection(contract)} className='underline hover:no-underline'>Index Collection</button>
-            </div> */}
-
-
 
             {listed && listed.length > 0 &&
                 <div className='space-y-4'>
                     <p>Listed</p>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-                        {listed.map((nft) => (
-                            <ImageBox nft={nft} />
-                        ))}
-                    </div>
+                    <TokenMasonry tokens={listed} />
                 </div>
             }
 
-            {data && (
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-                    {data.map((nft) => (
-                        <ImageBox nft={nft} />
-                    ))}
-                </div>
-            )}
+            {data && <TokenMasonry tokens={data} />}
         </div>
     )
 }
