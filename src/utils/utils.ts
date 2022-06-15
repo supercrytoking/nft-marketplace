@@ -19,7 +19,7 @@ export const imageUrl = (string = "") => {
 }
 
 export const indexCollection = async (contractAddress: string) => {
-    const run = await api.post(`/indexr/collection/${contractAddress}`)
+    const run = await api.post(`/indexr/collection/${contractAddress}?all=true`)
     await mutate('/stats')
     return run
 }

@@ -6,8 +6,6 @@ import useSWR from 'swr'
 import { useWallet } from 'use-wallet'
 import Web3 from 'web3'
 import Button from '../../components/Button'
-import ImageBox from '../../components/ImageBox'
-import Input from '../../components/Input'
 import TokenMasonry from '../../components/TokenMasonry'
 import { erc721 } from '../../data/abis'
 

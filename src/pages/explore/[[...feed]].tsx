@@ -11,27 +11,34 @@ import ImageBox from '../../components/ImageBox'
 const feeds = [
     {
         slug: '/',
-        name: 'Newly Minted',
-        query: '/feeds/new',
-        description: 'View newly minted (or indexed) tokens on the blockchain.'
+        name: 'Live',
+        query: '/feeds/live',
+        description: 'Tokens that are moving across the blockchain, including manual transfers and marketplace events.'
     },
     {
-        slug: 'moving',
-        name: 'Moving',
-        query: '/feeds/moving',
-        description: 'Tokens that are moving across the blockchain, including manual transfers and marketplace events.'
+        slug: 'new',
+        name: 'New',
+        query: '/feeds/new',
+        description: 'Newly minted tokens.'
+    },
+    {
+        slug: 'recent',
+        name: 'Recently Indexed',
+        query: '/feeds/recent',
+        description: 'Tokens that have been recently indexed on Fantom Digital.'
     },
     {
         slug: 'listed',
         name: 'Listed',
         query: '/feeds/listed',
         description: 'Tokens that are listed on Fantom Digital.'
+
     },
     {
         slug: 'sold',
         name: 'Sold',
         query: '/feeds/accepted',
-        description: 'Tokens that are listed purchased and sold on Fantom Digital.'
+        description: 'Tokens that have been sold on Fantom Digital.'
 
     }
 ]
