@@ -11,6 +11,7 @@ import Meta from '../components/Meta'
 import '../styles/global.css'
 import { api } from '../utils/utils'
 import NextNProgress from "nextjs-progressbar";
+import { AppWrapper } from '../AppWrapper'
 
 
 const relativeTime = require('dayjs/plugin/relativeTime')
@@ -30,9 +31,11 @@ export default function App({ Component, pageProps }: AppProps) {
                     refreshInterval: 3000, fetcher: (url) => api.get(url).then((res) => res.data)
 
                 }}>
-                    <Header />
-                    <Component {...pageProps} />
-                    <Footer />
+                    <AppWrapper>
+                        <Header />
+                        <Component {...pageProps} />
+                        <Footer />
+                    </AppWrapper>
                 </SWRConfig>
             </UseWalletProvider>
         </>

@@ -1,6 +1,9 @@
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
+import useApp from "../AppWrapper"
 import ImageBox from "./ImageBox"
-export default function TokenMasonry({ tokens, largeGrid = true }) {
+export default function TokenMasonry({ tokens }) {
+
+    const { largeGrid } = useApp()
 
     return <ResponsiveMasonry
         columnsCountBreakPoints={{ 350: largeGrid ? 1 : 2, 750: largeGrid ? 2 : 4, 900: largeGrid ? 3 : 5 }}

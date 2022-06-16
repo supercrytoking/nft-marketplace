@@ -5,6 +5,7 @@ import { useState } from 'react'
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
 import ReactTyped from 'react-typed'
 import useSWR from 'swr'
+import useApp from '../../AppWrapper'
 import Button from '../../components/Button'
 import ImageBox from '../../components/ImageBox'
 
@@ -52,7 +53,7 @@ export default function Explore({ feed: feedFromProps }) {
 
     const feedFromQuery = feedFromProps ? feeds.find((search) => search.slug === feedFromProps[0]) : feeds[0]
 
-    const [largeGrid, setLargeGrid] = useState(true)
+    const { largeGrid, setLargeGrid } = useApp()
 
     const [feed, setFeed] = useState(feedFromQuery)
     const { data, error } = useSWR(feed.query)
@@ -120,9 +121,7 @@ export default function Explore({ feed: feedFromProps }) {
                         gutter="1em"
                     >
                         {data.map((nft) => (
-                            <>{nft &&
-                                <ImageBox nft={nft} key={nft._id} />
-                            }</>
+                            <ImageBox nft={nft} key={nft._id} />
                         ))}
                     </Masonry></ResponsiveMasonry>
             )
