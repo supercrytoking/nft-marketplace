@@ -34,7 +34,7 @@ export default function Wallet({ params }) {
     }, Object.create(null))
 
     const grouped = _grouped && Object.keys(_grouped).map((key) => _grouped[key]).sort((a, b) => {
-        return a[0].contract.name.localeCompare(b[0].contract.name)
+        return a?.[0]?.contract?.name?.localeCompare(b?.[0]?.contract?.name)
     })
 
     return (

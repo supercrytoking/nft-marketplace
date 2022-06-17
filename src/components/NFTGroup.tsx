@@ -4,6 +4,7 @@ import { useState } from "react"
 import { imageUrl } from "../utils/utils"
 import Button from "./Button"
 import ImageBox from "./ImageBox"
+import TokenMasonry from "./TokenMasonry"
 
 export default function NFTGroup({ items }) {
 
@@ -18,17 +19,22 @@ export default function NFTGroup({ items }) {
                 <div style={{ backgroundImage: `url("${imageUrl(firstItem.metadata.image)}")` }} className="w-12 h-12 border-white border-opacity-10 bg-black bg-opacity-25 rounded bg-center bg-cover" />
                 {/* <img className="w-12 border " src={} /> */}
                 <div>
-                    <p>{contract.name || 'Unknown Collection'} </p>
+                    <p>{contract?.name || 'Unknown Collection'} </p>
                     <p>{items.length} items</p>
                 </div>
             </div>
-            <Link href={`/${contract.contractAddress}`}><a className="underline hover:no-underline opacity-50 hover:opacity-100">View Marketplace</a></Link>
+            <Link href={`/${firstItem.contractAddress}`}><a className="underline hover:no-underline opacity-50 hover:opacity-100">View Marketplace</a></Link>
             <p>{open ? <><Button>Close</Button></> : <Button>Open</Button>}</p>
         </button>
-        {open && <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+
+        {open && <TokenMasonry tokens={items} />}
+
+
+
+        {/* {open && <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
             {items.map((nft) => (
                 <ImageBox nft={nft} />
             ))}
-        </div>}
+        </div>} */}
     </div>
 }
