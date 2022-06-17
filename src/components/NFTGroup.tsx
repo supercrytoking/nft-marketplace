@@ -1,6 +1,6 @@
 import classNames from "classnames"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { imageUrl } from "../utils/utils"
 import Button from "./Button"
 import ImageBox from "./ImageBox"

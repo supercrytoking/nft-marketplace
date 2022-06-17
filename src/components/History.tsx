@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import ReactTyped from 'react-typed'
 import Web3 from 'web3'
@@ -29,21 +30,22 @@ const HistoryItem = ({ event }) => {
     return (
         <div className="bg-zinc-400 text-zinc-900 p-2">
             <div className="flex items-center justify-center space-x-4">
-                <p className="truncate">{event.returnValues.from}</p>
+                <Link href={`/wallet/${event.returnValues.from}`}>
+                    <a className="underline hover:no-underline truncate">{event.returnValues.from}</a>
+                </Link>
                 <p>&rarr;</p>
-                <p className="truncate">{event.returnValues.to}</p>
-                {/* {value && <p>{value} FTM</p>} */}
+                <Link href={`/wallet/${event.returnValues.to}`}>
+                    <a className="underline hover:no-underline truncate">{event.returnValues.to}</a>
+                </Link>
             </div>
             <div className="flex items-center space-x-4 text-xs opacity-50">
-                <p className="space-x-4">
-                    <a className="underline hover:no-underline" href={`https://ftmscan.com/tx/${event.transactionHash}`} target="_blank" rel="noreferrer">
-                        {event.transactionHash.slice(0, 6)}
-                        ...
-                        {event.transactionHash.slice(-6)}
-                    </a>
-                    <span>{time}</span>
-                    <span>{value} FTM</span>
-                </p>
+                <p>{value} FTM</p>
+                <p className='flex-1'>{time}</p>
+                <a className="underline hover:no-underline" href={`https://ftmscan.com/tx/${event.transactionHash}`} target="_blank" rel="noreferrer">
+                    {event.transactionHash.slice(0, 6)}
+                    ...
+                    {event.transactionHash.slice(-6)}
+                </a>
             </div>
         </div>
     )
