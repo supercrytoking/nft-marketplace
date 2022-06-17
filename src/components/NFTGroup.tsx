@@ -11,7 +11,7 @@ export default function NFTGroup({ items }) {
     const [open, setOpen] = useState()
 
     const firstItem = items[0]
-    const contract = firstItem.contract
+    const contract = firstItem?.contract
 
     return <div className={classNames("space-y-6")}>
         <button className={classNames("group flex w-full text-left gap-4 p-4 hover:bg-zinc-800 rounded items-center hover", open && 'bg-zinc-800')} onClick={() => setOpen(_ => !_)}>
