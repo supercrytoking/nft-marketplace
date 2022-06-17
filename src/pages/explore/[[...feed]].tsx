@@ -20,7 +20,7 @@ const feeds = [
         slug: 'new',
         name: 'New',
         query: '/feeds/new',
-        description: 'Newly minted tokens.'
+        description: 'Newly minted tokens across the entire Fantom Blockchain. Contracts don\'t need to be listed in-order to pick-up new mints.'
     },
     {
         slug: 'recent',

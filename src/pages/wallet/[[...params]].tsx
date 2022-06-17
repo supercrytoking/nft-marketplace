@@ -34,11 +34,8 @@ export default function Wallet({ params }) {
     }, Object.create(null))
 
     const grouped = _grouped && Object.keys(_grouped).map((key) => _grouped[key]).sort((a, b) => {
-        console.log(a[0].contract.name, b[0].contract.name)
         return a[0].contract.name.localeCompare(b[0].contract.name)
     })
-
-    useEffect(() => console.log(grouped), [grouped])
 
     return (
         <div className="p-6 py-12 max-w-7xl mx-auto space-y-12 w-full">

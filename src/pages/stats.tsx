@@ -121,7 +121,7 @@ export default function IndexPage() {
                                 {data.recentEvents.map((event, index) =>
                                     <tr className={classNames(index % 2 != 0 && 'bg-white bg-opacity-5')}>
                                         <td className="p-1 py-2">
-                                            {<a className="underline hover:no-underline" href={`/${event.token.contractAddress}/${event.token.tokenId}`}>{event.token.metadata.name}</a>}
+                                            {<a className="underline hover:no-underline" href={`/${event?.token?.contractAddress}/${event?.token?.tokenId}`}>{event?.token?.metadata?.name}</a>}
                                         </td>
                                         <td className="p-1 py-2">
                                             {event.status}
