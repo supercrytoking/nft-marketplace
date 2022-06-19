@@ -65,7 +65,7 @@ export default function Collection({ contract }) {
         },
         rarity: {
             name: 'Rarest First',
-            sort: { "rarity": -1 },
+            sort: { "rarity": 1 },
         },
         clear: {
             name: 'None',
@@ -126,14 +126,26 @@ export default function Collection({ contract }) {
                 />
             </div>
 
+            {(error && !data) && < p className="opacity-50">
+                An error occurred. Please wait 1 minute and retry.
+            </p>}
 
-            {(!data || !collection) && <div>
-                <p className="opacity-50">
-                    <ReactTyped strings={['Loading...']} loop />
+
+            {
+                ((!data || !collection) && !error) && <div>
+                    <p className="opacity-50">
+                        <ReactTyped strings={['Loading...']} loop />
+                    </p>
+                </div>
+            }
+
+            {
+                (data.length <= 0 && !error) && <p className="opacity-50">
+                    No items found matching this criteria.
                 </p>
-            </div>}
+            }
 
             {data && <TokenMasonry tokens={data} />}
-        </div>
+        </div >
     )
 }
