@@ -12,6 +12,9 @@ body,
     @apply font-mono text-zinc-400 bg-zinc-900;
 }
 
+select::-ms-expand {
+    display: none;
+}
 
 @layer utilities {
     @variants responsive {
