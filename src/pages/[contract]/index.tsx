@@ -36,7 +36,14 @@ export default function Collection({ contract }) {
             name: 'Sold',
             sort: { 'listing.priceEth': 1 },
             match: { 'listing.status': 'accepted' }
-        }
+        },
+        ...wallet?.account ? {
+            owned: {
+                name: 'Owned',
+                sort: { 'blockNumber': -1 },
+                match: { 'owner': wallet?.account }
+            }
+        } : {}
     }
 
     const sortPresets = {
