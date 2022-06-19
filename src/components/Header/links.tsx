@@ -10,6 +10,11 @@ const links = [
         title: 'Explore'
     },
     {
+        slug: 'collections',
+        href: '/collections',
+        title: 'Collections'
+    },
+    {
         slug: 'create',
         href: '/create',
         title: 'Create'
