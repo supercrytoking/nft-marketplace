@@ -33,10 +33,6 @@ export default function AttributesSidebar({ visible, onClose, contractAddress, m
 
     return <SideBar {...{ visible, onClose }}>
         {grouped && <div>
-
-
-            {JSON.stringify(match)}
-
             {Object.keys(grouped).sort((a, b) => a?.localeCompare(b))?.map(attributeGroupKey => {
                 const attributeGroup = grouped[attributeGroupKey].sort((a, b) => ((a?.rate - b?.rate) || a?.value?.localeCompare(b?.value)))
                 return <div>
