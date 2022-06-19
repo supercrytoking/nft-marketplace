@@ -140,7 +140,7 @@ export default function Collection({ contract }) {
             }
 
             {
-                (data.length <= 0 && !error) && <p className="opacity-50">
+                (data && data.length <= 0 && !error) && <p className="opacity-50">
                     No items found matching this criteria.
                 </p>
             }
