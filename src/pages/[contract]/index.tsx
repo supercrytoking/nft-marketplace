@@ -56,17 +56,21 @@ export default function Collection({ contract }) {
             sort: { "listing.priceEth": -1 },
         },
         idasc: {
-            name: 'Low Token ID',
+            name: 'Low Token ID First',
             sort: { "tokenId": 1 },
         },
         iddesc: {
-            name: 'High Token ID',
+            name: 'High Token ID First',
             sort: { "tokenId": -1 },
         },
         rarity: {
-            name: 'Rarity',
+            name: 'Rarest First',
             sort: { "rarity": -1 },
-        }
+        },
+        clear: {
+            name: 'None',
+            sort: null,
+        },
     }
 
     const [_filter, setFilter] = useState(filterPresets.all)
