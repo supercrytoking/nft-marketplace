@@ -133,24 +133,30 @@ export default function Collection({ contract }) {
                     </div>
                 </div>}
 
-                <div className="flex gap-4 items-center overflow-auto whitespace-nowrap no-scrollbar">
-                    <div className="flex-1 flex gap-4">
+                <div className="flex gap-4 items-center flex-wrap">
+
+                    <div className="shrink-0 flex gap-4 whitespace-nowrap overflow-auto no-scrollbar">
                         {Object.keys(filterPresets).map((key, index) => {
                             const preset = filterPresets[key]
                             return <Button onClick={() => setFilter(preset)} className={filter.name === preset.name && 'bg-blue-500'}>{preset.name}</Button>
                         })}
                     </div>
 
-                    <Dropdown
-                        onChange={e => setSort(sortPresets[e.target.value])}
-                        options={Object.keys(sortPresets).map((key, index) => {
-                            const sortPreset = sortPresets[key]
-                            return { name: sortPreset.name, value: key }
-                        })}
-                    />
-                    <Button onClick={() => setShowAttributesSidebar(true)}>
-                        <i className='fas fa-filter'></i>
-                    </Button>
+                    <div className="hidden md:block flex-1" />
+
+                    <div className='flex gap-4 items-center whitespace-nowrap '>
+                        <Dropdown
+                            onChange={e => setSort(sortPresets[e.target.value])}
+                            options={Object.keys(sortPresets).map((key, index) => {
+                                const sortPreset = sortPresets[key]
+                                return { name: sortPreset.name, value: key }
+                            })}
+                        />
+
+                        <Button onClick={() => setShowAttributesSidebar(true)}>
+                            <i className='fas fa-filter'></i>
+                        </Button>
+                    </div>
                 </div>
 
                 {(error && !data) && < p className="opacity-50">
