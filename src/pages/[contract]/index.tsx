@@ -154,7 +154,8 @@ export default function Collection({ contract }) {
                         />
 
                         <Button onClick={() => setShowAttributesSidebar(true)}>
-                            <i className='fas fa-filter'></i>
+                            {(match && match.length > 0) && <span>({match.length}) </span>}
+                            <i className='fas fa-filter' />
                         </Button>
                     </div>
                 </div>

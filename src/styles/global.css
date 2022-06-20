@@ -12,6 +12,10 @@ body,
     @apply font-mono text-zinc-400 bg-zinc-900;
 }
 
+select {
+    -webkit-appearance: none;
+}
+
 select::-ms-expand {
     display: none;
 }
