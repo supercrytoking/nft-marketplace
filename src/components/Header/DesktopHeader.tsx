@@ -1,8 +1,4 @@
-import commaNumber from 'comma-number'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import { useWallet } from 'use-wallet'
-import Web3 from 'web3'
 import ConnectWallet from './ConnectWallet'
 import links from './links'
 
