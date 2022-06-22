@@ -16,7 +16,7 @@ export default function PaintswapWidget({ contractAddress, tokenId }: PaintswapW
     if (!listing) return <></>
     return <div className="bg-white text-zinc-900 p-4 text-sm rounded flex flex-wrap">
         <a href={`https://paintswap.finance/marketplace/${listing.id}`} target="_blank" className="flex items-center flex-1">
-            <img className="w-5 mr-2 rounded" src="/img/logos/paintswap.png" alt="" />
+            <img loading="lazy" className="w-5 mr-2 rounded" src="/img/logos/paintswap.png" alt="" />
             <p className="mr-2">Paintswap</p>
             <i className="fa-solid fa-square-arrow-up-right" />
         </a>

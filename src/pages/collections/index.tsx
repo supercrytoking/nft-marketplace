@@ -18,7 +18,7 @@ export default function CollectionsIndex() {
                 >{collections.map(collection =>
                     <Link href={collection.contractAddress}>
                         <a className="bg-white rounded overflow-hidden transform transition hover:-translate-y-2">
-                            <img className="w-full" src={imageUrl(collection.image[0])} alt="" />
+                            <img loading="lazy" className="w-full" src={imageUrl(collection.image[0])} alt="" />
                             <div className="p-6 text-center">
                                 <p className="text-zinc-900 truncate uppercase font-extended text-xl">{collection.name}</p>
                                 <p>{collection.totalSupply} Items</p>

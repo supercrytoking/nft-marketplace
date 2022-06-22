@@ -70,10 +70,10 @@ export default function ImageBox({ nft }) {
                     <a ref={boxRef} className={classNames('relative rounded bg-zinc-900 border-zinc-800 border overflow-hidden flex items-center justify-center h-full', !imageBinary && 'square')}>
                         {!imageBinary && (
                             <div className="content">
-                                <img className="" src={'/img/loading.gif'} alt="" />
+                                <img loading="lazy" className="" src={'/img/loading.gif'} alt="" />
                             </div>
                         )}
-                        <img ref={ref} className="" src={`data:image/jpeg;charset=utf-8;base64,${imageBinary}`} alt="" />
+                        <img loading="lazy" ref={ref} className="" src={`data:image/jpeg;charset=utf-8;base64,${imageBinary}`} alt="" />
                     </a>
                 </div>
             </Link>

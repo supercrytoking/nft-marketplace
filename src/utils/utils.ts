@@ -15,7 +15,8 @@ export const imageUrl = (string = "") => {
     string = string.replace('https://ipfs.io/ipfs/', ipfsGateway)
     string = string.replace('https://ipfs.io/ipfs/', ipfsGateway)
     string = string.replace('https://gateway.pinata.cloud/ipfs/', ipfsGateway)
-    return string
+    return `${string}`
+    // return `http://nft-marketplace-optimizer.alsina.xyz/image/${string}`
 }
 
 export const indexCollection = async (contractAddress: string) => {

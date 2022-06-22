@@ -151,7 +151,7 @@ export default function CreateNft({ contractAddress }) {
                         {fileURL && (
                             <>
                                 <button onClick={() => setFile(null)} className="w-full" type="button">
-                                    <img className="rounded bg-zinc-900 border-zinc-800 border overflow-hidden w-full" src={fileURL} alt="" />
+                                    <img loading="lazy" className="rounded bg-zinc-900 border-zinc-800 border overflow-hidden w-full" src={fileURL} alt="" />
                                 </button>
                             </>
                         )}

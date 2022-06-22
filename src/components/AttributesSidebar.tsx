@@ -46,7 +46,7 @@ export default function AttributesSidebar({ visible, onClose, contractAddress, m
             </div>
             <div>
                 {Object.keys(groupedAttributes).sort((a, b) => a?.localeCompare(b))?.map(attributeGroupKey => {
-                    const attributeGroup = groupedAttributes[attributeGroupKey].sort((a, b) => ((a?.rate - b?.rate) || a?.value?.localeCompare(b?.value)))
+                    const attributeGroup = groupedAttributes[attributeGroupKey].sort((a, b) => ((a?.rate - b?.rate)))
                     return <div>
 
                         <div className="py-2 px-4 bg-zinc-700">

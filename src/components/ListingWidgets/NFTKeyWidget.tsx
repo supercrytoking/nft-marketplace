@@ -24,7 +24,7 @@ export default function NFTKeyWidget({ contractAddress, tokenId }: NFTKeyWidgetI
     if (!isListed) return <></>
     return <div className="bg-gray-600 text-zinc-300 p-4 text-sm rounded flex items-center flex-wrap">
         <a className="flex items-center flex-1">
-            <img className="w-5 mr-2 rounded" src="/img/logos/nftkey.png" alt="" />
+            <img loading="lazy" className="w-5 mr-2 rounded" src="/img/logos/nftkey.png" alt="" />
             <p className="mr-2">NFTKey</p>
             {/* <i className="fa-solid fa-square-arrow-up-right" /> */}
         </a>

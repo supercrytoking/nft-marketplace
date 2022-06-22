@@ -32,7 +32,7 @@ export default function ImageBox({ nft }) {
         if (cachedImageData) return
         if (!cacheImageError) return
 
-        const onLoad = async () => api.get(cacheImage(nft.metadata.image)).catch(() => {})
+        const onLoad = async () => api.get(cacheImage(nft.metadata.image)).catch(() => { })
         onLoad()
     }, [isVisible, cachedImageData, cacheImageError])
 
@@ -66,7 +66,7 @@ export default function ImageBox({ nft }) {
                         <p className="animate-spin">x</p>
                     </div>
                 )}
-                {imageData && <img src={`data:image/jpeg;charset=utf-8;base64,${imageData}`} alt="" />}
+                {imageData && <img loading="lazy" src={`data:image/jpeg;charset=utf-8;base64,${imageData}`} alt="" />}
             </a>
         </Link>
     )

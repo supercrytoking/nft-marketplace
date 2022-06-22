@@ -10,7 +10,7 @@ export default function ImageBox({ nft }) {
     const [error, setError] = useState(false)
 
     return (
-        <LazyLoad>
+        <LazyLoad height={200}>
             <>
                 <Link key={`${nft.contractAddress}-${nft.tokenId}`} href={`/${nft.contractAddress}/${nft.tokenId}`} >
                     <a className={classNames("group relative bg-white bg-opacity-5 border border-white border-opacity-10 rounded overflow-hidden flex items-center justify-center", error && 'bg-red-500 border-red-500', !error && !loaded && 'animate-pulse')} style={{ minHeight: '8em' }}>
@@ -29,7 +29,7 @@ export default function ImageBox({ nft }) {
                             <a onClick={e => e.stopPropagation()} className='underline hover:no-underline opacity-75 hover:opacity-100' target={"_blank"} href={nft.tokenUri}>View Metadata</a>
                         </p>}
 
-                        <img onLoad={() => setLoaded(true)} onError={() => setError(true)} className={classNames('max-h-full min-w-full object-contain', error && 'hidden')} src={imageUrl(nft.metadata.image)} />
+                        <img loading="lazy" onLoad={() => setLoaded(true)} onError={() => setError(true)} className={classNames('max-h-full min-w-full object-contain', error && 'hidden')} src={imageUrl(nft.metadata.image)} />
                     </a>
                 </Link>
             </>
