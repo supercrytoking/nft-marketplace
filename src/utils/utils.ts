@@ -4,8 +4,8 @@ import shortNumber from 'short-number'
 import axios from 'axios'
 import { mutate } from 'swr'
 
-// export const apiUrl = 'https://api.fantom.digital'
-export const apiUrl = process.env.NODE_ENV === 'production' ? 'https://api.fantom.digital' : 'http://localhost:8888'
+export const apiUrl = 'https://api.fantom.digital'
+// export const apiUrl = process.env.NODE_ENV === 'production' ? 'https://api.fantom.digital' : 'http://localhost:8888'
 export const api = axios.create({ baseURL: apiUrl })
 
 export const imageCacheUrl = 'https://enbzwejmbbmiirvimcib.supabase.in/storage/v1/object/public/cache'
@@ -16,7 +16,7 @@ export const imageUrl = (string = "") => {
     string = string.replace('https://ipfs.io/ipfs/', ipfsGateway)
     string = string.replace('https://gateway.pinata.cloud/ipfs/', ipfsGateway)
     return `${string}`
-    // return `http://nft-marketplace-optimizer.alsina.xyz/image/${string}`
+    // return `https://sea-turtle-app-5qubx.ondigitalocean.app/image/${string}`
 }
 
 export const indexCollection = async (contractAddress: string) => {
