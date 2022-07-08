@@ -23,7 +23,8 @@ export default function TokenPage({ contract, id }) {
     const wallet = useWallet()
     const { status, createListing: createListingFunction, acceptListing: acceptListingFunction, revokeListing: revokeListingFunction } = useExchange()
     const { data, error, mutate } = useSWR(`/data/${contract}/${id}`)
-    const { data: attributes } = useSWR(`/rarity/${contract}`)
+    const { data: attributes } = useSWR(`/attributes/${contract}`)
+
 
     const [showModal, setShowModal] = useState<false | 'list' | 'send'>(false)
     const [listingPrice, setListingPrice] = useState('')
