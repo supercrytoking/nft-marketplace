@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import ReactTyped from 'react-typed'
@@ -13,16 +14,18 @@ import PaintswapWidget from '../../components/ListingWidgets/PaintswapWidget'
 import Modal from '../../components/Modal'
 import SendModal from '../../components/SendModal'
 import useExchange from '../../hooks/useExchange'
+import { api, imageUrl } from '../../utils/utils'
 
 export async function getServerSideProps(ctx) {
     const { contract, id } = ctx.query
-    return { props: { contract, id } }
+    const { data } = await api.get(`/data/${contract}/${id}`)
+    return { props: { contract, id, data } }
 }
 
-export default function TokenPage({ contract, id }) {
+export default function TokenPage({ contract, id, data: initialData }) {
     const wallet = useWallet()
     const { status, createListing: createListingFunction, acceptListing: acceptListingFunction, revokeListing: revokeListingFunction } = useExchange()
-    const { data, error, mutate } = useSWR(`/data/${contract}/${id}`)
+    const { data, error, mutate } = useSWR(`/data/${contract}/${id}`, { fallbackData: initialData })
     const { data: attributes } = useSWR(`/attributes/${contract}`)
 
 
@@ -79,6 +82,12 @@ export default function TokenPage({ contract, id }) {
     }
     return (
         <>
+            <Head>
+                <title>{data.metadata.name}</title>
+                <link rel="icon" type="image/png" href={imageUrl(data.metadata.image)} />
+                <meta property="og:image" content={imageUrl(data.metadata.image)} />
+                <meta name="twitter:image" content={imageUrl(data.metadata.image)} />
+            </Head>
             <Modal visible={showModal === 'list'} onClose={() => setShowModal(false)}>
                 <div className="space-y-4">
                     <Input label="Listing Price" value={listingPrice} onChange={(e) => setListingPrice(e.target.value)} type="number" />
